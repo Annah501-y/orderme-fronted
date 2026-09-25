@@ -1,0 +1,142 @@
+﻿.categories-page {
+    width: 100%;
+    padding: 60px 0 80px;
+    min-height: 70vh;
+}
+
+
+/* ========================================
+   PAGE HEADER
+======================================== */
+
+.categories-page-header {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.categories-page-label {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--om-gold);
+    margin-bottom: 10px;
+}
+
+.categories-page-header h1 {
+    margin: 0 0 12px;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--om-ink);
+}
+
+.categories-page-header p {
+    max-width: 650px;
+    margin: 0 auto;
+    color: var(--om-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+
+/* ========================================
+   CATEGORY CARD WRAPPER
+======================================== */
+
+.categories-page-card {
+    height: 100%;
+    cursor: pointer;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.categories-page-card:hover {
+    transform: translateY(-6px);
+}
+
+
+/* ========================================
+   LOADING / EMPTY / ERROR
+======================================== */
+
+.categories-page-state {
+    min-height: 300px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    color: var(--om-muted);
+}
+
+.categories-page-state .spinner-border {
+    width: 2rem;
+    height: 2rem;
+    margin-bottom: 15px;
+}
+
+.categories-page-state p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+
+/* ========================================
+   ERROR
+======================================== */
+
+.categories-page-error {
+    color: #dc3545;
+}
+
+.categories-page-error button {
+    margin-top: 15px;
+
+    border: none;
+    border-radius: 5px;
+
+    padding: 9px 20px;
+
+    background: var(--om-gold);
+    color: white;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: background 0.2s ease;
+}
+
+.categories-page-error button:hover {
+    background: #966f09;
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 768px) {
+
+    .categories-page {
+        padding: 40px 0 60px;
+    }
+
+    .categories-page-header {
+        margin-bottom: 30px;
+    }
+
+    .categories-page-header h1 {
+        font-size: 2rem;
+    }
+
+    .categories-page-header p {
+        font-size: 0.95rem;
+    }
+
+}

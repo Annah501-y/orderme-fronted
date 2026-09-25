@@ -1,0 +1,116 @@
+﻿/* =========================================
+   CATEGORY CARD
+========================================= */
+
+.category-card {
+    width: 100%;
+    height: 100%;
+
+    padding: 12px;
+
+    background: #191b20;
+
+    border: 1px solid #292d34;
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.4s ease,
+        border-color 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+
+/* =========================================
+   CATEGORY IMAGE
+========================================= */
+
+.category-image {
+    width: 100%;
+    height: 180px;
+
+    display: block;
+
+    object-fit: cover;
+
+    border-radius: 10px;
+
+    transition: transform 0.5s ease;
+}
+
+
+/* Image zoom */
+
+.category-card:hover .category-image {
+    transform: scale(1.06);
+}
+
+
+/* =========================================
+   CARD HOVER
+========================================= */
+
+.category-card:hover {
+    transform: translateY(-6px);
+
+    border-color: var(--om-gold);
+
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+
+/* =========================================
+   CATEGORY NAME
+========================================= */
+
+.category-card h3 {
+    margin: 16px 4px 6px;
+
+    color: #ffffff;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    transition: color 0.3s ease;
+}
+
+
+.category-card:hover h3 {
+    color: var(--om-gold);
+}
+
+
+/* =========================================
+   CATEGORY DESCRIPTION
+========================================= */
+
+.category-card p {
+    margin: 0 4px 10px;
+
+    color: #92979f;
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 575px) {
+
+    .category-image {
+        height: 160px;
+    }
+
+    .category-card h3 {
+        font-size: 18px;
+    }
+
+    .category-card p {
+        font-size: 13px;
+    }
+
+}

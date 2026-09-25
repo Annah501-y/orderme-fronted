@@ -1,0 +1,426 @@
+﻿/* ========================================
+   ADMIN SIDEBAR
+======================================== */
+
+.admin-sidebar {
+    width: 260px;
+    min-width: 260px;
+    height: calc(100vh - 70px);
+    position: sticky;
+    top: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #ffffff;
+    border-right: 1px solid #e5e5e5;
+
+    transition:
+        width 0.25s ease,
+        min-width 0.25s ease;
+
+    z-index: 1000;
+}
+
+
+/* ========================================
+   COLLAPSED SIDEBAR
+======================================== */
+
+.admin-sidebar.admin-sidebar-collapsed {
+    width: 78px;
+    min-width: 78px;
+}
+
+
+/* ========================================
+   SIDEBAR HEADER
+======================================== */
+
+.admin-sidebar-header {
+    min-height: 72px;
+    padding: 0 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid #eeeeee;
+}
+
+.admin-sidebar-collapsed .admin-sidebar-header {
+    justify-content: center;
+    padding: 0 10px;
+}
+
+
+/* ========================================
+   SIDEBAR TITLE
+======================================== */
+
+.admin-sidebar-title {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.admin-sidebar-title-main {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--om-ink);
+}
+
+.admin-sidebar-title-sub {
+    margin-top: 3px;
+    font-size: 12px;
+    color: var(--om-muted);
+}
+
+
+/* ========================================
+   TOGGLE BUTTON
+======================================== */
+
+.admin-sidebar-toggle {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+
+    background: #ffffff;
+    color: #444444;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.admin-sidebar-toggle:hover {
+    background: #f4f4f4;
+    border-color: var(--om-gold);
+    color: var(--om-gold);
+}
+
+
+/* ========================================
+   ADMIN PROFILE
+======================================== */
+
+.admin-sidebar-profile {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 18px 16px;
+
+    border-bottom: 1px solid #eeeeee;
+}
+
+.admin-sidebar-collapsed .admin-sidebar-profile {
+    justify-content: center;
+    padding: 18px 10px;
+}
+
+
+/* ========================================
+   PROFILE AVATAR
+======================================== */
+
+.admin-profile-avatar {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--om-gold);
+    color: #ffffff;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+
+/* ========================================
+   PROFILE INFORMATION
+======================================== */
+
+.admin-profile-info {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-profile-name {
+    overflow: hidden;
+
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--om-ink);
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.admin-profile-role {
+    margin-top: 2px;
+
+    font-size: 12px;
+    color: var(--om-muted);
+}
+
+
+/* ========================================
+   NAVIGATION
+======================================== */
+
+.admin-sidebar-nav {
+    flex: 1;
+
+    padding: 18px 12px;
+
+    overflow-y: auto;
+}
+
+
+/* ========================================
+   SECTION TITLE
+======================================== */
+
+.admin-sidebar-section-title {
+    padding: 0 12px;
+    margin-bottom: 10px;
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+
+    color: #999999;
+}
+
+
+/* ========================================
+   NAVIGATION LINKS
+======================================== */
+
+.admin-sidebar-link {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 11px 13px;
+    margin-bottom: 5px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: transparent;
+    color: #555555;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.admin-sidebar-link svg {
+    flex-shrink: 0;
+}
+
+
+/* ========================================
+   HOVER
+======================================== */
+
+.admin-sidebar-link:hover {
+    background: #f7f3e8;
+    color: var(--om-gold);
+}
+
+
+/* ========================================
+   ACTIVE LINK
+======================================== */
+
+.admin-sidebar-link.active {
+    background: #f6edcf;
+    color: #a87900;
+
+    font-weight: 600;
+}
+
+.admin-sidebar-link.active svg {
+    color: var(--om-gold);
+}
+
+
+/* ========================================
+   COLLAPSED LINKS
+======================================== */
+
+.admin-sidebar-collapsed .admin-sidebar-link {
+    justify-content: center;
+
+    padding: 12px 10px;
+}
+
+.admin-sidebar-collapsed .admin-sidebar-section-title {
+    display: none;
+}
+
+
+/* ========================================
+   SIDEBAR FOOTER
+======================================== */
+
+.admin-sidebar-footer {
+    padding: 12px;
+
+    border-top: 1px solid #eeeeee;
+}
+
+
+/* ========================================
+   LOGOUT
+======================================== */
+
+.admin-logout-button {
+    color: #555555;
+}
+
+.admin-logout-button:hover {
+    background: #f8eeee;
+    color: #b02a37;
+}
+
+
+/* ========================================
+   SCROLLBAR
+======================================== */
+
+.admin-sidebar-nav::-webkit-scrollbar {
+    width: 5px;
+}
+
+.admin-sidebar-nav::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.admin-sidebar-nav::-webkit-scrollbar-thumb {
+    background: #dddddd;
+    border-radius: 10px;
+}
+
+
+/* ========================================
+   ADMIN LAYOUT BODY
+======================================== */
+
+.admin-layout-body {
+    display: flex;
+    align-items: stretch;
+
+    min-height: calc(100vh - 70px);
+}
+
+.admin-content {
+    flex: 1;
+    min-width: 0;
+
+    padding: 0;
+
+    transition: margin-left 0.25s ease;
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 768px) {
+
+    .admin-sidebar {
+        width: 230px;
+        min-width: 230px;
+    }
+
+    .admin-sidebar.admin-sidebar-collapsed {
+        width: 64px;
+        min-width: 64px;
+    }
+
+    .admin-sidebar-profile {
+        padding: 15px 12px;
+    }
+
+    .admin-sidebar-nav {
+        padding: 15px 8px;
+    }
+
+    .admin-sidebar-link {
+        padding: 10px 11px;
+        font-size: 13px;
+    }
+
+}
+
+
+/* ========================================
+   SMALL MOBILE
+======================================== */
+
+@media (max-width: 576px) {
+
+    .admin-sidebar {
+        width: 220px;
+        min-width: 220px;
+    }
+
+    .admin-sidebar.admin-sidebar-collapsed {
+        width: 60px;
+        min-width: 60px;
+    }
+
+    .admin-sidebar-header {
+        min-height: 64px;
+    }
+
+    .admin-sidebar-title-main {
+        font-size: 18px;
+    }
+
+    .admin-sidebar-toggle {
+        width: 34px;
+        height: 34px;
+    }
+
+    .admin-profile-avatar {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+    }
+
+}

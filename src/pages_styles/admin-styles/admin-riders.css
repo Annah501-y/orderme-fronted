@@ -1,0 +1,217 @@
+﻿/* ========================================
+   ADMIN RIDERS
+======================================== */
+
+.admin-riders {
+    width: 100%;
+    padding: 28px;
+    box-sizing: border-box;
+}
+
+
+/* ========================================
+   HEADER
+======================================== */
+
+.admin-riders-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.admin-riders-header h2 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--om-ink);
+}
+
+.admin-riders-header p {
+    margin: 6px 0 0;
+    color: var(--om-muted);
+    font-size: 14px;
+}
+
+
+/* ========================================
+   RIDER CARD
+======================================== */
+
+.admin-rider-card {
+    max-width: 700px;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 28px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.admin-rider-card-header {
+    margin-bottom: 24px;
+}
+
+.admin-rider-card-header h3 {
+    margin: 0 0 6px;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--om-ink);
+}
+
+.admin-rider-card-header p {
+    margin: 0;
+    color: var(--om-muted);
+    font-size: 14px;
+}
+
+
+/* ========================================
+   FORM
+======================================== */
+
+.admin-rider-form-group {
+    margin-bottom: 20px;
+}
+
+.admin-rider-form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--om-ink);
+}
+
+.admin-rider-form-group input {
+    width: 100%;
+    padding: 11px 13px;
+    border: 1px solid #d8d8d8;
+    border-radius: 6px;
+    outline: none;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.admin-rider-form-group input:focus {
+    border-color: #d4a017;
+    box-shadow: 0 0 0 2px rgba(212, 160, 23, 0.12);
+}
+
+.admin-rider-form-group input::placeholder {
+    color: #aaa;
+}
+
+
+/* ========================================
+   BUTTON
+======================================== */
+
+.admin-rider-submit {
+    width: 100%;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 6px;
+    background-color: #d4a017;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.admin-rider-submit:hover {
+    background-color: var(--om-gold);
+}
+
+.admin-rider-submit:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+
+/* ========================================
+   ALERTS
+======================================== */
+
+.admin-rider-alert {
+    padding: 12px 14px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.admin-rider-alert.success {
+    background-color: #e9f7ef;
+    color: #217a45;
+    border: 1px solid #b9e4c9;
+}
+
+.admin-rider-alert.error {
+    background-color: #fdecec;
+    color: #b42318;
+    border: 1px solid #f5c2c0;
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 768px) {
+    .admin-riders {
+        padding: 20px;
+    }
+
+    .admin-rider-card {
+        padding: 22px;
+    }
+
+    .admin-riders-header h2 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-riders {
+        padding: 15px;
+    }
+
+    .admin-rider-card {
+        padding: 18px;
+    }
+
+    .admin-riders-header h2 {
+        font-size: 22px;
+    }
+}
+
+.admin-rider-applications-card {
+    margin-bottom: 24px;
+    padding: 26px;
+    border: 1px solid var(--om-border, #e4e6e8);
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.admin-rider-applications-table-wrap { width: 100%; overflow-x: auto; }
+.admin-rider-applications-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.admin-rider-applications-table th,
+.admin-rider-applications-table td { padding: 12px 10px; border-bottom: 1px solid var(--om-border, #e4e6e8); text-align: left; white-space: nowrap; }
+.admin-rider-applications-table th { color: var(--om-muted, #68727e); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; }
+.admin-rider-applications-table td { color: var(--om-ink, #263344); }
+.admin-rider-application-status { display: inline-block; padding: 4px 9px; border-radius: 20px; background: #f4f5f6; color: #59636e; font-size: 12px; font-weight: 600; text-transform: capitalize; }
+.admin-rider-application-status.pending { background: #fff4d6; color: #805b00; }
+.admin-rider-application-status.invited { background: #eaf1ff; color: #2856a6; }
+.admin-rider-application-status.accepted { background: #eaf7ef; color: #176b3a; }
+.admin-rider-invite-button { padding: 8px 12px; border: 0; border-radius: 6px; background: var(--om-ink, #343a40); color: #fff; font-size: 12px; font-weight: 600; cursor: pointer; }
+.admin-rider-invite-button:hover:not(:disabled) { background: var(--om-gold, #d4a017); }
+.admin-rider-invite-button:disabled { opacity: .55; cursor: not-allowed; }
+.admin-rider-muted { margin: 0; color: var(--om-muted, #68727e); font-size: 14px; }
+
+html[data-theme="dark"] .admin-rider-applications-card { background: var(--om-surface); border-color: var(--om-border); }
+html[data-theme="dark"] .admin-rider-applications-table th,
+html[data-theme="dark"] .admin-rider-applications-table td { border-color: var(--om-border); }
+html[data-theme="dark"] .admin-rider-application-status.pending { background: #3b321b; color: #e0b33e; }
+html[data-theme="dark"] .admin-rider-application-status.invited { background: #1c2e4a; color: #a9c7ff; }
+html[data-theme="dark"] .admin-rider-application-status.accepted { background: #1d3827; color: #8bd5a4; }

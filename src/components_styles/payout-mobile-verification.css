@@ -1,0 +1,113 @@
+.payout-verification-panel {
+    width: 100%;
+    margin-top: 20px;
+    border: 1px solid var(--om-border, #e4e6e8);
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.payout-verification-content {
+    padding: 22px 24px;
+}
+
+.payout-verification-content h3 {
+    margin: 0 0 6px;
+    color: var(--om-ink, #263344);
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.payout-verification-content > p {
+    margin: 0 0 16px;
+    color: var(--om-muted, #69727c);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.payout-verification-send,
+.payout-verification-confirm {
+    min-height: 42px;
+    padding: 10px 16px;
+    border: 0;
+    border-radius: 7px;
+    background: #343a40;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, opacity 0.2s ease;
+}
+
+.payout-verification-send:hover:not(:disabled),
+.payout-verification-confirm:hover:not(:disabled) {
+    background: var(--om-gold, #d4a017);
+}
+
+.payout-verification-send:disabled,
+.payout-verification-confirm:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.payout-verification-code-row {
+    display: flex;
+    gap: 9px;
+    max-width: 420px;
+    margin-top: 12px;
+}
+
+.payout-verification-code-row input {
+    min-width: 0;
+    min-height: 42px;
+    flex: 1;
+    padding: 9px 12px;
+    border: 1px solid var(--om-border, #d9dde1);
+    border-radius: 7px;
+    background: #fff;
+    color: var(--om-ink, #263344);
+    font: inherit;
+}
+
+.payout-verification-code-row input:focus {
+    border-color: var(--om-gold, #d4a017);
+    outline: 0;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--om-gold, #d4a017) 18%, transparent);
+}
+
+.payout-verification-alert {
+    margin: 0 0 12px;
+    padding: 10px 12px;
+    border: 1px solid;
+    border-radius: 7px;
+    font-size: 13px;
+}
+
+.payout-verification-alert.success {
+    border-color: #ccebd8;
+    background: #eaf7ef;
+    color: #176b3a;
+}
+
+.payout-verification-alert.error {
+    border-color: #f4c7cb;
+    background: #fcebea;
+    color: #a52834;
+}
+
+html[data-theme="dark"] .payout-verification-panel {
+    background: var(--om-surface);
+    border-color: var(--om-border);
+}
+
+html[data-theme="dark"] .payout-verification-code-row input {
+    background: #15181c;
+    border-color: var(--om-border);
+    color: var(--om-ink);
+}
+
+@media (max-width: 575px) {
+    .payout-verification-content { padding: 18px; }
+    .payout-verification-code-row { max-width: none; }
+    .payout-verification-confirm { padding-inline: 13px; }
+}

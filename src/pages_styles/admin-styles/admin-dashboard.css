@@ -1,0 +1,426 @@
+﻿/* ========================================
+   ADMIN DASHBOARD
+======================================== */
+
+.admin-dashboard {
+    width: 100%;
+    padding: 28px;
+    box-sizing: border-box;
+}
+
+
+/* ========================================
+   HEADER
+======================================== */
+
+.admin-dashboard-header {
+    margin-bottom: 28px;
+}
+
+.admin-dashboard-header h1 {
+    margin: 0;
+
+    font-size: 28px;
+    font-weight: 700;
+
+    color: var(--om-ink);
+}
+
+.admin-dashboard-header p {
+    margin: 6px 0 0;
+
+    font-size: 14px;
+
+    color: var(--om-muted);
+}
+
+
+/* ========================================
+   SUMMARY GRID
+======================================== */
+
+.admin-summary-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+
+    margin-bottom: 24px;
+}
+
+
+/* ========================================
+   STAT CARD
+======================================== */
+
+.admin-stat-card {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #eeeeee;
+    border-radius: 12px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.admin-stat-icon {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #f6edcf;
+
+    color: #a87900;
+}
+
+.admin-stat-label {
+    display: block;
+
+    font-size: 12px;
+    font-weight: 500;
+
+    color: var(--om-muted);
+}
+
+.admin-stat-card h3 {
+    margin: 4px 0;
+
+    font-size: 21px;
+    font-weight: 700;
+
+    color: var(--om-ink);
+}
+
+.admin-stat-card small {
+    font-size: 11px;
+
+    color: #999999;
+}
+
+
+/* ========================================
+   CHART GRID
+======================================== */
+
+.admin-charts-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
+
+    margin-bottom: 20px;
+}
+
+
+/* ========================================
+   CHART CARD
+======================================== */
+
+.admin-chart-card {
+    min-width: 0;
+
+    padding: 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #eeeeee;
+    border-radius: 12px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.admin-chart-header {
+    margin-bottom: 10px;
+}
+
+.admin-chart-header h4 {
+    margin: 0;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    color: var(--om-ink);
+}
+
+.admin-chart-header p {
+    margin: 5px 0 0;
+
+    font-size: 12px;
+
+    color: var(--om-muted);
+}
+
+.admin-chart-container {
+    width: 100%;
+    height: 320px;
+}
+
+
+/* ========================================
+   RECENT DATA GRID
+======================================== */
+
+.admin-recent-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+
+/* ========================================
+   TABLE CARD
+======================================== */
+
+.admin-table-card {
+    min-width: 0;
+
+    background: #ffffff;
+
+    border: 1px solid #eeeeee;
+    border-radius: 12px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.04);
+
+    overflow: hidden;
+}
+
+
+/* ========================================
+   TABLE HEADER
+======================================== */
+
+.admin-table-header {
+    padding: 20px;
+
+    border-bottom: 1px solid #eeeeee;
+}
+
+.admin-table-header h4 {
+    margin: 0;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    color: var(--om-ink);
+}
+
+.admin-table-header p {
+    margin: 5px 0 0;
+
+    font-size: 12px;
+
+    color: var(--om-muted);
+}
+
+
+/* ========================================
+   TABLE
+======================================== */
+
+.admin-table {
+    margin: 0;
+
+    font-size: 13px;
+}
+
+.admin-table th {
+    padding: 12px 20px;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    color: var(--om-muted);
+
+    background: #fafafa;
+
+    white-space: nowrap;
+}
+
+.admin-table td {
+    padding: 14px 20px;
+
+    vertical-align: middle;
+
+    color: #555555;
+}
+
+
+/* ========================================
+   STATUS
+======================================== */
+
+.admin-status-badge {
+    display: inline-block;
+
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    background: #f6edcf;
+
+    color: #8c6900;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    text-transform: capitalize;
+}
+
+
+/* ========================================
+   EMPTY STATE
+======================================== */
+
+.admin-empty-state {
+    padding: 30px !important;
+
+    text-align: center;
+
+    color: #999999 !important;
+}
+
+
+/* ========================================
+   LOADING
+======================================== */
+
+.admin-dashboard-loading {
+    min-height: 400px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    color: var(--om-muted);
+}
+
+.admin-dashboard-loading p {
+    margin: 0;
+
+    font-size: 14px;
+}
+
+
+/* ========================================
+   ERROR
+======================================== */
+
+.admin-dashboard-error {
+    margin: 28px;
+
+    padding: 20px;
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 14px;
+
+    border: 1px solid #ead1d1;
+    border-radius: 10px;
+
+    background: #faf1f1;
+
+    color: #9b3434;
+}
+
+.admin-dashboard-error h5 {
+    margin: 0 0 5px;
+
+    font-size: 15px;
+}
+
+.admin-dashboard-error p {
+    margin: 0;
+
+    font-size: 13px;
+}
+
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 1000px) {
+
+    .admin-summary-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .admin-charts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-recent-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 576px) {
+
+    .admin-dashboard {
+        padding: 18px 14px;
+    }
+
+    .admin-dashboard-header h1 {
+        font-size: 23px;
+    }
+
+    .admin-summary-grid {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+    .admin-stat-card {
+        padding: 16px;
+    }
+
+    .admin-chart-card {
+        padding: 15px;
+    }
+
+    .admin-chart-container {
+        height: 280px;
+    }
+
+    .admin-table th,
+    .admin-table td {
+        padding: 11px 12px;
+    }
+
+}

@@ -1,0 +1,400 @@
+﻿/* ========================================
+   SELLER ORDERS PAGE
+======================================== */
+
+.seller-orders-page {
+    width: 100%;
+    padding: 28px;
+    box-sizing: border-box;
+}
+
+
+/* ========================================
+   HEADER
+======================================== */
+
+.seller-orders-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.seller-orders-header h2 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--om-ink);
+}
+
+.seller-orders-header p {
+    margin: 6px 0 0;
+    color: var(--om-muted);
+    font-size: 14px;
+}
+
+.seller-refresh-btn {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+
+/* ========================================
+   ORDERS CARD
+======================================== */
+
+.seller-orders-card {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+
+/* ========================================
+   TABLE
+======================================== */
+
+.seller-orders-table {
+    margin-bottom: 0;
+}
+
+.seller-orders-table thead th {
+    background: #f6f6f6;
+    color: var(--om-muted);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 15px 16px;
+    border-bottom: 1px solid #ddd;
+    white-space: nowrap;
+}
+
+.seller-orders-table tbody td {
+    padding: 16px;
+    font-size: 14px;
+    border-bottom: 1px solid #eeeeee;
+    vertical-align: middle;
+}
+
+.seller-orders-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.seller-orders-table tbody tr:hover {
+    background: #fafafa;
+}
+
+
+/* ========================================
+   ORDER NUMBER
+======================================== */
+
+.seller-order-number {
+    font-weight: 700;
+    color: var(--om-ink);
+}
+
+
+/* ========================================
+   CUSTOMER
+======================================== */
+
+.seller-customer-name {
+    font-weight: 600;
+    color: black;
+}
+
+
+/* ========================================
+   PRODUCT LIST
+======================================== */
+
+.seller-product-list {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.seller-product-item {
+    font-weight: 500;
+    color: var(--om-ink);
+    min-width: 180px;
+}
+
+
+/* ========================================
+   QUANTITY
+======================================== */
+
+.seller-quantity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.seller-quantity-item {
+    font-weight: 600;
+    color: black;
+}
+
+
+/* ========================================
+   SELLER TOTAL
+======================================== */
+
+.seller-order-total {
+    font-weight: 700;
+    color: var(--om-ink);
+    white-space: nowrap;
+}
+
+
+/* ========================================
+   STATUS
+======================================== */
+
+.seller-order-status {
+    display: inline-block;
+    padding: 6px 11px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+
+/* Pending */
+
+.seller-status-pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+
+/* Confirmed */
+
+.seller-status-confirmed {
+    background: #e2e3e5;
+    color: #41464b;
+}
+
+
+/* Processing */
+
+.seller-status-processing {
+    background: #cff4fc;
+    color: #055160;
+}
+
+
+/* Ready for delivery */
+
+.seller-status-ready {
+    background: #d1e7dd;
+    color: #0f5132;
+}
+
+
+/* Cancelled */
+
+.seller-status-cancelled {
+    background: #f8d7da;
+    color: #842029;
+}
+
+
+/* Unknown */
+
+.seller-status-default {
+    background: #eeeeee;
+    color: var(--om-muted);
+}
+
+
+/* ========================================
+   MANAGE BUTTON
+======================================== */
+
+.seller-manage-order-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    background: var(--om-ink);
+    color: #fff;
+
+    border: 1px solid var(--om-ink);
+    border-radius: 6px;
+
+    padding: 7px 12px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: all 0.2s ease;
+}
+
+.seller-manage-order-btn:hover {
+    background: var(--om-gold);
+    border-color: var(--om-gold);
+    color: #fff;
+}
+
+
+/* ========================================
+   REFRESH ANIMATION
+======================================== */
+
+.seller-spin {
+    animation: sellerSpin 1s linear infinite;
+}
+
+@keyframes sellerSpin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* ========================================
+   LOADING / EMPTY / ERROR STATES
+======================================== */
+
+.seller-orders-state {
+    min-height: 250px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+
+    padding: 30px;
+}
+
+.seller-orders-state p {
+    margin-top: 12px;
+    color: var(--om-muted);
+}
+
+.seller-orders-state h5 {
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.seller-orders-error p {
+    color: #b02a37;
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 768px) {
+
+    .seller-orders-page {
+        padding: 20px 15px;
+    }
+
+    .seller-orders-header {
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .seller-orders-header h2 {
+        font-size: 24px;
+    }
+
+    .seller-refresh-btn {
+        flex-shrink: 0;
+    }
+
+    .seller-orders-table thead th,
+    .seller-orders-table tbody td {
+        padding: 12px;
+    }
+}
+
+/* ========================================
+   TEXT VISIBILITY - BLACK TEXT
+======================================== */
+
+/* Main headings */
+.seller-order-details-header h2,
+.seller-detail-card-header h5,
+.seller-customer-info h6,
+.seller-product-info h6 {
+    color: #000000 !important;
+}
+
+/* Paragraphs and general information */
+.seller-order-details-header p,
+.seller-customer-info p,
+.seller-product-info p,
+.seller-product-info span,
+.seller-summary-row span,
+.seller-current-status span,
+.seller-current-status strong,
+.seller-order-details-loading p {
+    color: #000000 !important;
+}
+
+/* Status badge text */
+.seller-detail-status {
+    color: #000000 !important;
+}
+
+/* Back link */
+.seller-back-link {
+    color: #000000 !important;
+}
+
+.seller-back-link:hover {
+    color: var(--om-gold) !important;
+}
+
+/* Order summary */
+.seller-summary-row strong,
+.seller-summary-total span {
+    color: #000000 !important;
+}
+
+/* Keep gold accents for prices */
+.seller-product-total,
+.seller-summary-total strong {
+    color: var(--om-gold) !important;
+}
+
+/* Keep action button text white */
+.seller-status-action-btn,
+.seller-status-action-btn:hover,
+.seller-status-action-btn:disabled {
+    color: #ffffff !important;
+}
+
+/* Keep ready and cancelled messages readable */
+.seller-ready-message,
+.seller-cancelled-message {
+    color: #000000 !important;
+}
+
+.seller-ready-message strong,
+.seller-ready-message p,
+.seller-cancelled-message strong,
+.seller-cancelled-message p {
+    color: #000000 !important;
+}

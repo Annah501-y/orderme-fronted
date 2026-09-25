@@ -1,0 +1,945 @@
+﻿/* ========================================
+   ADMIN SETTINGS
+======================================== */
+
+.admin-settings {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+
+/* ========================================
+   HEADER
+======================================== */
+
+.admin-settings-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+.admin-settings-header h1 {
+    margin: 0 0 6px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #252525;
+}
+
+.admin-settings-header p {
+    margin: 0;
+    color: var(--om-muted);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.admin-settings-header-icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f7c948;
+    color: #252525;
+
+    flex-shrink: 0;
+}
+
+
+/* ========================================
+   MESSAGES
+======================================== */
+
+.admin-settings-success,
+.admin-settings-error {
+    width: 100%;
+    padding: 13px 16px;
+    margin-bottom: 20px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    box-sizing: border-box;
+}
+
+.admin-settings-success {
+    background: #eaf8ef;
+    border: 1px solid #b9e4c7;
+    color: #237a3b;
+}
+
+.admin-settings-error {
+    background: #fff0f0;
+    border: 1px solid #f0b9b9;
+    color: #b42318;
+}
+
+
+/* ========================================
+   SETTINGS CARD
+======================================== */
+
+.admin-settings-card {
+    background: #ffffff;
+    border: 1px solid #e7e7e7;
+    border-radius: 14px;
+
+    padding: 26px;
+    margin-bottom: 24px;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+
+/* ========================================
+   CARD HEADER
+======================================== */
+
+.admin-settings-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding-bottom: 20px;
+    margin-bottom: 24px;
+
+    border-bottom: 1px solid #eeeeee;
+}
+
+.admin-settings-card-header h2 {
+    margin: 0 0 6px;
+
+    font-size: 19px;
+    font-weight: 650;
+
+    color: #252525;
+}
+
+.admin-settings-card-header p {
+    margin: 0;
+
+    color: var(--om-muted);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.admin-settings-card-header > svg {
+    color: #b58a00;
+    flex-shrink: 0;
+}
+
+
+/* ========================================
+   PROFILE LAYOUT
+======================================== */
+
+.admin-settings-profile-layout {
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    gap: 38px;
+
+    align-items: start;
+}
+
+
+/* ========================================
+   PROFILE PHOTO
+======================================== */
+
+.admin-settings-photo-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+}
+
+.admin-settings-photo {
+    width: 140px;
+    height: 140px;
+
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f1f1f1;
+    border: 4px solid #ffffff;
+
+    box-shadow:
+        0 0 0 1px #dedede,
+        0 6px 18px rgba(0, 0, 0, 0.08);
+
+    color: var(--om-muted);
+
+    margin-bottom: 16px;
+}
+
+.admin-settings-photo img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* ========================================
+   PHOTO BUTTON
+======================================== */
+
+.admin-settings-photo-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    border: 1px solid #d7d7d7;
+    background: #ffffff;
+    color: var(--om-ink);
+
+    padding: 9px 15px;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.admin-settings-photo-btn:hover {
+    background: #f8f8f8;
+    border-color: #c5c5c5;
+}
+
+.admin-settings-photo-btn:active {
+    transform: translateY(1px);
+}
+
+.admin-settings-photo-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+/* ========================================
+   PHOTO ACTIONS
+======================================== */
+
+.admin-settings-photo-actions {
+    width: 100%;
+    margin-top: 14px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.admin-settings-photo-actions span {
+    max-width: 210px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    font-size: 12px;
+    color: var(--om-muted);
+}
+
+.admin-settings-photo-actions button {
+    width: 100%;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 8px 12px;
+
+    border-radius: 7px;
+
+    border: 1px solid #d9d9d9;
+
+    background: #ffffff;
+    color: var(--om-ink);
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.admin-settings-photo-actions button:first-of-type {
+    background: #d5a900;
+    border-color: #d5a900;
+    color: #ffffff;
+}
+
+.admin-settings-photo-actions button:first-of-type:hover {
+    background: #bd9400;
+    border-color: #bd9400;
+}
+
+.admin-settings-photo-actions button:last-of-type:hover {
+    background: #f4f4f4;
+}
+
+.admin-settings-photo-actions button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.admin-settings-photo-section small {
+    display: block;
+
+    margin-top: 12px;
+
+    max-width: 210px;
+
+    color: #8a8a8a;
+
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+
+/* ========================================
+   FORM
+======================================== */
+
+.admin-settings-form {
+    width: 100%;
+}
+
+.admin-settings-form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+.admin-settings-password-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+
+/* ========================================
+   FORM GROUP
+======================================== */
+
+.admin-form-group {
+    width: 100%;
+}
+
+.admin-form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    color: #353535;
+}
+
+
+/* ========================================
+   INPUT WRAPPER
+======================================== */
+
+.admin-input-wrapper {
+    width: 100%;
+    min-height: 45px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 0 13px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.admin-input-wrapper > svg {
+    flex-shrink: 0;
+    color: var(--om-muted);
+}
+
+.admin-input-wrapper:focus-within {
+    border-color: #c29a00;
+
+    box-shadow:
+        0 0 0 3px rgba(194, 154, 0, 0.12);
+}
+
+.admin-input-wrapper input {
+    width: 100%;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #252525;
+
+    font-size: 14px;
+
+    min-width: 0;
+}
+
+.admin-input-wrapper input::placeholder {
+    color: #aaa;
+}
+
+
+/* ========================================
+   PASSWORD TOGGLE
+======================================== */
+
+.admin-password-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border: none;
+    background: transparent;
+
+    padding: 3px;
+
+    color: var(--om-muted);
+
+    cursor: pointer;
+}
+
+.admin-password-toggle:hover {
+    color: var(--om-ink);
+}
+
+
+/* ========================================
+   FORM ACTIONS
+======================================== */
+
+.admin-settings-form-actions {
+    display: flex;
+    justify-content: flex-end;
+
+    margin-top: 24px;
+}
+
+.admin-settings-save-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    min-height: 42px;
+
+    padding: 0 18px;
+
+    border: none;
+    border-radius: 7px;
+
+    background: #d5a900;
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.admin-settings-save-btn:hover {
+    background: #bd9400;
+}
+
+.admin-settings-save-btn:active {
+    transform: translateY(1px);
+}
+
+.admin-settings-save-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+
+/* ========================================
+   SESSION MANAGEMENT
+======================================== */
+
+.admin-settings-danger-card {
+    border-color: #eadede;
+}
+
+.admin-settings-session-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 24px;
+}
+
+.admin-settings-session-content strong {
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 14px;
+    color: var(--om-ink);
+}
+
+.admin-settings-session-content p {
+    margin: 0;
+
+    font-size: 13px;
+    color: var(--om-muted);
+    line-height: 1.5;
+}
+
+.admin-settings-logout-all-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    flex-shrink: 0;
+
+    min-height: 42px;
+
+    padding: 0 17px;
+
+    border-radius: 7px;
+
+    border: 1px solid #d7a1a1;
+
+    background: #ffffff;
+    color: #b42318;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.admin-settings-logout-all-btn:hover {
+    background: #fff2f2;
+    border-color: #c97979;
+}
+
+.admin-settings-logout-all-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+/* ========================================
+   LOADING
+======================================== */
+
+.admin-settings-loading {
+    min-height: 400px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    color: var(--om-muted);
+}
+
+.admin-settings-loading p {
+    margin: 0;
+
+    font-size: 14px;
+}
+
+.admin-settings-spinner {
+    animation: adminSettingsSpin 1s linear infinite;
+}
+
+@keyframes adminSettingsSpin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* ========================================
+   DARK MODE
+======================================== */
+
+body.admin-dark-mode .admin-settings {
+    color: #eeeeee;
+}
+
+body.admin-dark-mode .admin-settings-header h1 {
+    color: #f4f4f4;
+}
+
+body.admin-dark-mode .admin-settings-header p {
+    color: #a9a9a9;
+}
+
+body.admin-dark-mode .admin-settings-header-icon {
+    background: #d5a900;
+    color: #1c1c1c;
+}
+
+
+/* Cards */
+
+body.admin-dark-mode .admin-settings-card {
+    background: #202020;
+    border-color: #363636;
+
+    box-shadow:
+        0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+body.admin-dark-mode .admin-settings-card-header {
+    border-bottom-color: #363636;
+}
+
+body.admin-dark-mode .admin-settings-card-header h2 {
+    color: #f0f0f0;
+}
+
+body.admin-dark-mode .admin-settings-card-header p {
+    color: #9e9e9e;
+}
+
+body.admin-dark-mode .admin-settings-card-header > svg {
+    color: #e0b600;
+}
+
+
+/* Photo */
+
+body.admin-dark-mode .admin-settings-photo {
+    background: #2b2b2b;
+    border-color: #202020;
+
+    box-shadow:
+        0 0 0 1px #444,
+        0 6px 18px rgba(0, 0, 0, 0.3);
+
+    color: #aaa;
+}
+
+
+/* Photo buttons */
+
+body.admin-dark-mode .admin-settings-photo-btn {
+    background: #292929;
+    border-color: #444;
+    color: #eeeeee;
+}
+
+body.admin-dark-mode .admin-settings-photo-btn:hover {
+    background: var(--om-ink);
+    border-color: var(--om-muted);
+}
+
+body.admin-dark-mode .admin-settings-photo-actions span {
+    color: var(--om-muted);
+}
+
+body.admin-dark-mode .admin-settings-photo-actions button {
+    background: #292929;
+    border-color: #444;
+    color: #eeeeee;
+}
+
+body.admin-dark-mode .admin-settings-photo-actions button:first-of-type {
+    background: #c59b00;
+    border-color: #c59b00;
+    color: #ffffff;
+}
+
+body.admin-dark-mode .admin-settings-photo-actions button:last-of-type:hover {
+    background: var(--om-ink);
+}
+
+body.admin-dark-mode .admin-settings-photo-section small {
+    color: var(--om-muted);
+}
+
+
+/* Form labels */
+
+body.admin-dark-mode .admin-form-group label {
+    color: #dddddd;
+}
+
+
+/* Inputs */
+
+body.admin-dark-mode .admin-input-wrapper {
+    background: #292929;
+    border-color: #444;
+}
+
+body.admin-dark-mode .admin-input-wrapper > svg {
+    color: var(--om-muted);
+}
+
+body.admin-dark-mode .admin-input-wrapper:focus-within {
+    border-color: #d0a700;
+
+    box-shadow:
+        0 0 0 3px rgba(208, 167, 0, 0.14);
+}
+
+body.admin-dark-mode .admin-input-wrapper input {
+    color: #eeeeee;
+}
+
+body.admin-dark-mode .admin-input-wrapper input::placeholder {
+    color: var(--om-muted);
+}
+
+body.admin-dark-mode .admin-password-toggle {
+    color: var(--om-muted);
+}
+
+body.admin-dark-mode .admin-password-toggle:hover {
+    color: #eeeeee;
+}
+
+
+/* Session */
+
+body.admin-dark-mode .admin-settings-danger-card {
+    border-color: #4b3838;
+}
+
+body.admin-dark-mode .admin-settings-session-content strong {
+    color: #eeeeee;
+}
+
+body.admin-dark-mode .admin-settings-session-content p {
+    color: var(--om-muted);
+}
+
+body.admin-dark-mode .admin-settings-logout-all-btn {
+    background: #292929;
+    border-color: #714646;
+    color: #ef7777;
+}
+
+body.admin-dark-mode .admin-settings-logout-all-btn:hover {
+    background: #352626;
+    border-color: #8b5050;
+}
+
+
+/* Messages */
+
+body.admin-dark-mode .admin-settings-success {
+    background: #17351f;
+    border-color: #285b36;
+    color: #8ed7a2;
+}
+
+body.admin-dark-mode .admin-settings-error {
+    background: #3a1e1e;
+    border-color: #693838;
+    color: #ff9d9d;
+}
+
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 1000px) {
+
+    .admin-settings {
+        padding: 24px;
+    }
+
+    .admin-settings-profile-layout {
+        grid-template-columns: 190px 1fr;
+        gap: 28px;
+    }
+
+    .admin-settings-password-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 760px) {
+
+    .admin-settings {
+        padding: 20px 16px;
+    }
+
+    .admin-settings-header {
+        align-items: flex-start;
+    }
+
+    .admin-settings-header h1 {
+        font-size: 24px;
+    }
+
+    .admin-settings-header-icon {
+        width: 46px;
+        height: 46px;
+    }
+
+    .admin-settings-card {
+        padding: 20px;
+        border-radius: 12px;
+    }
+
+    .admin-settings-profile-layout {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .admin-settings-photo-section {
+        padding-bottom: 24px;
+
+        border-bottom: 1px solid #eeeeee;
+    }
+
+    body.admin-dark-mode
+        .admin-settings-photo-section {
+        border-bottom-color: #363636;
+    }
+
+    .admin-settings-form-grid,
+    .admin-settings-password-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-settings-session-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .admin-settings-logout-all-btn {
+        width: 100%;
+    }
+}
+
+
+/* ========================================
+   SMALL MOBILE
+======================================== */
+
+@media (max-width: 480px) {
+
+    .admin-settings {
+        padding: 16px 12px;
+    }
+
+    .admin-settings-header {
+        margin-bottom: 20px;
+    }
+
+    .admin-settings-header h1 {
+        font-size: 22px;
+    }
+
+    .admin-settings-header p {
+        font-size: 13px;
+    }
+
+    .admin-settings-header-icon {
+        display: none;
+    }
+
+    .admin-settings-card {
+        padding: 17px;
+        margin-bottom: 18px;
+    }
+
+    .admin-settings-card-header {
+        gap: 12px;
+    }
+
+    .admin-settings-card-header h2 {
+        font-size: 17px;
+    }
+
+    .admin-settings-card-header p {
+        font-size: 12px;
+    }
+
+    .admin-settings-form-actions {
+        justify-content: stretch;
+    }
+
+    .admin-settings-save-btn {
+        width: 100%;
+    }
+
+    .admin-settings-session-content {
+        gap: 18px;
+    }
+}

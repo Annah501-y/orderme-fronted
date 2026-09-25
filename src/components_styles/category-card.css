@@ -1,0 +1,230 @@
+﻿/* =========================================
+   CATEGORIES SECTION
+========================================= */
+
+.categories-section {
+    position: relative;
+    padding: 90px 0;
+    background: #111317;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.categories-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 45px;
+}
+
+.categories-label {
+    display: inline-block;
+    margin-bottom: 12px;
+
+    color: var(--om-gold);
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 700;
+    letter-spacing: 2px;
+
+    animation: categoryTextSlide 1.2s ease-out;
+}
+
+
+/* Heading animation */
+
+@keyframes categoryTextSlide {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+
+.categories-title {
+    margin: 0;
+
+    font-size: 38px;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+}
+
+
+.categories-description {
+    max-width: 600px;
+    margin: 14px 0 0;
+
+    color: #92979f;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   VIEW ALL BUTTON
+========================================= */
+
+.categories-view-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 11px 18px;
+
+    border: 1px solid #383c43;
+    border-radius: 7px;
+
+    background: transparent;
+    color: #d9dde2;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    white-space: nowrap;
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+
+.categories-view-button span {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+}
+
+
+.categories-view-button:hover {
+    border-color: var(--om-gold);
+    color: var(--om-gold);
+    background: #191b20;
+}
+
+
+.categories-view-button:hover span {
+    transform: translateX(4px);
+}
+
+
+/* =========================================
+   CATEGORY CAROUSEL
+========================================= */
+
+.categories-slider {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+
+.categories-track {
+    display: flex;
+    gap: 20px;
+
+    width: max-content;
+
+    animation: categoriesMove 25s linear infinite;
+}
+
+
+/* Each card has a fixed width */
+
+.category-slide {
+    width: 280px;
+    flex-shrink: 0;
+}
+
+
+/* =========================================
+   CONTINUOUS MOVEMENT
+========================================= */
+
+@keyframes categoriesMove {
+
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+
+}
+
+
+/* Pause carousel when user hovers */
+
+.categories-slider:hover .categories-track {
+    animation-play-state: paused;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 991px) {
+
+    .categories-section {
+        padding: 70px 0;
+    }
+
+    .categories-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .categories-title {
+        font-size: 32px;
+    }
+
+    .category-slide {
+        width: 260px;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 575px) {
+
+    .categories-section {
+        padding: 60px 0;
+    }
+
+    .categories-label {
+        font-size: 14px;
+        letter-spacing: 1.5px;
+    }
+
+    .categories-title {
+        font-size: 28px;
+    }
+
+    .categories-description {
+        font-size: 14px;
+    }
+
+    .categories-view-button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .category-slide {
+        width: 240px;
+    }
+
+}

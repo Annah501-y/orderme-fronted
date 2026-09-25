@@ -1,0 +1,567 @@
+﻿/* ========================================
+   SELLER ORDER DETAILS PAGE
+======================================== */
+
+.seller-order-details-page {
+    width: 100%;
+    padding: 28px;
+    box-sizing: border-box;
+    color: #000000;
+}
+
+
+/* ========================================
+   HEADER
+======================================== */
+
+.seller-order-details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.seller-order-details-header h2 {
+    margin: 10px 0 4px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #000000;
+}
+
+.seller-order-details-header p {
+    margin: 0;
+    color: #000000;
+    font-size: 14px;
+}
+
+
+/* ========================================
+   BACK LINK
+======================================== */
+
+.seller-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: #000000;
+    font-size: 14px;
+    transition: 0.2s ease;
+}
+
+.seller-back-link:hover {
+    color: var(--om-gold);
+}
+
+
+/* ========================================
+   STATUS BADGE
+======================================== */
+
+.seller-detail-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 15px;
+    border-radius: 25px;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* Pending */
+
+.seller-detail-status-pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+/* Confirmed */
+
+.seller-detail-status-confirmed {
+    background: #cff4fc;
+    color: #055160;
+}
+
+/* Processing */
+
+.seller-detail-status-processing {
+    background: #cfe2ff;
+    color: #084298;
+}
+
+/* Ready for delivery */
+
+.seller-detail-status-ready {
+    background: #d1e7dd;
+    color: #0f5132;
+}
+
+/* Cancelled */
+
+.seller-detail-status-cancelled {
+    background: #f8d7da;
+    color: #842029;
+}
+
+/* Default */
+
+.seller-detail-status-default {
+    background: #e9ecef;
+    color: #495057;
+}
+
+
+/* ========================================
+   ALERTS
+======================================== */
+
+.seller-detail-alert {
+    border-radius: 8px;
+}
+
+
+/* ========================================
+   CARDS
+======================================== */
+
+.seller-detail-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    margin-bottom: 20px;
+    color: #000000;
+}
+
+.seller-detail-card-header {
+    padding: 17px 20px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.seller-detail-card-header h5 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 650;
+    color: #000000;
+}
+
+.seller-detail-card-title {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.seller-detail-card-title svg {
+    color: var(--om-gold);
+}
+
+.seller-detail-card-body {
+    padding: 20px;
+    color: #000000;
+}
+
+
+/* ========================================
+   CUSTOMER INFORMATION
+======================================== */
+
+.seller-customer-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: #000000;
+}
+
+.seller-customer-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #f1f1f1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #000000;
+    flex-shrink: 0;
+}
+
+.seller-customer-info h6 {
+    margin: 0 0 4px;
+    font-size: 15px;
+    font-weight: 650;
+    color: #000000;
+}
+
+.seller-customer-info p {
+    margin: 0;
+    font-size: 13px;
+    color: #000000;
+}
+
+
+/* ========================================
+   PRODUCTS
+======================================== */
+
+.seller-product-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    padding: 18px 20px;
+
+    border-bottom: 1px solid #eeeeee;
+
+    color: #000000;
+}
+
+.seller-product-row:last-child {
+    border-bottom: none;
+}
+
+
+/* Product image */
+
+.seller-product-image {
+    width: 70px;
+    height: 70px;
+
+    flex-shrink: 0;
+
+    border-radius: 8px;
+
+    background: #f5f5f5;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #000000;
+
+    overflow: hidden;
+}
+
+.seller-product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* Product information */
+
+.seller-product-info {
+    flex: 1;
+    color: #000000;
+}
+
+.seller-product-info h6 {
+    margin: 0 0 5px;
+
+    font-size: 14px;
+    font-weight: 650;
+
+    color: #000000;
+}
+
+.seller-product-info p {
+    margin: 0 0 4px;
+
+    font-size: 13px;
+
+    color: #000000;
+}
+
+.seller-product-info span {
+    font-size: 12px;
+    color: #000000;
+}
+
+
+/* Product total */
+
+.seller-product-total {
+    font-size: 14px;
+    font-weight: 700;
+
+    color: var(--om-gold);
+
+    white-space: nowrap;
+}
+
+
+/* ========================================
+   SUMMARY
+======================================== */
+
+.seller-summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 14px;
+}
+
+.seller-summary-row span {
+    color: #000000;
+    font-size: 14px;
+}
+
+.seller-summary-row strong {
+    color: #000000;
+    font-size: 14px;
+}
+
+.seller-summary-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 15px;
+}
+
+.seller-summary-total span {
+    font-size: 15px;
+    font-weight: 600;
+
+    color: #000000;
+}
+
+.seller-summary-total strong {
+    font-size: 18px;
+
+    color: var(--om-gold);
+}
+
+
+/* ========================================
+   STATUS ACTION
+======================================== */
+
+.seller-current-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 18px;
+
+    gap: 15px;
+
+    color: #000000;
+}
+
+.seller-current-status span {
+    color: #000000;
+    font-size: 14px;
+}
+
+.seller-current-status strong {
+    font-size: 14px;
+    color: #000000;
+}
+
+
+/* Status action button */
+
+.seller-status-action-btn {
+    background-color: var(--om-gold);
+
+    color: #ffffff;
+
+    border: none;
+
+    padding: 11px 15px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    border-radius: 7px;
+
+    transition: background-color 0.2s ease;
+}
+
+.seller-status-action-btn:hover {
+    background-color: #9f7409;
+    color: #ffffff;
+}
+
+.seller-status-action-btn:disabled {
+    background-color: #b8b8b8;
+    color: #ffffff;
+    cursor: not-allowed;
+}
+
+
+/* ========================================
+   READY / CANCELLED MESSAGE
+======================================== */
+
+.seller-ready-message,
+.seller-cancelled-message {
+    display: flex;
+
+    gap: 10px;
+
+    padding: 13px;
+
+    border-radius: 8px;
+}
+
+
+/* Ready */
+
+.seller-ready-message {
+    background: #d1e7dd;
+    color: #0f5132;
+}
+
+
+/* Cancelled */
+
+.seller-cancelled-message {
+    background: #f8d7da;
+    color: #842029;
+}
+
+
+/* Message text */
+
+.seller-ready-message strong,
+.seller-cancelled-message strong {
+    display: block;
+
+    font-size: 13px;
+
+    margin-bottom: 3px;
+
+    color: inherit;
+}
+
+.seller-ready-message p,
+.seller-cancelled-message p {
+    margin: 0;
+
+    font-size: 12px;
+
+    color: inherit;
+}
+
+
+/* ========================================
+   REFRESH BUTTON
+======================================== */
+
+.seller-refresh-detail-btn {
+    padding: 10px;
+    border-radius: 7px;
+}
+
+
+/* ========================================
+   LOADING
+======================================== */
+
+.seller-order-details-loading {
+    min-height: 400px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #000000;
+}
+
+.seller-order-details-loading p {
+    margin-top: 12px;
+    color: #000000;
+}
+
+
+/* ========================================
+   TEXT VISIBILITY
+======================================== */
+
+.seller-order-details-page h1,
+.seller-order-details-page h2,
+.seller-order-details-page h3,
+.seller-order-details-page h4,
+.seller-order-details-page h5,
+.seller-order-details-page h6,
+.seller-order-details-page p,
+.seller-order-details-page span,
+.seller-order-details-page strong {
+    visibility: visible;
+}
+
+
+/* ========================================
+   RESPONSIVE - TABLET
+======================================== */
+
+@media (max-width: 768px) {
+
+    .seller-order-details-page {
+        padding: 20px 15px;
+    }
+
+    .seller-order-details-header {
+        flex-direction: column;
+    }
+
+    .seller-order-details-header h2 {
+        font-size: 24px;
+    }
+
+    .seller-detail-status {
+        align-self: flex-start;
+    }
+
+    .seller-product-row {
+        align-items: flex-start;
+    }
+
+    .seller-product-total {
+        font-size: 13px;
+    }
+}
+
+
+/* ========================================
+   RESPONSIVE - MOBILE
+======================================== */
+
+@media (max-width: 576px) {
+
+    .seller-order-details-page {
+        padding: 16px 10px;
+    }
+
+    .seller-product-row {
+        flex-wrap: wrap;
+    }
+
+    .seller-product-image {
+        width: 60px;
+        height: 60px;
+    }
+
+    .seller-product-info {
+        min-width: calc(100% - 80px);
+    }
+
+    .seller-product-total {
+        width: 100%;
+        padding-left: 75px;
+    }
+
+    .seller-detail-card-body {
+        padding: 16px;
+    }
+}

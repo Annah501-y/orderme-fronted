@@ -1,0 +1,446 @@
+﻿/* ========================================
+   ORDER PAYMENT PAGE
+======================================== */
+
+.order-payment-page {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 28px 20px;
+}
+
+
+/* ========================================
+   BACK BUTTON
+======================================== */
+
+.order-payment-page .btn-link {
+    color: var(--om-ink);
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s ease;
+}
+
+.order-payment-page .btn-link:hover {
+    color: #c49a00;
+}
+
+
+/* ========================================
+   CARDS
+======================================== */
+
+.order-payment-page .card {
+    border-radius: 14px;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.order-payment-page .card-body {
+    padding: 28px;
+}
+
+
+/* ========================================
+   PAGE HEADINGS
+======================================== */
+
+.order-payment-page h3 {
+    color: #252525;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.order-payment-page h5 {
+    color: #252525;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.order-payment-page h6 {
+    color: var(--om-ink);
+    font-size: 16px;
+}
+
+
+/* ========================================
+   PAYMENT METHOD LIST
+======================================== */
+
+.payment-method-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+
+/* ========================================
+   PAYMENT METHOD OPTION
+======================================== */
+
+.payment-method-option {
+    width: 100%;
+    min-height: 76px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 15px 16px;
+
+    border: 1px solid #dedede;
+    border-radius: 12px;
+    background: #ffffff;
+
+    text-align: left;
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.payment-method-option:hover {
+    border-color: #d5aa00;
+    background: #fffdf4;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+}
+
+.payment-method-option:focus {
+    outline: none;
+    border-color: #d5aa00;
+    box-shadow: 0 0 0 3px rgba(213, 170, 0, 0.15);
+}
+
+.payment-method-option.selected {
+    border: 2px solid #d5aa00;
+    background: #fffbea;
+    box-shadow: 0 3px 12px rgba(213, 170, 0, 0.08);
+}
+
+
+/* ========================================
+   PAYMENT METHOD ICON
+======================================== */
+
+.payment-method-icon {
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 10px;
+    background: #f1f1f1;
+    color: #454545;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.payment-method-option.selected .payment-method-icon {
+    background: #d5aa00;
+    color: #ffffff;
+}
+
+
+/* ========================================
+   PAYMENT METHOD CONTENT
+======================================== */
+
+.payment-method-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.payment-method-content .fw-semibold {
+    color: #292929;
+    font-size: 15px;
+    margin-bottom: 3px;
+}
+
+.payment-method-content small {
+    display: block;
+    color: var(--om-muted);
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+
+/* ========================================
+   PAYMENT RADIO INDICATOR
+======================================== */
+
+.payment-radio {
+    width: 25px;
+    height: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    color: #d5aa00;
+}
+
+.payment-radio:not(.active) {
+    border: 2px solid #cfcfcf;
+    border-radius: 50%;
+}
+
+.payment-radio.active {
+    color: #d5aa00;
+}
+
+
+/* ========================================
+   FORM ELEMENTS
+======================================== */
+
+.order-payment-page .form-label {
+    color: var(--om-ink);
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.order-payment-page .form-control {
+    min-height: 46px;
+    border: 1px solid #d8d8d8;
+    border-radius: 8px;
+    padding: 11px 13px;
+    font-size: 14px;
+    color: var(--om-ink);
+    background: #ffffff;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.order-payment-page .form-control:focus {
+    border-color: #d5aa00;
+    box-shadow: 0 0 0 3px rgba(213, 170, 0, 0.14);
+}
+
+.order-payment-page .form-control::placeholder {
+    color: #999999;
+}
+
+.order-payment-page .form-text,
+.order-payment-page small.text-muted {
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* ========================================
+   ALERTS
+======================================== */
+
+.order-payment-page .alert {
+    border-radius: 9px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.order-payment-page .alert-light {
+    background: #fafafa;
+    border-color: #e5e5e5 !important;
+}
+
+.order-payment-page .alert-danger {
+    border: 1px solid #f1b5b5;
+}
+
+.order-payment-page .alert-success {
+    border: 1px solid #b8dfc2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+/* ========================================
+   PAYMENT BUTTON
+======================================== */
+
+.order-payment-page .btn-warning {
+    min-height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 9px;
+
+    background: #d5aa00;
+    color: #ffffff;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    transition:
+        background-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.order-payment-page .btn-warning:hover {
+    background: #bd9400;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(189, 148, 0, 0.2);
+    transform: translateY(-1px);
+}
+
+.order-payment-page .btn-warning:focus {
+    background: #bd9400;
+    color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(213, 170, 0, 0.2);
+}
+
+.order-payment-page .btn-warning:disabled {
+    background: #d9c783;
+    color: #ffffff;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+
+/* ========================================
+   ORDER SUMMARY
+======================================== */
+
+.order-payment-page .card .text-muted {
+    color: var(--om-muted) !important;
+}
+
+.order-payment-page .card hr {
+    margin: 20px 0;
+    border-color: #e8e8e8;
+    opacity: 1;
+}
+
+.order-payment-page .badge {
+    padding: 7px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.order-payment-page .text-warning {
+    color: #c49a00 !important;
+}
+
+
+/* ========================================
+   LOADING STATE
+======================================== */
+
+.order-payment-page .spinner-border {
+    color: #d5aa00;
+}
+
+.order-payment-page .btn .spinner-border {
+    color: currentColor;
+}
+
+
+/* ========================================
+   RESPONSIVE DESIGN
+======================================== */
+
+@media (max-width: 991px) {
+    .order-payment-page {
+        padding: 24px 18px;
+    }
+
+    .order-payment-page .card-body {
+        padding: 24px;
+    }
+
+    .order-payment-page h3 {
+        font-size: 24px;
+    }
+}
+
+
+@media (max-width: 767px) {
+    .order-payment-page {
+        padding: 20px 14px;
+    }
+
+    .order-payment-page .card-body {
+        padding: 21px;
+    }
+
+    .order-payment-page h3 {
+        font-size: 22px;
+    }
+
+    .order-payment-page h5 {
+        font-size: 19px;
+    }
+
+    .payment-method-option {
+        min-height: 70px;
+        padding: 13px;
+        gap: 11px;
+    }
+
+    .payment-method-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .payment-method-content .fw-semibold {
+        font-size: 14px;
+    }
+
+    .payment-method-content small {
+        font-size: 12px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .order-payment-page {
+        padding: 16px 10px;
+    }
+
+    .order-payment-page .card-body {
+        padding: 17px;
+    }
+
+    .payment-method-option {
+        padding: 11px;
+    }
+
+    .payment-method-icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    .payment-method-icon svg {
+        width: 19px;
+        height: 19px;
+    }
+
+    .payment-radio {
+        width: 22px;
+        height: 22px;
+    }
+
+    .order-payment-page .btn-warning {
+        min-height: 48px;
+        font-size: 14px;
+    }
+}

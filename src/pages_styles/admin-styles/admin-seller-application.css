@@ -1,0 +1,815 @@
+﻿/* ========================================
+   ADMIN SELLER APPLICATIONS
+======================================== */
+
+.admin-seller-applications-page {
+    width: 100%;
+    padding: 28px;
+    box-sizing: border-box;
+}
+
+
+/* ========================================
+   HEADER
+======================================== */
+
+.admin-seller-applications-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+.admin-seller-applications-label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    color: #a18318;
+}
+
+.admin-seller-applications-header h1 {
+    margin: 0 0 7px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #252525;
+}
+
+.admin-seller-applications-header p {
+    margin: 0;
+    color: var(--om-muted);
+    font-size: 14px;
+}
+
+.admin-seller-refresh-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    background: #fff;
+    color: #444;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.admin-seller-refresh-btn:hover {
+    background: #f7f7f7;
+}
+
+.admin-seller-refresh-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+
+/* ========================================
+   SPINNER
+======================================== */
+
+.admin-seller-spin {
+    animation: adminSellerSpin 1s linear infinite;
+}
+
+@keyframes adminSellerSpin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* ========================================
+   SUMMARY
+======================================== */
+
+.admin-seller-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 22px;
+}
+
+.admin-seller-summary-card {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 17px;
+    border: 1px solid #e7e7e7;
+    border-radius: 9px;
+    background: #fff;
+}
+
+.admin-seller-summary-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: #f2f2f2;
+    color: var(--om-muted);
+}
+
+.admin-seller-summary-icon.pending {
+    background: #fff8df;
+    color: #9a7a12;
+}
+
+.admin-seller-summary-icon.approved {
+    background: #eaf7ef;
+    color: #267744;
+}
+
+.admin-seller-summary-icon.rejected {
+    background: #f7eeee;
+    color: #a13d3d;
+}
+
+.admin-seller-summary-card span {
+    display: block;
+    margin-bottom: 3px;
+    color: var(--om-muted);
+    font-size: 12px;
+}
+
+.admin-seller-summary-card strong {
+    color: #282828;
+    font-size: 21px;
+}
+
+
+/* ========================================
+   FILTERS
+======================================== */
+
+.admin-seller-filters {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.admin-seller-search {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-height: 42px;
+    padding: 0 13px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    background: #fff;
+    color: var(--om-muted);
+}
+
+.admin-seller-search input {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 0 10px;
+    background: transparent;
+    font-size: 13px;
+    color: var(--om-ink);
+}
+
+.admin-seller-status-filter {
+    min-width: 180px;
+    padding: 0 12px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    background: #fff;
+    color: #444;
+    outline: none;
+    cursor: pointer;
+}
+
+
+/* ========================================
+   ERROR
+======================================== */
+
+.admin-seller-error {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 18px;
+    padding: 12px 14px;
+    border: 1px solid #ead4d4;
+    border-radius: 7px;
+    background: #faf1f1;
+    color: #963f3f;
+    font-size: 13px;
+}
+
+
+/* ========================================
+   TABLE
+======================================== */
+
+.admin-seller-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #e7e7e7;
+    border-radius: 9px;
+    background: #fff;
+}
+
+.admin-seller-table {
+    width: 100%;
+    min-width: 1050px;
+    border-collapse: collapse;
+}
+
+.admin-seller-table th {
+    padding: 13px 16px;
+    border-bottom: 1px solid #e7e7e7;
+    background: #fafafa;
+    color: var(--om-muted);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-align: left;
+}
+
+.admin-seller-table td {
+    padding: 15px 16px;
+    border-bottom: 1px solid #eeeeee;
+    color: #444;
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+.admin-seller-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.admin-seller-table tbody tr:hover {
+    background: #fcfcfc;
+}
+
+
+/* ========================================
+   SELLER
+======================================== */
+
+.admin-seller-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-seller-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #eeeeee;
+    color: var(--om-muted);
+}
+
+.admin-seller-user strong {
+    display: block;
+    margin-bottom: 3px;
+    color: #303030;
+    font-size: 13px;
+}
+
+.admin-seller-user span {
+    color: var(--om-muted);
+    font-size: 11px;
+}
+
+
+/* ========================================
+   STORE
+======================================== */
+
+.admin-seller-store {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #444;
+    font-weight: 600;
+}
+
+.admin-seller-store svg {
+    color: #b18d19;
+}
+
+
+/* ========================================
+   CONTACT
+======================================== */
+
+.admin-seller-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.admin-seller-contact span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--om-muted);
+    white-space: nowrap;
+}
+
+.admin-seller-contact svg {
+    color: var(--om-muted);
+}
+
+
+/* ========================================
+   ADDRESS
+======================================== */
+
+.admin-seller-address {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    max-width: 220px;
+    color: var(--om-muted);
+}
+
+.admin-seller-address svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: #a1841d;
+}
+
+.admin-seller-address span {
+    line-height: 1.45;
+}
+
+
+/* ========================================
+   STATUS
+======================================== */
+
+.admin-seller-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.admin-seller-status.pending {
+    background: #fff8df;
+    color: #947510;
+}
+
+.admin-seller-status.approved {
+    background: #eaf7ef;
+    color: #287546;
+}
+
+.admin-seller-status.rejected {
+    background: #f7eeee;
+    color: #9d4141;
+}
+
+
+/* ========================================
+   ACTION
+======================================== */
+
+.admin-seller-action-cell {
+    position: relative;
+    width: 50px;
+}
+
+.admin-seller-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--om-muted);
+    cursor: pointer;
+}
+
+.admin-seller-action-btn:hover {
+    background: #f1f1f1;
+}
+
+.admin-seller-action-menu {
+    position: absolute;
+    z-index: 20;
+    top: 47px;
+    right: 10px;
+    min-width: 165px;
+    padding: 6px;
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.admin-seller-action-menu button {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    width: 100%;
+    padding: 9px 10px;
+    border: none;
+    border-radius: 5px;
+    background: transparent;
+    color: #444;
+    font-size: 12px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.admin-seller-action-menu button:hover {
+    background: #f5f5f5;
+}
+
+.admin-seller-action-menu button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.admin-seller-danger-action {
+    color: #a03f3f !important;
+}
+
+
+/* ========================================
+   LOADING / EMPTY
+======================================== */
+
+.admin-seller-loading,
+.admin-seller-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 280px;
+    border: 1px solid #e7e7e7;
+    border-radius: 9px;
+    background: #fff;
+    color: var(--om-muted);
+}
+
+.admin-seller-loading {
+    flex-direction: row;
+    gap: 10px;
+    min-height: 180px;
+    font-size: 13px;
+}
+
+.admin-seller-empty svg {
+    margin-bottom: 10px;
+    color: #aaa;
+}
+
+.admin-seller-empty h3 {
+    margin: 0 0 5px;
+    color: #444;
+    font-size: 16px;
+}
+
+.admin-seller-empty p {
+    margin: 0;
+    color: var(--om-muted);
+    font-size: 13px;
+}
+
+
+/* ========================================
+   MODAL
+======================================== */
+
+.admin-seller-modal-backdrop {
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.admin-seller-modal {
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
+}
+
+.admin-seller-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px 22px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.admin-seller-modal-header span {
+    display: block;
+    margin-bottom: 5px;
+    color: #a1841d;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.admin-seller-modal-header h3 {
+    margin: 0;
+    color: #292929;
+    font-size: 19px;
+}
+
+.admin-seller-modal-header button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--om-muted);
+    cursor: pointer;
+}
+
+.admin-seller-modal-header button:hover {
+    background: #f1f1f1;
+}
+
+.admin-seller-modal-body {
+    padding: 22px;
+}
+
+.admin-seller-detail-section {
+    margin-bottom: 23px;
+}
+
+.admin-seller-detail-section:last-child {
+    margin-bottom: 0;
+}
+
+.admin-seller-detail-section h4 {
+    margin: 0 0 12px;
+    color: var(--om-ink);
+    font-size: 13px;
+}
+
+.admin-seller-detail-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 9px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.admin-seller-detail-row span {
+    color: var(--om-muted);
+    font-size: 12px;
+}
+
+.admin-seller-detail-row strong {
+    color: #444;
+    font-size: 12px;
+    text-align: right;
+}
+
+.admin-seller-description > span {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--om-muted);
+    font-size: 12px;
+}
+
+.admin-seller-description p {
+    margin: 0;
+    padding: 11px;
+    border-radius: 6px;
+    background: #f8f8f8;
+    color: var(--om-muted);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.admin-seller-full-address {
+    display: flex;
+    gap: 8px;
+    padding: 12px;
+    border-radius: 7px;
+    background: #f8f8f8;
+    color: var(--om-muted);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.admin-seller-full-address svg {
+    flex-shrink: 0;
+    color: #a1841d;
+}
+
+.admin-seller-rejection-reason {
+    margin-top: 12px;
+    padding: 12px;
+    border-radius: 7px;
+    background: #faf1f1;
+}
+
+.admin-seller-rejection-reason strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #963f3f;
+    font-size: 12px;
+}
+
+.admin-seller-rejection-reason p {
+    margin: 0;
+    color: var(--om-muted);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* ========================================
+   MODAL FOOTER
+======================================== */
+
+.admin-seller-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 9px;
+    padding: 16px 22px;
+    border-top: 1px solid #eeeeee;
+}
+
+.admin-seller-modal-footer button {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 13px;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.admin-seller-modal-footer button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.admin-seller-modal-close {
+    background: #f0f0f0;
+    color: var(--om-muted);
+}
+
+.admin-seller-modal-approve {
+    background: #eaf7ef;
+    color: #287546;
+}
+
+.admin-seller-modal-reject {
+    background: #f7eeee;
+    color: #9d4141;
+}
+
+
+/* ========================================
+   REJECT MODAL
+======================================== */
+
+.admin-seller-reject-modal {
+    max-width: 500px;
+}
+
+.admin-seller-reject-warning {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 12px;
+    border-radius: 7px;
+    background: #fff8df;
+    color: #806b1d;
+}
+
+.admin-seller-reject-warning svg {
+    flex-shrink: 0;
+}
+
+.admin-seller-reject-warning p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.admin-seller-form-group {
+    position: relative;
+}
+
+.admin-seller-form-group label {
+    display: block;
+    margin-bottom: 7px;
+    color: #444;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.admin-seller-form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 12px;
+    border: 1px solid #d8d8d8;
+    border-radius: 7px;
+    outline: none;
+    resize: vertical;
+    font-family: inherit;
+    font-size: 13px;
+}
+
+.admin-seller-form-group textarea:focus {
+    border-color: var(--om-gold);
+    box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.12);
+}
+
+.admin-seller-form-group small {
+    display: block;
+    margin-top: 5px;
+    color: var(--om-muted);
+    font-size: 10px;
+    text-align: right;
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 1100px) {
+
+    .admin-seller-summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .admin-seller-applications-page {
+        padding: 20px;
+    }
+
+    .admin-seller-applications-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .admin-seller-filters {
+        flex-direction: column;
+    }
+
+    .admin-seller-status-filter {
+        width: 100%;
+        min-height: 42px;
+    }
+
+}
+
+@media (max-width: 576px) {
+
+    .admin-seller-applications-page {
+        padding: 15px;
+    }
+
+    .admin-seller-summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-seller-modal-backdrop {
+        padding: 10px;
+    }
+
+    .admin-seller-modal-footer {
+        flex-wrap: wrap;
+    }
+
+}

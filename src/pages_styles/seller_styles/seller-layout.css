@@ -1,0 +1,127 @@
+
+/* =========================================
+   SELLER LAYOUT
+========================================= */
+
+.seller-layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #f8f9fa;
+}
+
+
+/* =========================================
+   NAVBAR
+   Navbar keeps its normal height
+========================================= */
+
+.seller-layout > nav,
+.seller-layout > header {
+    flex-shrink: 0;
+}
+
+
+/* =========================================
+   SIDEBAR + CONTENT AREA
+========================================= */
+
+.seller-layout-body {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+}
+
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.seller-layout-body > .seller-sidebar {
+    flex-shrink: 0;
+}
+
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
+.seller-content {
+    flex: 1;
+    min-width: 0;
+
+    /*
+     * Gives the page content room to breathe.
+     */
+    padding: 32px;
+
+    /*
+     * Keeps content vertically positioned normally.
+     */
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    /*
+     * Center the actual page content.
+     */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    transition: margin-left 0.25s ease,
+                width 0.25s ease;
+}
+
+
+/*
+ * Outlet content itself can use the available width.
+ */
+.seller-content > * {
+    width: 100%;
+    max-width: 1400px;
+}
+
+
+
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.seller-layout > footer {
+    flex-shrink: 0;
+    width: 100%;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 992px) {
+
+    .seller-content {
+        padding: 24px;
+    }
+
+}
+
+
+@media (max-width: 768px) {
+
+    .seller-content {
+        padding: 20px 16px;
+    }
+
+}
+
+
+@media (max-width: 576px) {
+
+    .seller-content {
+        padding: 16px 12px;
+    }
+
+}

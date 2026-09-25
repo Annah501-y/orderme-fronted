@@ -1,0 +1,507 @@
+﻿/* ========================================
+   SELLER SIDEBAR
+======================================== */
+
+.seller-sidebar {
+    width: 240px;
+    min-width: 240px;
+    flex-shrink: 0;
+
+    background: #111111;
+    color: #ffffff;
+
+    display: flex;
+    flex-direction: column;
+
+    border-right: 1px solid #2a2a2a;
+
+    transition: width 0.3s ease, min-width 0.3s ease;
+
+    position: relative;
+}
+
+
+/* ========================================
+   COLLAPSED SIDEBAR
+======================================== */
+
+.seller-sidebar.collapsed {
+    width: 72px;
+    min-width: 72px;
+}
+
+
+/* ========================================
+   PROFILE SECTION
+======================================== */
+
+.seller-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 20px 16px;
+
+    border-bottom: 1px solid #2a2a2a;
+}
+
+
+/* ========================================
+   PROFILE IMAGE CONTAINER
+======================================== */
+
+.profile-image-container {
+    position: relative;
+
+    width: 52px;
+    height: 52px;
+
+    flex-shrink: 0;
+}
+
+
+/* ========================================
+   PROFILE IMAGE BUTTON
+======================================== */
+
+.profile-image-button {
+    width: 52px;
+    height: 52px;
+
+    padding: 0;
+
+    border: none;
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    background: transparent;
+
+    cursor: pointer;
+}
+
+
+/* ========================================
+   PROFILE IMAGE
+======================================== */
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+}
+
+
+/* ========================================
+   PROFILE PLACEHOLDER
+======================================== */
+
+.profile-placeholder {
+    width: 100%;
+    height: 100%;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--om-gold);
+    color: #111111;
+
+    font-size: 17px;
+    font-weight: 600;
+}
+
+
+/* ========================================
+   CAMERA BUTTON
+======================================== */
+
+.sidebar-camera-button {
+    position: absolute;
+
+    right: -2px;
+    bottom: -2px;
+
+    width: 21px;
+    height: 21px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--om-gold);
+    color: #111111;
+
+    border: 2px solid #111111;
+
+    cursor: pointer;
+
+    z-index: 10;
+
+    transition: transform 0.2s ease;
+}
+
+.sidebar-camera-button:hover {
+    transform: scale(1.08);
+}
+
+
+/* ========================================
+   PROFILE INFORMATION
+======================================== */
+
+.profile-info {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-info strong {
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #ffffff;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* ========================================
+   NAVIGATION
+======================================== */
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+
+    padding: 18px 12px;
+
+    flex: 1;
+}
+
+
+/* ========================================
+   SIDEBAR LINKS
+======================================== */
+
+.sidebar-link {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 11px 12px;
+
+    border: none;
+    border-radius: 7px;
+
+    background: transparent;
+
+    color: #bdbdbd;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+
+    box-sizing: border-box;
+}
+
+
+/* ========================================
+   LINK HOVER
+======================================== */
+
+.sidebar-link:hover {
+    background: #1d1d1d;
+    color: #ffffff;
+}
+
+
+/* ========================================
+   ACTIVE LINK
+======================================== */
+
+.sidebar-link.active {
+    background: rgba(198, 161, 91, 0.15);
+    color: var(--om-gold);
+}
+
+
+/* ========================================
+   ACTIVE ICON
+======================================== */
+
+.sidebar-link.active svg {
+    color: var(--om-gold);
+}
+
+
+/* ========================================
+   LOGOUT
+======================================== */
+
+.sidebar-bottom {
+    padding: 12px;
+
+    border-top: 1px solid #2a2a2a;
+}
+
+.logout-link {
+    color: #bdbdbd;
+}
+
+.logout-link:hover {
+    color: #ffffff;
+    background: #1d1d1d;
+}
+
+
+/* ========================================
+   COLLAPSE SECTION
+======================================== */
+
+.sidebar-collapse {
+    padding: 12px;
+
+    border-top: 1px solid #2a2a2a;
+}
+
+
+/* ========================================
+   COLLAPSE BUTTON
+======================================== */
+
+.collapse-button {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    padding: 10px 12px;
+
+    border: none;
+    border-radius: 7px;
+
+    background: transparent;
+
+    color: #bdbdbd;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.collapse-button:hover {
+    background: #1d1d1d;
+    color: #ffffff;
+}
+
+
+/* ========================================
+   COLLAPSED STATE
+======================================== */
+
+.seller-sidebar.collapsed .seller-profile {
+    justify-content: center;
+    padding: 20px 10px;
+}
+
+.seller-sidebar.collapsed .sidebar-nav {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.seller-sidebar.collapsed .sidebar-link {
+    justify-content: center;
+
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.seller-sidebar.collapsed .sidebar-bottom {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.seller-sidebar.collapsed .sidebar-collapse {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+/* ========================================
+   TABLET
+   769px - 1024px
+======================================== */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+
+    .seller-sidebar {
+        width: 200px;
+        min-width: 200px;
+    }
+
+    .seller-sidebar.collapsed {
+        width: 68px;
+        min-width: 68px;
+    }
+
+    .seller-profile {
+        padding: 18px 12px;
+    }
+
+    .sidebar-nav {
+        padding: 16px 10px;
+    }
+
+    .sidebar-link {
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .sidebar-bottom,
+    .sidebar-collapse {
+        padding: 10px;
+    }
+}
+
+
+/* ========================================
+   PHONE
+   481px - 768px
+======================================== */
+
+@media (min-width: 481px) and (max-width: 768px) {
+
+    .seller-sidebar {
+        width: 72px;
+        min-width: 72px;
+    }
+
+    .seller-profile {
+        justify-content: center;
+        padding: 18px 10px;
+    }
+
+    .seller-sidebar .profile-info {
+        display: none;
+    }
+
+    .seller-sidebar .sidebar-link span {
+        display: none;
+    }
+
+    .seller-sidebar .collapse-button span {
+        display: none;
+    }
+
+    .sidebar-nav {
+        padding: 16px 10px;
+    }
+
+    .sidebar-link {
+        justify-content: center;
+        padding: 11px 8px;
+    }
+
+    .sidebar-bottom,
+    .sidebar-collapse {
+        padding: 10px;
+    }
+}
+
+
+/* ========================================
+   SMALL PHONE
+   Up to 480px
+======================================== */
+
+@media (max-width: 480px) {
+
+    .seller-sidebar {
+        width: 64px;
+        min-width: 64px;
+    }
+
+    .seller-profile {
+        justify-content: center;
+        padding: 15px 7px;
+    }
+
+    .profile-image-container {
+        width: 44px;
+        height: 44px;
+    }
+
+    .profile-image-button {
+        width: 44px;
+        height: 44px;
+    }
+
+    .profile-placeholder {
+        font-size: 14px;
+    }
+
+    .sidebar-camera-button {
+        width: 19px;
+        height: 19px;
+    }
+
+    .seller-sidebar .profile-info {
+        display: none;
+    }
+
+    .seller-sidebar .sidebar-link span {
+        display: none;
+    }
+
+    .seller-sidebar .collapse-button span {
+        display: none;
+    }
+
+    .sidebar-nav {
+        padding: 14px 7px;
+        gap: 4px;
+    }
+
+    .sidebar-link {
+        justify-content: center;
+        padding: 10px 5px;
+    }
+
+    .sidebar-bottom,
+    .sidebar-collapse {
+        padding: 7px;
+    }
+
+    .collapse-button {
+        padding: 9px 5px;
+    }
+}

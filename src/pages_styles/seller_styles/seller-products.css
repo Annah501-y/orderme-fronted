@@ -1,0 +1,558 @@
+﻿/* =========================================================
+   SELLER PRODUCTS PAGE
+========================================================= */
+
+.seller-products-page {
+    width: 100%;
+    padding: 28px;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.seller-products-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.seller-products-header h2 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.seller-products-header p {
+    margin: 6px 0 0;
+    color: var(--om-muted);
+}
+
+.seller-add-product-btn,
+.seller-save-product-btn {
+    background: var(--om-gold);
+    border: 1px solid var(--om-gold);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 18px;
+    font-weight: 600;
+}
+
+.seller-add-product-btn:hover,
+.seller-save-product-btn:hover {
+    background: var(--om-gold);
+    border-color: var(--om-gold);
+    color: #fff;
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.seller-products-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.seller-product-search {
+    width: 350px;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    padding: 9px 13px;
+}
+
+.seller-product-search svg {
+    color: var(--om-muted);
+}
+
+.seller-product-search input {
+    width: 100%;
+    border: none;
+    outline: none;
+}
+
+.seller-product-count {
+    color: var(--om-muted);
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   PRODUCT CARD / TABLE
+========================================================= */
+
+.seller-products-card {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.seller-products-table {
+    margin: 0;
+    vertical-align: middle;
+}
+
+.seller-products-table thead th {
+    background: #f5f5f5;
+    color: var(--om-muted);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 15px;
+    white-space: nowrap;
+}
+
+.seller-products-table tbody td {
+    padding: 15px;
+    border-color: #eee;
+}
+
+
+/* =========================================================
+   PRODUCT INFORMATION
+========================================================= */
+
+.seller-product-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 230px;
+}
+
+.seller-product-image {
+    width: 58px;
+    height: 58px;
+    flex-shrink: 0;
+    border-radius: 7px;
+    overflow: hidden;
+    background: #f1f1f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--om-muted);
+}
+
+.seller-product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.seller-product-info strong {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.seller-product-info small {
+    display: block;
+    color: var(--om-gold);
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   PRICE
+========================================================= */
+
+.seller-products-table td strong {
+    font-size: 14px;
+}
+
+.old-price {
+    display: block;
+    color: var(--om-muted);
+    text-decoration: line-through;
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+
+/* =========================================================
+   STOCK
+========================================================= */
+
+.stock-value-btn {
+    border: none;
+    background: #f5f5f5;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.stock-value-btn:hover {
+    background: #eee;
+}
+
+.stock-editor {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.stock-editor input {
+    width: 60px;
+    height: 31px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.stock-adjust-btn {
+    width: 29px;
+    height: 29px;
+    padding: 0;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stock-save-btn {
+    height: 29px;
+    border: none;
+    background: var(--om-gold);
+    color: #fff;
+    border-radius: 5px;
+    padding: 0 8px;
+    font-size: 12px;
+}
+
+.stock-cancel-btn {
+    width: 29px;
+    height: 29px;
+    padding: 0;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.product-status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.product-status.active {
+    background: #e8f6ed;
+    color: #217a3c;
+}
+
+.product-status.inactive {
+    background: #f1f1f1;
+    color: var(--om-muted);
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.product-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.product-action-btn {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-action-btn.edit {
+    color: var(--om-muted);
+}
+
+.product-action-btn.status {
+    color: var(--om-gold);
+}
+
+.product-action-btn.delete {
+    color: #b42318;
+}
+
+.product-action-btn:hover {
+    background: #f5f5f5;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.seller-products-loading {
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--om-muted);
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.seller-products-empty {
+    min-height: 300px;
+    background: #fff;
+    border: 1px dashed #ddd;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+    color: var(--om-muted);
+}
+
+.seller-products-empty h4 {
+    color: var(--om-ink);
+    margin: 15px 0 5px;
+}
+
+.seller-products-empty p {
+    margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.seller-product-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1050;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.seller-product-modal {
+    width: 100%;
+    max-width: 720px;
+    max-height: 92vh;
+    overflow-y: auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.seller-product-modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px 24px;
+    border-bottom: 1px solid #eee;
+}
+
+.seller-product-modal-header h4 {
+    margin: 0;
+    font-size: 21px;
+}
+
+.seller-product-modal-header p {
+    margin: 5px 0 0;
+    color: var(--om-muted);
+    font-size: 13px;
+}
+
+.modal-close-btn {
+    width: 34px;
+    height: 34px;
+    border: none;
+    background: #f5f5f5;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.seller-product-modal-body {
+    padding: 24px;
+}
+
+.seller-product-modal-footer {
+    padding: 16px 24px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+
+/* =========================================================
+   IMAGE UPLOAD
+========================================================= */
+
+.product-image-upload {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.product-image-preview {
+    width: 100px;
+    height: 100px;
+    border: 1px dashed #ccc;
+    border-radius: 8px;
+    background: #f7f7f7;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--om-muted);
+    flex-shrink: 0;
+}
+
+.product-image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image-upload-btn {
+    background: #f3f3f3;
+    border: 1px solid #ddd;
+    color: #444;
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+.product-image-upload small {
+    display: block;
+    color: var(--om-muted);
+}
+
+
+/* =========================================================
+   CALCULATED PRICE
+========================================================= */
+
+.calculated-price {
+    min-height: 38px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 8px 12px;
+    background: #f8f8f8;
+    font-weight: 600;
+}
+
+.col-md-4 > small {
+    color: var(--om-muted);
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   SPINNER
+========================================================= */
+
+.spin {
+    animation: seller-products-spin 1s linear infinite;
+}
+
+@keyframes seller-products-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .seller-products-page {
+        padding: 18px;
+    }
+
+    .seller-products-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .seller-products-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .seller-product-search {
+        width: 100%;
+    }
+
+    .seller-product-count {
+        text-align: right;
+    }
+
+    .seller-product-modal-overlay {
+        padding: 10px;
+    }
+
+    .seller-product-modal {
+        max-height: 95vh;
+    }
+
+    .seller-product-modal-body {
+        padding: 18px;
+    }
+
+    .seller-product-modal-footer {
+        padding: 14px 18px;
+    }
+
+    .product-image-upload {
+        align-items: flex-start;
+    }
+
+}

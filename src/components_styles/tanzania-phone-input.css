@@ -1,0 +1,70 @@
+.tanzania-phone-input {
+    display: flex;
+    width: 100%;
+    min-height: 45px;
+    overflow: hidden;
+    border: 1px solid var(--om-border, #d9dde1);
+    border-radius: 7px;
+    background: #fff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tanzania-phone-input:focus-within {
+    border-color: var(--om-gold, #d4a017);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--om-gold, #d4a017) 18%, transparent);
+}
+
+.tanzania-phone-input-prefix {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    padding: 0 13px;
+    border-right: 1px solid var(--om-border, #d9dde1);
+    background: #f7f7f7;
+    color: var(--om-muted, #69727c);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.tanzania-phone-input .tanzania-phone-input-control,
+.tanzania-phone-input .tanzania-phone-input-control.form-control {
+    min-width: 0;
+    min-height: 43px;
+    flex: 1 1 auto;
+    padding: 10px 12px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--om-ink, #263344);
+    font: inherit;
+    box-shadow: none;
+}
+
+.tanzania-phone-input .tanzania-phone-input-control:focus {
+    outline: 0;
+    box-shadow: none;
+}
+
+.tanzania-phone-input .tanzania-phone-input-control::placeholder {
+    color: #9aa1a9;
+    opacity: 1;
+}
+
+.tanzania-phone-input:has(.tanzania-phone-input-control.is-invalid) {
+    border-color: #dc3545;
+}
+
+html[data-theme="dark"] .tanzania-phone-input {
+    background: var(--om-surface);
+    border-color: var(--om-border);
+}
+
+html[data-theme="dark"] .tanzania-phone-input-prefix {
+    background: #252a30;
+    border-color: var(--om-border);
+    color: var(--om-muted);
+}
+
+html[data-theme="dark"] .tanzania-phone-input .tanzania-phone-input-control {
+    color: var(--om-ink);
+}
