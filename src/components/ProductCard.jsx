@@ -10,30 +10,71 @@ function ProductCard({ product, onAddToCart }) {
     const [favorited, setFavorited] = useState(false);
     const [favoriteError, setFavoriteError] = useState("");
     const [cartError, setCartError] = useState("");
+
     const toggleFavorite = async () => {
         const token = localStorage.getItem("token");
-        if (!token) { navigate("/login"); return; }
+
+        if (!token) {
+            navigate("/login");
+            return;
+        }
+
         setFavoriteError("");
+
         try {
             if (favorited) {
-                const response = await fetch(`${API_URL}/wishlist/${product.id}`, {
-                    method: "DELETE", headers: { Accept: "application/json", Authorization: `Bearer ${token}` },
-                });
-                if (!response.ok) throw new Error("Could not remove this favorite.");
+                // Remove from wishlist
+                const response = await fetch(
+                    `${API_URL}/wishlist/${product.id}`,
+                    {
+                        method: "DELETE",
+                        headers: {
+                            Accept: "application/json",
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error("Could not remove this favorite.");
+                }
+
                 setFavorited(false);
             } else {
-                const response = await fetch(`${API_URL}/wishlist/${product.id}`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json", Accept: "application/json", Authorization: `Bearer ${token}` },
-                    body: JSON.stringify({ product_id: product.id }),
-                });
+                // Add to wishlist
+                const response = await fetch(
+                    `${API_URL}/wishlist/${product.id}`,
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Accept: "application/json",
+                            Authorization: `Bearer ${token}`,
+                        },
+                        body: JSON.stringify({
+                            product_id: product.id,
+                        }),
+                    }
+                );
+
                 const result = await response.json();
-                if (!response.ok) throw new Error(result.message || "Could not save this favorite.");
+
+                if (!response.ok) {
+                    throw new Error(
+                        result.message || "Could not save this favorite."
+                    );
+                }
+
                 setFavorited(true);
+
+                // Go directly to the buyer wishlist
+                navigate("/buyer/wishlist");
             }
-        } catch (error) { setFavoriteError(error.message); }
+        } catch (error) {
+            setFavoriteError(error.message);
+        }
     };
-    const addAndCheckout = async () => {
+    const addToCart = async () => {
         if (adding) return;
         setAdding(true);
         setCartError("");
@@ -50,14 +91,14 @@ function ProductCard({ product, onAddToCart }) {
                 if (!addResponse.ok) throw new Error(addResult.message || "Unable to add this product to your cart.");
                 const cartResponse = await fetch(`${API_URL}/cart`, { headers: { Accept: "application/json", Authorization: `Bearer ${token}` } });
                 const cartResult = await cartResponse.json();
-                if (!cartResponse.ok) throw new Error(cartResult.message || "Unable to prepare checkout.");
+                if (!cartResponse.ok) throw new Error(cartResult.message || "Unable to load your cart.");
                 const cartItem = (cartResult.data?.items || []).find((item) => Number(item.product_id ?? item.product?.id) === Number(product.id));
                 cartItemIds = cartItem ? [cartItem.id] : [];
             }
             if (Array.isArray(cartItemIds) && cartItemIds.length) {
-                navigate("/checkout", { state: { cartItemIds } });
+                navigate("/cart");
             } else {
-                setCartError("Product added, but checkout could not be opened.");
+                setCartError("Product added, but your cart could not be opened.");
             }
         } catch (error) {
             setCartError(error.message || "Unable to add this product to your cart.");
@@ -126,7 +167,7 @@ function ProductCard({ product, onAddToCart }) {
                 <button
                     type="button"
                     className="product-cart-button"
-                    onClick={addAndCheckout}
+                    onClick={addToCart}
                     disabled={adding}
                 >
                     <ShoppingCart size={17} />

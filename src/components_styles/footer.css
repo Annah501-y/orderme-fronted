@@ -136,6 +136,40 @@
     color: var(--om-gold);
 }
 
+/* Footer buttons that behave like links */
+.footer-action-link {
+    padding: 0;
+    margin: 0;
+
+    border: none;
+    background: transparent;
+
+    color: var(--om-muted);
+    font-family: inherit;
+    font-size: 13px;
+
+    text-decoration: none;
+    cursor: pointer;
+
+    transition:
+        color 0.3s ease,
+        padding-left 0.3s ease;
+}
+
+.footer-action-link:hover {
+    padding-left: 4px;
+    color: var(--om-gold);
+}
+
+/* Bottom legal links */
+.footer-bottom-links .footer-action-link {
+    font-size: 12px;
+}
+
+.footer-bottom-links .footer-action-link:hover {
+    padding-left: 0;
+    color: var(--om-gold);
+}
 @media (max-width: 767px) {
     .footer-section {
         padding-top: 60px;

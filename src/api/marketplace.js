@@ -1,5 +1,19 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
+/** Return a browser-ready image URL from either API image field shape. */
+export function getProductImageUrl(product) {
+    const value = product?.image_url || product?.image || product?.image_path || product?.photo_url;
+    if (!value) return null;
+
+    const image = String(value).trim();
+    if (/^(https?:|data:|blob:)/i.test(image)) return image;
+
+    const backendUrl = (API_URL || "").replace(/\/api\/?$/i, "").replace(/\/+$/, "");
+    const path = image.replace(/\\/g, "/").replace(/^\/+/, "").replace(/^public\//i, "");
+    const storagePath = path.replace(/^storage\//i, "");
+    return backendUrl ? `${backendUrl}/storage/${storagePath}` : `/${path}`;
+}
+
 /** Fetch every page of the public product catalog. */
 export async function fetchAllProducts() {
     const products = [];

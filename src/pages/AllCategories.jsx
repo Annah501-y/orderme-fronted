@@ -115,13 +115,9 @@ function AllCategories() {
 
                 <div className="categories-page-header">
 
-                    <span className="categories-page-label">
-                        ORDERME SHOP
-                    </span>
+                  
 
-                    <h1>
-                        All Categories
-                    </h1>
+                    
 
                     <p>
                         Explore our categories and discover

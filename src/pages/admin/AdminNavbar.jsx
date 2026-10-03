@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 
 import "../../pages_styles/admin-styles/admin-navbar.css";
-import { useTheme } from "../../theme";
+
 
 const API_URL = import.meta.env.VITE_API_URL;
 

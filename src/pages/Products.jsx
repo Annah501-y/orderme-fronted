@@ -300,7 +300,7 @@ function Products() {
                         }
                         aria-label="Close notification"
                     >
-                        ×
+                        
                     </button>
 
                 </div>
@@ -319,16 +319,13 @@ function Products() {
 
                     <div>
 
-                        <span className="products-page-label">
-                            ORDERME SHOP
-                        </span>
-
+                        
 
                         <h1>
 
                             {categoryId
                                 ? "Category Products"
-                                : "All Products"}
+                                : ""}
 
                         </h1>
 
@@ -342,12 +339,6 @@ function Products() {
                         </p>
 
                     </div>
-
-
-                    <span className="products-count">
-                        {visibleProducts.length} products
-
-                    </span>
 
                 </div>
 

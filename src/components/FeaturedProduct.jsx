@@ -92,9 +92,7 @@ function FeaturedProducts() {
                 <div className="featured-products-header">
 
                     <div>
-                        <h2 className="featured-products-title">
-                            Products
-                        </h2>
+                        
 
                         <p className="featured-products-description">
                             Browse products offered by sellers on OrderMe.

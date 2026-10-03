@@ -330,6 +330,67 @@
     }
 }
 
+/* Etsy-inspired storefront lead: editorial, calm, and search-first. */
+.marketplace-hero {
+    min-height: 0;
+    padding: 50px 0 38px;
+    background: #fbfaf7 !important;
+    background-image: none !important;
+    text-align: center;
+}
+.marketplace-hero .container { position: relative; z-index: 1; }
+.marketplace-hero-copy { max-width: 760px; margin: 0 auto; }
+.marketplace-hero .hero-eyebrow {
+    margin: 0 0 13px;
+    padding: 0;
+    background: transparent;
+    color: var(--om-gold);
+    font-size: .9rem;
+    letter-spacing: .02em;
+}
+.marketplace-hero .hero-heading {
+    margin: 0;
+    color: var(--om-ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(2.4rem, 5vw, 4.25rem);
+    font-weight: 500 !important;
+    letter-spacing: -.045em;
+    line-height: 1.08;
+}
+.marketplace-hero .hero-heading-accent { color: var(--om-gold); }
+.marketplace-hero .hero-description { max-width: 600px; margin: 16px auto 24px; color: var(--om-muted); }
+.marketplace-search-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: min(100%, 650px);
+    min-height: 58px;
+    margin: 0 auto;
+    padding: 5px 6px 5px 18px;
+    border: 1px solid #d6d2ca;
+    border-radius: 999px;
+    background: rgba(255,255,255,.85);
+    box-shadow: 0 6px 22px rgba(32,37,43,.08);
+    backdrop-filter: blur(12px);
+}
+.marketplace-search-form > svg { flex: 0 0 auto; color: var(--om-muted); }
+.marketplace-search-form input { flex: 1; width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--om-ink); }
+.marketplace-search-form input:focus-visible { outline: 0; }
+.marketplace-search-form button {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 46px; padding: 0 20px; border: 0; border-radius: 999px;
+    background: var(--om-gold); color: #fff; font-weight: 650;
+}
+.marketplace-search-form button:hover { background: var(--om-gold-hover); }
+.marketplace-shop-link { display: inline-flex; align-items: center; gap: 7px; margin: 17px 0 0; padding: 5px 0; border: 0; background: transparent; color: var(--om-ink); font-weight: 600; }
+.marketplace-shop-link:hover { color: var(--om-gold); }
+@media (max-width: 576px) {
+    .marketplace-hero { padding: 38px 0 28px; }
+    .marketplace-search-form { min-height: 52px; padding-left: 14px; }
+    .marketplace-search-form button { min-height: 40px; padding: 0 14px; }
+    .marketplace-search-form button span { display: none; }
+}
+
 .hero-badge-deal strong {
     color: #dc3545;
 }

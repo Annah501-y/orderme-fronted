@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Privacy() {
+function Privacy({ onOpenHelp }) {
     return (
         <article className="container py-5">
             <header className="mb-4">
@@ -38,7 +38,25 @@ function Privacy() {
 
             <section>
                 <h2 className="h4">Contact</h2>
-                <p>For privacy questions or requests, email <a href="mailto:support@ordreme.co.tz">support@ordreme.co.tz</a> or visit the <Link to="/help">Help Center</Link>.</p>
+                <p>
+                    For privacy questions or requests, email{" "}
+                    <a href="mailto:support@ordreme.co.tz">
+                        support@ordreme.co.tz
+                    </a>{" "}
+                    or visit the{" "}
+                    {onOpenHelp ? (
+                        <button
+                            type="button"
+                            className="footer-document-link"
+                            onClick={() => onOpenHelp("help")}
+                        >
+                            Help Center
+                        </button>
+                    ) : (
+                        <Link to="/help">Help Center</Link>
+                    )}
+                    .
+                </p>
             </section>
         </article>
     );

@@ -1,0 +1,317 @@
+/* =========================================
+   FOOTER READING OVERLAY
+   ========================================= */
+
+   .footer-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Dark layer behind the reading panel */
+.footer-overlay-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.48);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+/* Main reading panel */
+.footer-overlay-panel {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    width: min(1100px, calc(100% - 48px));
+    height: min(90vh, 900px);
+
+    overflow: hidden;
+
+    background: #ffffff;
+    border-radius: 16px;
+
+    box-shadow:
+        0 25px 60px rgba(15, 23, 42, 0.25),
+        0 8px 20px rgba(15, 23, 42, 0.12);
+
+    animation: footerOverlayOpen 0.25s ease-out;
+}
+
+/* Header */
+.footer-overlay-header {
+    flex-shrink: 0;
+
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+
+    min-height: 68px;
+    padding: 0 22px;
+
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.footer-overlay-header h2 {
+    margin: 0;
+
+    color: var(--om-ink);
+    font-size: 17px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Back button */
+.footer-overlay-back-button {
+    justify-self: start;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 8px 10px;
+
+    border: none;
+    background: transparent;
+
+    color: var(--om-ink);
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        background 0.2s ease;
+}
+
+.footer-overlay-back-button:hover {
+    color: var(--om-gold);
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+/* Close button */
+.footer-overlay-close {
+    justify-self: end;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+
+    padding: 0;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #f5f6f8;
+    color: var(--om-ink);
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.footer-overlay-close:hover {
+    background: var(--om-gold);
+    color: var(--om-ink);
+    transform: rotate(90deg);
+}
+
+/* Scrollable document area */
+.footer-overlay-content {
+    flex: 1;
+    overflow-y: auto;
+
+    scroll-behavior: smooth;
+
+    background: #ffffff;
+}
+
+/*
+   Make the existing document components
+   fit naturally inside the overlay.
+*/
+.footer-overlay-content > .container {
+    max-width: 820px;
+    padding-top: 50px !important;
+    padding-bottom: 70px !important;
+}
+
+/* Better document typography */
+.footer-overlay-content article h1,
+.footer-overlay-content section h1 {
+    color: var(--om-ink);
+    font-size: clamp(28px, 4vw, 38px);
+    font-weight: 700;
+    letter-spacing: -0.7px;
+}
+
+.footer-overlay-content article h2,
+.footer-overlay-content section h2 {
+    margin-top: 28px;
+    color: var(--om-ink);
+    font-weight: 600;
+}
+
+.footer-overlay-content article p,
+.footer-overlay-content section p {
+    color: #5f6b78;
+    font-size: 15px;
+    line-height: 1.85;
+}
+
+.footer-overlay-content a {
+    color: var(--om-ink);
+    font-weight: 500;
+}
+
+.footer-overlay-content a:hover {
+    color: var(--om-gold);
+}
+
+/* Scrollbar */
+.footer-overlay-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.footer-overlay-content::-webkit-scrollbar-track {
+    background: #f5f6f8;
+}
+
+.footer-overlay-content::-webkit-scrollbar-thumb {
+    background: #cbd1d8;
+    border-radius: 20px;
+}
+
+.footer-overlay-content::-webkit-scrollbar-thumb:hover {
+    background: #aeb6c0;
+}
+.footer-document-link {
+    padding: 0;
+    border: none;
+    background: transparent;
+
+    color: var(--om-ink);
+    font: inherit;
+    font-weight: 500;
+
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+
+    cursor: pointer;
+
+    transition: color 0.2s ease;
+}
+
+.footer-document-link:hover {
+    color: var(--om-gold);
+}
+
+/* Opening animation */
+@keyframes footerOverlayOpen {
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.985);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 767px) {
+    .footer-overlay-panel {
+        width: calc(100% - 24px);
+        height: calc(100vh - 24px);
+
+        border-radius: 12px;
+    }
+
+    .footer-overlay-header {
+        min-height: 62px;
+        padding: 0 14px;
+    }
+
+    .footer-overlay-header h2 {
+        font-size: 15px;
+    }
+
+    .footer-overlay-back-button span {
+        display: none;
+    }
+
+    .footer-overlay-back-button {
+        width: 38px;
+        height: 38px;
+
+        justify-content: center;
+        padding: 0;
+    }
+
+    .footer-overlay-content > .container {
+        padding-top: 35px !important;
+        padding-bottom: 50px !important;
+    }
+
+    .footer-overlay-content article h1,
+    .footer-overlay-content section h1 {
+        font-size: 29px;
+    }
+
+    .footer-overlay-content article p,
+    .footer-overlay-content section p {
+        font-size: 14px;
+        line-height: 1.75;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 575px) {
+    .footer-overlay-panel {
+        width: 100%;
+        height: 100%;
+
+        border-radius: 0;
+    }
+
+    .footer-overlay-header {
+        min-height: 60px;
+    }
+
+    .footer-overlay-content > .container {
+        padding: 30px 20px 45px !important;
+    }
+
+    .footer-overlay-content article h1,
+    .footer-overlay-content section h1 {
+        font-size: 27px;
+    }
+
+    .footer-overlay-content article h2,
+    .footer-overlay-content section h2 {
+        font-size: 19px;
+    }
+}

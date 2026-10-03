@@ -118,9 +118,9 @@ function ProductDetails() {
                 headers: { Accept: "application/json", Authorization: `Bearer ${token}` },
             });
             const cartResult = await cartResponse.json();
-            if (!cartResponse.ok) throw new Error(cartResult.message || "Added to cart, but checkout could not be opened.");
+            if (!cartResponse.ok) throw new Error(cartResult.message || "Added to cart, but your cart could not be opened.");
             const cartItemIds = (cartResult.data?.items || []).map((item) => item.id);
-            if (cartItemIds.length) navigate("/checkout", { state: { cartItemIds } });
+            if (cartItemIds.length) navigate("/cart");
 
         } catch (error) {
             console.error("Add to cart error:", error);

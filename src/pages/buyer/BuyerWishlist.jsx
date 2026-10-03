@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Heart, Trash2, ShoppingCart, ArrowLeft, ArrowRight } from "lucide-react";
-import { fetchAllProducts } from "../../api/marketplace";
+import { fetchAllProducts, getProductImageUrl } from "../../api/marketplace";
 import "../../pages_styles/buyer_styles/buyer-wishlist.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -27,10 +27,28 @@ function BuyerWishlist() {
                     fetchAllProducts(),
                 ]);
                 const result = await wishlistResponse.json();
-                if (!wishlistResponse.ok || !result.success) throw new Error(result.message || "Failed to load wishlist.");
-                const saved = result.data || [];
+                if (!wishlistResponse.ok || !result.success)
+                    throw new Error(result.message || "Failed to load wishlist.");
+                const catalogById = new Map(products.map((product) => [String(product.id), product]));
+                const saved = (result.data || []).map((item) => {
+                    const productId = item.product_id ?? item.product?.id;
+                    const catalogProduct = catalogById.get(String(productId));
+                    const savedProduct = item.product || catalogProduct;
+                    if (!savedProduct) return item;
+                    const image = getProductImageUrl(savedProduct) || getProductImageUrl(catalogProduct);
+                    return {
+                        ...item,
+                        product: {
+                            ...(catalogProduct || {}),
+                            ...savedProduct,
+                            image_url: image,
+                        },
+                    };
+                });
                 setWishlist(saved);
-                const savedProducts = saved.map((item) => item.product).filter(Boolean);
+
+                const savedProducts = saved.map((item) =>
+                    item.product).filter(Boolean);
                 setRecommendations(savedProducts.map((savedProduct) => ({
                     productId: savedProduct.id,
                     products: products.filter((product) => product.id !== savedProduct.id
@@ -48,7 +66,8 @@ function BuyerWishlist() {
     const removeFromWishlist = async (productId) => {
         try {
             setRemovingId(productId);
-            const response = await fetch(`${API_URL}/wishlist/${productId}`, { method: "DELETE", headers: { Accept: "application/json", Authorization: `Bearer ${token}` } });
+            const response = await fetch(`${API_URL}/wishlist/${productId}`,
+                { method: "DELETE", headers: { Accept: "application/json", Authorization: `Bearer ${token}` } });
             const result = await response.json();
             if (!response.ok || !result.success) throw new Error(result.message || "Failed to remove product.");
             setWishlist((items) => items.filter((item) => item.product_id !== productId));
@@ -92,7 +111,7 @@ function BuyerWishlist() {
             const related = recommendations.find((entry) => entry.productId === product.id)?.products || [];
             return <section className="wishlist-collection" key={item.id}>
                 <div className="wishlist-card">
-                    <Link to={`/products/${product.id}`} className="wishlist-image-container">{product.image ? <img src={product.image} alt={product.name} /> : <div className="wishlist-image-placeholder"><ShoppingCart size={30} /></div>}</Link>
+                    <Link to={`/products/${product.id}`} className="wishlist-image-container">{getProductImageUrl(product) ? <img src={getProductImageUrl(product)} alt={product.name} /> : <div className="wishlist-image-placeholder"><ShoppingCart size={30} /></div>}</Link>
                     <div className="wishlist-card-content">
                         <Link to={`/products/${product.id}`} className="wishlist-product-name">{product.name}</Link>
                         <p className="wishlist-product-description">{product.description}</p>
@@ -103,7 +122,7 @@ function BuyerWishlist() {
                         </div></div>
                     </div>
                 </div>
-                {related.length > 0 && <div className="wishlist-related"><div className="wishlist-related-heading"><h2>More like this</h2><span>Other OrderMe sellers</span></div><div className="wishlist-related-grid">{related.map((suggestion) => <article className="wishlist-related-card" key={suggestion.id}><Link to={`/products/${suggestion.id}`} className="wishlist-related-image">{suggestion.image ? <img src={suggestion.image} alt={suggestion.name} /> : <ShoppingCart size={24} />}</Link><div><Link to={`/products/${suggestion.id}`} className="wishlist-related-name">{suggestion.name}</Link><span className="wishlist-related-seller">{suggestion.seller?.store_name || suggestion.seller?.name || "OrderMe seller"}</span><strong>{money(suggestion.price)}</strong></div></article>)}</div></div>}
+                {related.length > 0 && <div className="wishlist-related"><div className="wishlist-related-heading"><h2>More like this</h2><span>Other OrderMe sellers</span></div><div className="wishlist-related-grid">{related.map((suggestion) => <article className="wishlist-related-card" key={suggestion.id}><Link to={`/products/${suggestion.id}`} className="wishlist-related-image">{getProductImageUrl(suggestion) ? <img src={getProductImageUrl(suggestion)} alt={suggestion.name} /> : <ShoppingCart size={24} />}</Link><div><Link to={`/products/${suggestion.id}`} className="wishlist-related-name">{suggestion.name}</Link><span className="wishlist-related-seller">{suggestion.seller?.store_name || suggestion.seller?.name || "OrderMe seller"}</span><strong>{money(suggestion.price)}</strong></div></article>)}</div></div>}
             </section>;
         })}
     </div>;

@@ -2,14 +2,15 @@ import { useEffect, useState } from "react";
 import {
   ShoppingCart,
   User,
+  Heart,
+  Percent,
+  Truck,
   ChevronDown,
   Menu,
   X,
-  Sun,
-  Moon,
+  Search,
 } from "lucide-react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useTheme } from "../theme";
+import { Link, useNavigate } from "react-router-dom";
 
 import "../components_styles/navbar.css";
 
@@ -19,12 +20,11 @@ const Navbar = () => {
   const [categoriesOpen, setCategoriesOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
   const [user, setUser] = useState(() => {
     try { return JSON.parse(localStorage.getItem("user") || "null"); } catch { return null; }
   });
   const navigate = useNavigate();
-  const location = useLocation();
-  const [theme, toggleTheme] = useTheme();
   const role = user?.roles?.find((item) => item?.name === "seller")?.name || user?.roles?.[0]?.name;
 
   //
@@ -77,6 +77,13 @@ const Navbar = () => {
     navigate("/");
   };
 
+  const submitSearch = (event) => {
+    event.preventDefault();
+    const query = searchTerm.trim();
+    navigate(query ? `/products?search=${encodeURIComponent(query)}` : "/products");
+    setMobileOpen(false);
+  };
+
   return (
     <nav className="navbar navbar-expand-lg border-bottom sticky-top orderme-navbar">
       <div className="container px-lg-4">
@@ -94,6 +101,50 @@ const Navbar = () => {
           </span>
         </a>
 
+        {/* Compact marketplace actions shown in a separate mobile top row. */}
+        <div className="mobile-navbar-actions">
+          <div className="account-menu-wrap">
+            <button type="button" className="mobile-nav-action" title="Account" aria-label="Account" onClick={() => setAccountOpen(!accountOpen)} aria-expanded={accountOpen}>
+              <User size={19} /><span>Account</span>
+            </button>
+            {accountOpen && <div className="account-dropdown">
+              {user ? <>
+                <div className="account-dropdown-heading">{user.name || "Your account"}<small>{user.email}</small></div>
+                <Link to="/buyer/profile" onClick={() => setAccountOpen(false)}>Account settings</Link>
+                <Link to="/buyer/orders" onClick={() => setAccountOpen(false)}>Purchases and orders</Link>
+                <Link to="/buyer/wishlist" onClick={() => setAccountOpen(false)}>Favorites</Link>
+                {role === "buyer" && <Link to="/seller-profile-setup" onClick={() => setAccountOpen(false)}>Become a Seller</Link>}
+                {role === "seller" && <Link to="/seller/store-profile" onClick={() => setAccountOpen(false)}>Seller account</Link>}
+                {role === "admin" && <Link to="/admin-dashboard" onClick={() => setAccountOpen(false)}>Admin dashboard</Link>}
+                {role === "rider" && <Link to="/rider/dashboard" onClick={() => setAccountOpen(false)}>Rider dashboard</Link>}
+                <button type="button" onClick={signOut}>Sign out</button>
+              </> : <><Link to="/login" onClick={() => setAccountOpen(false)}>Sign in</Link><Link to="/register" onClick={() => setAccountOpen(false)}>Create account</Link><Link to="/register?account_type=seller" onClick={() => setAccountOpen(false)}>Become a Seller</Link></>}
+            </div>}
+          </div>
+          <Link className="mobile-nav-action" to="/buyer/wishlist" title="Favorites" aria-label="Favorites"><Heart size={19} /><span>Favorites</span></Link>
+          <Link className="mobile-nav-action" to="/deals" title="Deals" aria-label="Deals"><Percent size={19} /><span>Deals</span></Link>
+          <Link className="mobile-nav-action" to="/cart" title="Cart" aria-label="Cart"><ShoppingCart size={19} /><span>Cart</span></Link>
+          <Link className="mobile-nav-action mobile-rider-action" to="/become-rider" title="Become a Rider" aria-label="Become a Rider"><Truck size={19} /><span>Become a Rider</span></Link>
+        </div>
+
+        {/* Second mobile row: categories menu and marketplace search. */}
+        <div className="mobile-navbar-tools">
+          <div className="mobile-categories-wrap">
+            <button type="button" className="mobile-categories-button" onClick={() => setCategoriesOpen(!categoriesOpen)} aria-expanded={categoriesOpen}>
+              <Menu size={19} /> <span>Categories</span> <ChevronDown size={15} />
+            </button>
+            {categoriesOpen && <div className="mobile-category-menu">
+              <strong>Shop by Category</strong>
+              {categories.map((category) => <Link key={category.id} to={`/products?category=${category.id}`} onClick={() => { setCategoriesOpen(false); setMobileOpen(false); }}>{category.name}</Link>)}
+              <Link to="/sellers" onClick={() => { setCategoriesOpen(false); setMobileOpen(false); }}>Stores</Link>
+            </div>}
+          </div>
+          <form className="mobile-marketplace-search" onSubmit={submitSearch} role="search">
+            <input type="search" placeholder="Search for anything" aria-label="Search products" value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} />
+            <button type="submit" aria-label="Search products"><Search size={19} /></button>
+          </form>
+        </div>
+
         {/* Mobile menu button */}
         <button
           className="navbar-toggler border-0"
@@ -108,6 +159,10 @@ const Navbar = () => {
           className={`collapse navbar-collapse ${mobileOpen ? "show" : ""
             }`}
         >
+          <form className="navbar-marketplace-search" onSubmit={submitSearch} role="search">
+            <input type="search" placeholder="Search for anything" aria-label="Search products" value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} />
+            <button type="submit" aria-label="Search products"><Search size={19} /></button>
+          </form>
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
 
             {/* Categories */}
@@ -184,12 +239,6 @@ const Navbar = () => {
 
           {/* Right side actions */}
           <div className="d-flex align-items-center gap-3">
-
-            {(["seller", "rider", "admin"].includes(role) && !location.pathname.startsWith("/buyer")) && (
-              <button type="button" className="theme-toggle-button" onClick={toggleTheme} aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"} title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}>
-                {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
-              </button>
-            )}
 
             {/* Account */}
             <div className="account-menu-wrap">

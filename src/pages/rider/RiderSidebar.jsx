@@ -19,7 +19,7 @@ import {
 
 import OrderMeLogo from "../../assets/images/orderme-logo.jpg";
 import "../../pages_styles/rider-styles/rider-sidebar.css";
-import { useTheme } from "../../theme";
+
 
 const API_URL = import.meta.env.VITE_API_URL;
 

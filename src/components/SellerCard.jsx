@@ -50,11 +50,6 @@ function SellerCard({ seller }) {
                     </div>
                 )}
 
-                <div className="seller-products">
-                    <strong>{seller.productCount ?? (Array.isArray(seller.products) ? seller.products.length : seller.products)}</strong>
-                    <span>Products</span>
-                </div>
-
             </div>
 
             <Link className="seller-button text-decoration-none" to={`/products?seller=${seller.id}`}>

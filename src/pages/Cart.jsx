@@ -189,35 +189,12 @@ function Cart() {
         }
     };
 
-    /*
-     * Checkout only selected products.
-     */
-    const checkoutSelected = () => {
-        if (selectedItems.length === 0) {
-            setError(
-                "Please select at least one product to checkout."
-            );
-            return;
-        }
-
-        navigate("/checkout", {
-            state: {
-                cartItemIds: selectedItems,
-            },
-        });
-    };
-
-    /*
-     * Checkout every product in the cart.
-     */
     const checkoutAll = () => {
         if (cartItems.length === 0) return;
 
         navigate("/checkout", {
             state: {
-                cartItemIds: cartItems.map(
-                    (item) => item.id
-                ),
+                cartItemIds: cartItems.map((item) => item.id),
             },
         });
     };
@@ -299,9 +276,9 @@ function Cart() {
                 <div className="cart-header">
 
                     <div>
-                        <span className="cart-label">
-                            ORDERME
-                        </span>
+                        <Link to="/products" className="cart-label cart-shop-link">
+                            Shop Products
+                        </Link>
 
                         <h1>Your Cart</h1>
 
@@ -390,11 +367,10 @@ function Cart() {
 
                                 return (
                                     <div
-                                        className={`cart-item ${
-                                            isSelected
+                                        className={`cart-item ${isSelected
                                                 ? "cart-item-selected"
                                                 : ""
-                                        }`}
+                                            }`}
                                         key={item.id}
                                     >
 
@@ -402,11 +378,10 @@ function Cart() {
 
                                             <button
                                                 type="button"
-                                                className={`cart-checkbox ${
-                                                    isSelected
+                                                className={`cart-checkbox ${isSelected
                                                         ? "checked"
                                                         : ""
-                                                }`}
+                                                    }`}
                                                 onClick={() =>
                                                     toggleItem(
                                                         item.id
@@ -427,29 +402,33 @@ function Cart() {
 
                                         </div>
 
-                                        <div className="cart-item-image">
+                                        <Link to={`/products/${product?.id}`} className="cart-item-product-link" aria-label={`View ${product?.name || "product"}`}>
+                                            <div className="cart-item-image">
 
-                                            {product?.image_url ? (
-                                                <img
-                                                    src={
-                                                        product.image_url
-                                                    }
-                                                    alt={
-                                                        product.name
-                                                    }
-                                                />
-                                            ) : (
-                                                <ShoppingCart
-                                                    size={30}
-                                                />
-                                            )}
+                                                {product?.image_url ? (
+                                                    <img
+                                                        src={
+                                                            product.image_url
+                                                        }
+                                                        alt={
+                                                            product.name
+                                                        }
+                                                    />
+                                                ) : (
+                                                    <ShoppingCart
+                                                        size={30}
+                                                    />
+                                                )}
 
-                                        </div>
+                                            </div>
+                                        </Link>
 
                                         <div className="cart-item-details">
 
                                             <h3>
-                                                {product?.name}
+                                                <Link to={`/products/${product?.id}`} className="cart-item-name-link">
+                                                    {product?.name}
+                                                </Link>
                                             </h3>
 
                                             <span>
@@ -507,9 +486,9 @@ function Cart() {
                                                 {formatPrice(
                                                     Number(
                                                         product?.price ||
-                                                            0
+                                                        0
                                                     ) *
-                                                        quantity
+                                                    quantity
                                                 )}
                                             </strong>
 
@@ -579,19 +558,24 @@ function Cart() {
 
                             </div>
 
-                            <button
-                                className="checkout-button"
-                                onClick={
-                                    checkoutSelected
-                                }
-                                disabled={
-                                    selectedItems.length ===
-                                    0
-                                }
-                            >
-                                Checkout Selected
-                                <ArrowRight size={17} />
-                            </button>
+                            {selectedItems.length > 0 ? (
+                                <Link
+                                    to="/checkout"
+                                    state={{ cartItemIds: selectedItems }}
+                                    className="checkout-all-button"
+                                >
+                                    Proceed to Checkout
+                                    <ArrowRight size={17} />
+                                </Link>
+                            ) : (
+                                <button
+                                    type="button"
+                                    className="checkout-button"
+                                    disabled
+                                >
+                                    Select items to checkout
+                                </button>
+                            )}
 
                             <button
                                 type="button"
@@ -600,7 +584,6 @@ function Cart() {
                             >
                                 Checkout All
                             </button>
-
                         </div>
 
                     </div>

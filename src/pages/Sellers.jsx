@@ -66,10 +66,6 @@ function Sellers() {
                                     <p>{seller.name}</p>
                                     {seller.description && <p>{seller.description}</p>}
                                     <p className="seller-category">{seller.category}</p>
-                                    <div className="seller-products">
-                                        <strong>{seller.productCount}</strong>
-                                        <span>Products</span>
-                                    </div>
                                     <h3 className="h6 mt-3">Products from this store</h3>
                                     <ul className="list-unstyled">
                                         {seller.products.slice(0, 6).map((product) => (

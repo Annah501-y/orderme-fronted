@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Terms() {
+function Terms({ onOpenHelp }) {
     return (
         <article className="container py-5">
             <header className="mb-4">
@@ -38,7 +38,25 @@ function Terms() {
 
             <section>
                 <h2 className="h4">Contact</h2>
-                <p>Questions about these terms? Contact <a href="mailto:support@ordreme.co.tz">support@ordreme.co.tz</a> or visit the <Link to="/help">Help Center</Link>.</p>
+                <p>
+                    Questions about these terms? Contact{" "}
+                    <a href="mailto:support@ordreme.co.tz">
+                        support@ordreme.co.tz
+                    </a>{" "}
+                    or visit the{" "}
+                    {onOpenHelp ? (
+                        <button
+                            type="button"
+                            className="footer-document-link"
+                            onClick={() => onOpenHelp("help")}
+                        >
+                            Help Center
+                        </button>
+                    ) : (
+                        <Link to="/help">Help Center</Link>
+                    )}
+                    .
+                </p>
             </section>
         </article>
     );
