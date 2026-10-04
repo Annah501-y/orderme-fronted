@@ -33,14 +33,14 @@
 
 .seller-dashboard-header h1 {
     margin: 0;
-    color: #ffffff;
+    color: #252f3d;
     font-size: 27px;
     font-weight: 600;
 }
 
 .dashboard-subtitle {
     margin: 7px 0 0;
-    color: #929292;
+    color: #68727e;
     font-size: 14px;
 }
 
@@ -56,11 +56,11 @@
 
     padding: 9px 14px;
 
-    border: 1px solid var(--om-ink);
+    border: 1px solid #dce1e6;
     border-radius: 7px;
 
-    background: #171717;
-    color: #cfcfcf;
+    background: #ffffff;
+    color: #374151;
 
     font-size: 13px;
 
@@ -81,11 +81,11 @@
     padding: 12px 14px;
     margin-bottom: 20px;
 
-    border: 1px solid #553737;
+    border: 1px solid #f0c7c7;
     border-radius: 7px;
 
-    background: wheat;
-    color: #e2aaaa;
+    background: #fff4f4;
+    color: #9c3434;
 
     font-size: 13px;
 }
@@ -103,7 +103,7 @@
     justify-content: center;
     gap: 10px;
 
-    color: #999999;
+    color: #68727e;
     font-size: 14px;
 }
 
@@ -145,9 +145,9 @@
 
     padding: 18px;
 
-    background: #151515;
+    background: #ffffff;
 
-    border: 1px solid #292929;
+    border: 1px solid #e5e8ec;
     border-radius: 9px;
 }
 
@@ -174,12 +174,12 @@
 }
 
 .stat-content span {
-    color: #8e8e8e;
+    color: #68727e;
     font-size: 12px;
 }
 
 .stat-content strong {
-    color: #ffffff;
+    color: #252f3d;
     font-size: 21px;
     font-weight: 600;
 }
@@ -208,9 +208,9 @@
 
 .dashboard-section,
 .quick-actions-section {
-    background:  #151515;
+    background: #ffffff;
 
-    border: 1px solid #292929;
+    border: 1px solid #e5e8ec;
     border-radius: 9px;
 
     padding: 20px;
@@ -229,7 +229,7 @@
 .section-header h2 {
     margin: 0;
 
-    color: #ffffff;
+    color: #252f3d;
 
     font-size: 16px;
     font-weight: 600;
@@ -263,7 +263,7 @@
 }
 
 .section-link:hover {
-    color: #ffffff;
+    color: #72550a;
 }
 
 
@@ -289,7 +289,7 @@
 
     text-align: left;
 
-    border-bottom: 1px solid #292929;
+    border-bottom: 1px solid #e6e9ed;
 
     color: var(--om-muted);
 
@@ -302,9 +302,9 @@
 .seller-orders-table td {
     padding: 13px 8px;
 
-    border-bottom: 1px solid #242424;
+    border-bottom: 1px solid #edf0f2;
 
-    color: #cfcfcf;
+    color: #4b5563;
 
     font-size: 12px;
 }
@@ -329,8 +329,8 @@
 
     text-transform: capitalize;
 
-    background: #252525;
-    color: #bdbdbd;
+    background: #f1f3f5;
+    color: #5c6672;
 }
 
 .order-status.pending,
@@ -339,13 +339,13 @@
 .order-status.paid,
 .order-status.preparing {
     background: rgba(198, 161, 91, 0.13);
-    color: var(--om-gold);
+    color: #795e16;
 }
 
 .order-status.completed,
 .order-status.delivered {
     background: rgba(76, 175, 80, 0.12);
-    color: #8bc58e;
+    color: #287a43;
 }
 
 
@@ -364,7 +364,7 @@
 
     gap: 10px;
 
-    color: #555555;
+    color: #7b8490;
 }
 
 .dashboard-empty p {
@@ -395,7 +395,7 @@
 
     padding: 12px 0;
 
-    border-bottom: 1px solid #242424;
+    border-bottom: 1px solid #edf0f2;
 }
 
 .stock-item:last-child {
@@ -423,8 +423,8 @@
 
     border-radius: 7px;
 
-    background: #202020;
-    color: #999999;
+    background: #f2f4f6;
+    color: #68727e;
 }
 
 .stock-product div:last-child {
@@ -437,7 +437,7 @@
 }
 
 .stock-product strong {
-    color: #dddddd;
+    color: #313b48;
 
     font-size: 12px;
 
@@ -491,12 +491,12 @@
 
     padding: 10px;
 
-    border: 1px solid #303030;
+    border: 1px solid #dce1e6;
     border-radius: 7px;
 
-    background: #191919;
+    background: #ffffff;
 
-    color: #bdbdbd;
+    color: #394453;
 
     font-size: 12px;
 

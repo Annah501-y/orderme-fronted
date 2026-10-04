@@ -7,6 +7,11 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 const AdminRiders = () => {
     const [applications, setApplications] = useState([]);
+    const [licenseSubmissions, setLicenseSubmissions] = useState([]);
+    const [licenseLoading, setLicenseLoading] = useState(true);
+    const [licenseError, setLicenseError] = useState("");
+    const [licenseMessage, setLicenseMessage] = useState("");
+    const [reviewingRiderId, setReviewingRiderId] = useState(null);
     const [applicationsLoading, setApplicationsLoading] = useState(true);
     const [applicationsError, setApplicationsError] = useState("");
     const [invitingId, setInvitingId] = useState(null);
@@ -38,7 +43,83 @@ const AdminRiders = () => {
         }
     };
 
-    useEffect(() => { fetchApplications(); }, []);
+    // Load rider profiles that have submitted documents and still need review.
+    const fetchLicenseSubmissions = async () => {
+        setLicenseLoading(true);
+        setLicenseError("");
+        try {
+            const response = await fetch(`${API_URL}/admin/rider-licenses`, {
+                headers: { Accept: "application/json", Authorization: `Bearer ${localStorage.getItem("token")}` },
+            });
+            const result = await response.json().catch(() => ({}));
+            if (!response.ok) throw new Error(result.message || "Unable to load rider licence submissions.");
+            setLicenseSubmissions(Array.isArray(result.data) ? result.data : []);
+        } catch (fetchError) {
+            setLicenseError(fetchError.message || "Unable to load rider licence submissions.");
+        } finally {
+            setLicenseLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchApplications();
+        fetchLicenseSubmissions();
+    }, []);
+
+    // Retrieve the identity document through the authenticated private-file endpoint.
+    const downloadLicense = async (rider) => {
+        setLicenseError("");
+        try {
+            const response = await fetch(`${API_URL}/admin/riders/${rider.id}/license-document`, {
+                headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+            });
+            if (!response.ok) {
+                const result = await response.json().catch(() => ({}));
+                throw new Error(result.message || "Unable to download this licence.");
+            }
+
+            const objectUrl = URL.createObjectURL(await response.blob());
+            const link = document.createElement("a");
+            link.href = objectUrl;
+            link.download = `rider-${rider.id}-license`;
+            link.click();
+            URL.revokeObjectURL(objectUrl);
+        } catch (downloadError) {
+            setLicenseError(downloadError.message || "Unable to download this licence.");
+        }
+    };
+
+    // Ask for a correction note when rejecting a document so the rider knows what to fix.
+    const reviewLicense = async (rider, status) => {
+        const reviewNote = status === "rejected"
+            ? window.prompt("Tell the rider what needs to be corrected:")
+            : "";
+        if (status === "rejected" && !reviewNote?.trim()) return;
+
+        setReviewingRiderId(rider.id);
+        setLicenseError("");
+        setLicenseMessage("");
+        try {
+            const response = await fetch(`${API_URL}/admin/riders/${rider.id}/license-review`, {
+                method: "PATCH",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+                body: JSON.stringify({ status, review_note: reviewNote || null }),
+            });
+            const result = await response.json().catch(() => ({}));
+            if (!response.ok) throw new Error(result.message || "Unable to update this licence review.");
+
+            setLicenseSubmissions((current) => current.filter((item) => item.id !== rider.id));
+            setLicenseMessage(result.message || `Licence ${status}.`);
+        } catch (reviewError) {
+            setLicenseError(reviewError.message || "Unable to update this licence review.");
+        } finally {
+            setReviewingRiderId(null);
+        }
+    };
 
     const sendInvitation = async (application) => {
         setInvitingId(application.id);
@@ -135,6 +216,37 @@ const AdminRiders = () => {
                     </p>
                 </div>
             </div>
+
+            <section className="admin-rider-applications-card">
+                <div className="admin-rider-card-header">
+                    <h3>Rider Licence Reviews</h3>
+                    <p>Review the uploaded document before allowing a rider to start assigned deliveries.</p>
+                </div>
+                {licenseError && <div className="admin-rider-alert error" role="alert">{licenseError}</div>}
+                {licenseMessage && <div className="admin-rider-alert success" role="status">{licenseMessage}</div>}
+                {licenseLoading ? <p className="admin-rider-muted">Loading licence submissions...</p> : licenseSubmissions.length === 0 ? (
+                    <p className="admin-rider-muted">No rider licences are waiting for review.</p>
+                ) : (
+                    <div className="admin-rider-applications-table-wrap">
+                        <table className="admin-rider-applications-table">
+                            <thead><tr><th>Rider</th><th>Phone</th><th>Vehicle</th><th>Licence number</th><th>Document</th><th>Review</th></tr></thead>
+                            <tbody>{licenseSubmissions.map((rider) => (
+                                <tr key={rider.id}>
+                                    <td>{rider.user?.name || "Rider"}<br /><small>{rider.user?.email}</small></td>
+                                    <td>{rider.user?.phone || "Not provided"}</td>
+                                    <td>{rider.vehicle_type}</td>
+                                    <td>{rider.license_number}</td>
+                                    <td><button type="button" className="admin-rider-invite-button" disabled={!rider.has_license_document} onClick={() => downloadLicense(rider)}>View licence</button></td>
+                                    <td className="admin-rider-review-actions">
+                                        <button type="button" className="admin-rider-invite-button" disabled={reviewingRiderId === rider.id} onClick={() => reviewLicense(rider, "approved")}>Approve</button>
+                                        <button type="button" className="admin-rider-review-reject" disabled={reviewingRiderId === rider.id} onClick={() => reviewLicense(rider, "rejected")}>Request correction</button>
+                                    </td>
+                                </tr>
+                            ))}</tbody>
+                        </table>
+                    </div>
+                )}
+            </section>
 
             <section className="admin-rider-applications-card">
                 <div className="admin-rider-card-header">

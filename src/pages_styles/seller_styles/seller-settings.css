@@ -1,0 +1,274 @@
+.seller-settings-page {
+    width: min(100%, 1120px);
+    margin: 0 auto;
+    padding: 30px 24px 48px;
+    color: #252f3d;
+}
+
+.seller-settings-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 24px;
+}
+
+.seller-settings-header-icon {
+    display: grid;
+    width: 50px;
+    height: 50px;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 13px;
+    background: #fff5dd;
+    color: #72550a;
+}
+
+.seller-settings-header h1 {
+    margin: 0;
+    font-size: 27px;
+    font-weight: 700;
+}
+
+.seller-settings-header p {
+    margin: 5px 0 0;
+    color: #697586;
+    font-size: 14px;
+}
+
+.seller-settings-header .seller-settings-eyebrow {
+    margin: 0 0 3px;
+    color: #80610d;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.seller-settings-card,
+.seller-settings-profile-link {
+    border: 1px solid #e3e6eb;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 6px 20px rgb(24 35 48 / 4%);
+}
+
+.seller-settings-card {
+    padding: 23px;
+}
+
+.seller-settings-card-title {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    margin-bottom: 20px;
+    color: #80610d;
+}
+
+.seller-settings-card-title h2,
+.seller-settings-profile-link h2 {
+    margin: 0;
+    color: #252f3d;
+    font-size: 17px;
+}
+
+.seller-settings-card-title p,
+.seller-settings-profile-link p {
+    margin: 5px 0 0;
+    color: #697586;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.seller-settings-form {
+    display: grid;
+    gap: 17px;
+}
+
+.seller-settings-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.seller-settings-field {
+    display: grid;
+    gap: 7px;
+    color: #344154;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.seller-settings-field input,
+.seller-settings-field select {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid #d8dde5;
+    border-radius: 8px;
+    background: #fff;
+    color: #243142;
+    font: inherit;
+    font-weight: 400;
+}
+
+.seller-settings-field input:focus,
+.seller-settings-field select:focus {
+    border-color: #a17a1a;
+    outline: 3px solid rgb(161 122 26 / 13%);
+}
+
+.seller-settings-primary,
+.seller-settings-secondary {
+    justify-self: start;
+    min-height: 43px;
+    padding: 10px 16px;
+    border: 1px solid #80610d;
+    border-radius: 8px;
+    background: #80610d;
+    color: #fff;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.seller-settings-primary:hover:not(:disabled) {
+    background: #6b500b;
+}
+
+.seller-settings-secondary {
+    margin-top: 14px;
+    border-color: #d4d9e0;
+    background: #fff;
+    color: #344154;
+}
+
+.seller-settings-secondary:hover:not(:disabled) {
+    border-color: #80610d;
+    background: #fffaf0;
+}
+
+.seller-settings-primary:disabled,
+.seller-settings-secondary:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+.seller-settings-verification {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #edf0f3;
+}
+
+.seller-settings-verification-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 14px;
+    border: 1px solid #e3e6eb;
+    border-radius: 9px;
+    background: #f8f9fb;
+    color: #4b5563;
+    font-size: 13px;
+}
+
+.seller-settings-verification-status.verified {
+    border-color: #b9dec8;
+    background: #effaf3;
+    color: #24633a;
+}
+
+.seller-settings-verification-status.pending {
+    border-color: #ead9a9;
+    background: #fff9e9;
+    color: #805d00;
+}
+
+.seller-settings-code-form {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.seller-settings-code-form .seller-settings-field {
+    width: min(100%, 300px);
+}
+
+.seller-settings-alert {
+    margin-bottom: 16px;
+    padding: 12px 14px;
+    border: 1px solid;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.seller-settings-alert.error {
+    border-color: #f1c3c3;
+    background: #fff3f3;
+    color: #922f2f;
+}
+
+.seller-settings-alert.success {
+    border-color: #b9dec8;
+    background: #effaf3;
+    color: #24633a;
+}
+
+.seller-settings-profile-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin-top: 18px;
+    padding: 19px 22px;
+}
+
+.seller-settings-profile-link a {
+    flex: 0 0 auto;
+    color: #72550a;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.seller-settings-profile-link a:hover {
+    text-decoration: underline;
+}
+
+.seller-settings-loading {
+    padding: 60px 0;
+    color: #697586;
+    text-align: center;
+}
+
+@media (max-width: 640px) {
+    .seller-settings-page {
+        padding: 22px 14px 36px;
+    }
+
+    .seller-settings-fields {
+        grid-template-columns: 1fr;
+    }
+
+    .seller-settings-card {
+        padding: 18px;
+    }
+
+    .seller-settings-code-form,
+    .seller-settings-profile-link {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .seller-settings-code-form .seller-settings-field,
+    .seller-settings-code-form .seller-settings-primary,
+    .seller-settings-secondary,
+    .seller-settings-form > .seller-settings-primary {
+        width: 100%;
+    }
+
+    .seller-settings-profile-link {
+        padding: 18px;
+    }
+}

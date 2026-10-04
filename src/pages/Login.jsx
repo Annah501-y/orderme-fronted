@@ -1,11 +1,16 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import "../pages_styles/auth.css";
 import { getGoogleAuthUrl, useGoogleAuthCallback } from "../hooks/useGoogleAuthCallback";
 
 function Login() {
     const navigate = useNavigate();
+    const location = useLocation();
+    const requestedRedirect = new URLSearchParams(location.search).get("redirect");
+    const buyerRedirect = requestedRedirect?.startsWith("/") && !requestedRedirect.startsWith("//")
+        ? requestedRedirect
+        : "/";
 
     const [formData, setFormData] = useState({
         email: "",
@@ -85,7 +90,7 @@ function Login() {
             const role = user.roles?.[0]?.name;
 
             if (role === "buyer") {
-                navigate("/");
+                navigate(buyerRedirect);
             } else if (role === "seller") {
                 navigate("/seller-dashboard");
             } else if (role === "admin") {

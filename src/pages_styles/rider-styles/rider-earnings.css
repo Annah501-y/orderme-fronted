@@ -1,0 +1,150 @@
+/* Rider earnings uses the same white cards and OrderMe accent colors as the rider dashboard. */
+.rider-earnings-page {
+    width: 100%;
+    min-height: calc(100vh - 60px);
+    box-sizing: border-box;
+    padding: 30px;
+    color: var(--om-ink, #242a31);
+}
+
+.rider-earnings-header,
+.rider-earnings-ledger-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.rider-earnings-header { margin-bottom: 24px; }
+.rider-earnings-eyebrow { color: var(--om-muted, #68727e); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.rider-earnings-header h1 { margin: 5px 0 0; font-size: 28px; font-weight: 700; }
+.rider-earnings-header p,
+.rider-earnings-ledger-heading p { margin: 6px 0 0; color: var(--om-muted, #68727e); font-size: 14px; }
+
+.rider-earnings-refresh,
+.rider-earnings-alert button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 42px;
+    padding: 0 15px;
+    border: 1px solid #dce1e6;
+    border-radius: 9px;
+    background: #fff;
+    color: var(--om-ink, #242a31);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 650;
+    cursor: pointer;
+}
+.rider-earnings-refresh:hover:not(:disabled),
+.rider-earnings-alert button:hover { border-color: var(--om-gold, #d4a017); }
+.rider-earnings-refresh:disabled { opacity: .65; cursor: wait; }
+.rider-earnings-refresh .is-spinning { animation: riderEarningsSpin .8s linear infinite; }
+
+.rider-earnings-period {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    color: var(--om-muted, #68727e);
+    font-size: 13px;
+}
+.rider-earnings-period-options { display: flex; flex-wrap: wrap; gap: 7px; }
+.rider-earnings-period-options button {
+    padding: 8px 12px;
+    border: 1px solid #e1e5e9;
+    border-radius: 999px;
+    background: #fff;
+    color: #47515c;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.rider-earnings-period-options button:hover { border-color: var(--om-gold, #d4a017); }
+.rider-earnings-period-options button.active { border-color: var(--om-gold, #d4a017); background: #fff8e8; color: #72550a; }
+
+.rider-earnings-alert {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 18px;
+    padding: 13px 15px;
+    border: 1px solid #f0c7c7;
+    border-radius: 10px;
+    background: #fff5f5;
+    color: #9c3434;
+    font-size: 14px;
+}
+
+.rider-earnings-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 22px; }
+.rider-earnings-stat,
+.rider-earnings-ledger,
+.rider-earnings-payout-note {
+    border: 1px solid #e6e9ec;
+    border-radius: 13px;
+    background: #fff;
+    box-shadow: 0 3px 12px rgb(24 39 56 / 4%);
+}
+.rider-earnings-stat { display: flex; min-height: 150px; flex-direction: column; align-items: flex-start; padding: 18px; }
+.rider-earnings-stat-primary { border-top: 3px solid var(--om-gold, #d4a017); }
+.rider-earnings-stat-icon,
+.rider-earnings-payout-note-icon,
+.rider-earnings-empty-icon { display: grid; width: 40px; height: 40px; place-items: center; border-radius: 10px; background: #fff5dd; color: #9a7413; }
+.rider-earnings-stat-label { margin-top: 13px; color: var(--om-muted, #68727e); font-size: 12px; font-weight: 600; }
+.rider-earnings-stat strong { margin-top: 5px; font-size: 24px; letter-spacing: -.02em; }
+.rider-earnings-stat small { margin-top: 4px; color: #87909a; font-size: 11px; }
+
+.rider-earnings-ledger { overflow: hidden; }
+.rider-earnings-ledger-heading { padding: 20px 21px; border-bottom: 1px solid #edf0f2; }
+.rider-earnings-ledger-heading h2 { margin: 0; font-size: 17px; }
+.rider-earnings-ledger-heading > svg { color: var(--om-gold, #d4a017); }
+.rider-earnings-empty { display: flex; min-height: 210px; flex-direction: column; align-items: center; justify-content: center; padding: 24px; text-align: center; }
+.rider-earnings-empty h3 { margin: 13px 0 0; font-size: 15px; }
+.rider-earnings-empty p { margin: 6px 0 0; color: var(--om-muted, #68727e); font-size: 13px; }
+.rider-earnings-table-wrap { overflow-x: auto; }
+.rider-earnings-table { width: 100%; border-collapse: collapse; text-align: left; }
+.rider-earnings-table th { padding: 12px 20px; background: #fafbfc; color: #75808b; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.rider-earnings-table td { padding: 15px 20px; border-top: 1px solid #edf0f2; color: #515b65; font-size: 13px; white-space: nowrap; }
+.rider-earnings-table td strong { display: block; color: var(--om-ink, #242a31); font-size: 13px; }
+.rider-earnings-table td small { display: block; margin-top: 4px; color: #87909a; font-size: 11px; }
+.rider-earnings-table .rider-earnings-amount { color: var(--om-ink, #242a31); font-weight: 700; }
+.rider-earnings-status { display: inline-flex; padding: 5px 9px; border-radius: 999px; font-size: 11px; font-weight: 700; }
+.rider-earnings-status.pending { background: #fff5dd; color: #8a6710; }
+.rider-earnings-status.paid { background: #eaf7ef; color: #237349; }
+
+.rider-earnings-payout-note { display: flex; align-items: center; gap: 13px; margin-top: 18px; padding: 16px; }
+.rider-earnings-payout-note-icon { flex: 0 0 auto; }
+.rider-earnings-payout-note > div:nth-child(2) { flex: 1; }
+.rider-earnings-payout-note strong { font-size: 13px; }
+.rider-earnings-payout-note p { margin: 4px 0 0; color: var(--om-muted, #68727e); font-size: 12px; }
+.rider-earnings-payout-note a { color: #765b12; font-size: 12px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+.rider-earnings-payout-note a:hover { text-decoration: underline; }
+
+@keyframes riderEarningsSpin { to { transform: rotate(360deg); } }
+
+@media (max-width: 760px) {
+    .rider-earnings-page { padding: 21px 16px; }
+    .rider-earnings-summary { grid-template-columns: 1fr; gap: 11px; }
+    .rider-earnings-stat { min-height: auto; }
+    .rider-earnings-table thead { display: none; }
+    .rider-earnings-table, .rider-earnings-table tbody, .rider-earnings-table tr, .rider-earnings-table td { display: block; width: 100%; box-sizing: border-box; }
+    .rider-earnings-table tr { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; padding: 14px 16px; border-top: 1px solid #edf0f2; }
+    .rider-earnings-table td { padding: 0; border: 0; white-space: normal; }
+    .rider-earnings-table td::before { display: block; margin-bottom: 5px; color: #87909a; content: attr(data-label); font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+    .rider-earnings-payout-note { align-items: flex-start; flex-wrap: wrap; }
+    .rider-earnings-payout-note a { margin-left: 53px; }
+}
+
+@media (max-width: 430px) {
+    .rider-earnings-header { align-items: flex-start; }
+    .rider-earnings-header h1 { font-size: 24px; }
+    .rider-earnings-header p { max-width: 220px; }
+    .rider-earnings-refresh { padding: 0 11px; font-size: 12px; }
+    .rider-earnings-period { align-items: flex-start; flex-wrap: wrap; }
+    .rider-earnings-period-options { width: 100%; }
+    .rider-earnings-alert { align-items: flex-start; flex-direction: column; }
+}

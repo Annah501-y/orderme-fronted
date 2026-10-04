@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AddressLocationPicker from "../../components/AddressLocationPicker";
 import TanzaniaPhoneInput from "../../components/TanzaniaPhoneInput";
 import { getTanzaniaNationalNumber, toTanzaniaPhoneNumber } from "../../utils/tanzaniaPhone";
 
@@ -15,6 +16,9 @@ function SellerProfileSetup() {
         city: "",
         region: "",
         country: "Tanzania",
+        latitude: "",
+        longitude: "",
+        place_id: "",
         nida_number: "",
         tin_reference: "",
         payout_method: "mobile_money",
@@ -47,6 +51,11 @@ function SellerProfileSetup() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (formData.latitude === "" || formData.longitude === "") {
+            setGeneralError("Choose your store location on the map before submitting your application.");
+            return;
+        }
 
         setErrors({});
         setGeneralError("");
@@ -428,6 +437,20 @@ function SellerProfileSetup() {
                                             {errors.country[0]}
                                         </div>
                                     )}
+                                </div>
+
+                                {/* Capture the store's map location for customer directions and delivery assignments. */}
+                                <div className="mb-4">
+                                    <AddressLocationPicker
+                                        latitude={formData.latitude}
+                                        longitude={formData.longitude}
+                                        onChange={({ latitude, longitude }) => setFormData((previous) => ({
+                                            ...previous,
+                                            latitude,
+                                            longitude,
+                                            place_id: "",
+                                        }))}
+                                    />
                                 </div>
 
                                 <button

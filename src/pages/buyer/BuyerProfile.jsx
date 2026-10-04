@@ -15,6 +15,7 @@ import {
 
 import "../../pages_styles/buyer_styles/buyer-profile.css";
 import TanzaniaPhoneInput from "../../components/TanzaniaPhoneInput";
+import AddressLocationPicker from "../../components/AddressLocationPicker";
 import { getTanzaniaNationalNumber } from "../../utils/tanzaniaPhone";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -324,6 +325,11 @@ function BuyerProfile() {
 
     const handleAddressSubmit = async (e) => {
         e.preventDefault();
+
+        if (addressForm.latitude === "" || addressForm.longitude === "") {
+            showNotification("Choose your delivery point on the map before saving this address.", "error");
+            return;
+        }
 
         try {
             setSavingAddress(true);
@@ -908,11 +914,17 @@ function BuyerProfile() {
 
                         </div>
 
-                        {/* GOOGLE MAP DATA
-                            These remain hidden for now.
-                            They can be populated once Google Maps
-                            integration is added.
-                        */}
+                        {/* Customers select a map point; the saved address stores its coordinates automatically. */}
+                        <AddressLocationPicker
+                            latitude={addressForm.latitude}
+                            longitude={addressForm.longitude}
+                            onChange={({ latitude, longitude }) => setAddressForm((previous) => ({
+                                ...previous,
+                                latitude,
+                                longitude,
+                                place_id: "",
+                            }))}
+                        />
 
                         <input
                             type="hidden"

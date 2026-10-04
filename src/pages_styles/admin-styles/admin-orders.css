@@ -801,3 +801,98 @@
         margin-left: auto;
     }
 }
+/* Seller readiness and assignment controls in admin order details. */
+.admin-order-readiness {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 6px 10px;
+    background: #f4f4f4;
+    color: #666;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.admin-order-readiness.is-ready {
+    background: #e9f8ef;
+    color: #137a4b;
+}
+
+.admin-order-assignment-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 0 0 14px;
+    padding: 14px 16px;
+    border: 1px solid #cdebd8;
+    border-radius: 9px;
+    background: #f4fbf6;
+}
+
+.admin-order-assignment-box > div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.admin-order-assignment-box strong {
+    color: #176b43;
+    font-size: 14px;
+}
+
+.admin-order-assignment-box span {
+    color: #62736a;
+    font-size: 12px;
+}
+
+.admin-order-assign-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 40px;
+    flex: 0 0 auto;
+    padding: 0 15px;
+    border: 0;
+    border-radius: 7px;
+    background: var(--om-gold);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.admin-order-assign-btn:hover:not(:disabled) {
+    background: #9f7508;
+}
+
+.admin-order-assign-btn:disabled {
+    cursor: wait;
+    opacity: 0.65;
+}
+
+.admin-order-assignment-success {
+    margin-bottom: 12px;
+    color: #137a4b;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+@media (max-width: 600px) {
+    .admin-order-assignment-box {
+        align-items: stretch;
+        flex-direction: column;
+    }
+}
+
+.admin-order-assignment-error {
+    margin: 0 0 12px;
+    padding: 10px 12px;
+    border: 1px solid #f0caca;
+    border-radius: 7px;
+    background: #fff1f1;
+    color: #b42318;
+    font-size: 13px;
+}

@@ -12,6 +12,7 @@ import {
 
 import "../../pages_styles/seller_styles/seller-store-profile.css";
 import TanzaniaPhoneInput from "../../components/TanzaniaPhoneInput";
+import AddressLocationPicker from "../../components/AddressLocationPicker";
 import { getTanzaniaNationalNumber } from "../../utils/tanzaniaPhone";
 import PayoutMobileVerification from "../../components/PayoutMobileVerification";
 
@@ -27,6 +28,9 @@ function SellerStoreProfile() {
         city: "",
         region: "",
         country: "Tanzania",
+        latitude: "",
+        longitude: "",
+        place_id: "",
     });
 
     const [status, setStatus] = useState("");
@@ -82,6 +86,9 @@ function SellerStoreProfile() {
                         city: address?.city || "",
                         region: address?.region || "",
                         country: address?.country || "Tanzania",
+                        latitude: address?.latitude ?? "",
+                        longitude: address?.longitude ?? "",
+                        place_id: address?.place_id || "",
                     });
 
                     setStatus(profile.status || "");
@@ -132,6 +139,11 @@ function SellerStoreProfile() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        if (form.latitude === "" || form.longitude === "") {
+            setError("Choose your store location on the map before saving your profile.");
+            return;
+        }
 
         try {
             setSaving(true);
@@ -186,6 +198,9 @@ function SellerStoreProfile() {
                     city: address.city || "",
                     region: address.region || "",
                     country: address.country || "Tanzania",
+                    latitude: address.latitude ?? "",
+                    longitude: address.longitude ?? "",
+                    place_id: address.place_id || "",
                 }));
             }
 
@@ -494,6 +509,18 @@ function SellerStoreProfile() {
                                         onChange={handleChange}
                                     />
                                 </div>
+
+                                {/* Save the exact store entrance location for delivery routing. */}
+                                <AddressLocationPicker
+                                    latitude={form.latitude}
+                                    longitude={form.longitude}
+                                    onChange={({ latitude, longitude }) => setForm((previous) => ({
+                                        ...previous,
+                                        latitude,
+                                        longitude,
+                                        place_id: "",
+                                    }))}
+                                />
 
                             </div>
 

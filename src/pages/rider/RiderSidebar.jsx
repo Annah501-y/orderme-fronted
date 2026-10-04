@@ -13,8 +13,6 @@ import {
     Camera,
     Menu,
     ChevronLeft,
-    Sun,
-    Moon,
 } from "lucide-react";
 
 import OrderMeLogo from "../../assets/images/orderme-logo.jpg";
@@ -25,8 +23,6 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 const RiderSidebar = ({ isOpen, onClose }) => {
     const navigate = useNavigate();
-    const [theme, toggleTheme] = useTheme();
-
     const [user, setUser] = React.useState(null);
     const [uploadingPhoto, setUploadingPhoto] =
         React.useState(false);
@@ -365,10 +361,6 @@ const RiderSidebar = ({ isOpen, onClose }) => {
                             </span>
                         )}
                     </NavLink>
-
-                    <button type="button" className="theme-toggle-button" onClick={toggleTheme} aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"} title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}>
-                        {theme === "dark" ? <Sun size={19} /> : <Moon size={19} />}
-                    </button>
 
                     <button
                         className="rider-sidebar-close"

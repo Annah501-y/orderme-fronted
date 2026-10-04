@@ -6,15 +6,19 @@ import {
     Minus,
     Plus,
     Store,
+    Star,
 } from "lucide-react";
+
 import ProductCard from "./ProductCard";
-import { fetchAllProducts } from "../api/marketplace";
+import {
+    fetchAllProducts,
+    getProductReviews,
+} from "../api/marketplace";
 
 import "../components_styles/prouct-details.css";
 import "../components_styles/product-card.css";
 
-const API_URL =
-    import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_API_URL;
 
 function ProductDetails() {
     const { id } = useParams();
@@ -27,6 +31,9 @@ function ProductDetails() {
     const [addingToCart, setAddingToCart] = useState(false);
     const [cartMessage, setCartMessage] = useState("");
     const [error, setError] = useState("");
+
+    const [reviews, setReviews] = useState([]);
+    const [reviewsLoading, setReviewsLoading] = useState(true);
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -53,8 +60,27 @@ function ProductDetails() {
             }
         };
 
+        const fetchReviews = async () => {
+            try {
+                setReviewsLoading(true);
+
+                const productReviews = await getProductReviews(id);
+
+                setReviews(productReviews);
+            } catch (error) {
+                console.error("Product reviews error:", error);
+                setReviews([]);
+            } finally {
+                setReviewsLoading(false);
+            }
+        };
+
         fetchProduct();
-        fetchAllProducts().then(setCatalogProducts).catch(() => setCatalogProducts([]));
+        fetchReviews();
+
+        fetchAllProducts()
+            .then(setCatalogProducts)
+            .catch(() => setCatalogProducts([]));
     }, [id]);
 
     const increaseQuantity = () => {
@@ -115,13 +141,28 @@ function ProductDetails() {
             );
 
             const cartResponse = await fetch(`${API_URL}/cart`, {
-                headers: { Accept: "application/json", Authorization: `Bearer ${token}` },
+                headers: {
+                    Accept: "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
             });
-            const cartResult = await cartResponse.json();
-            if (!cartResponse.ok) throw new Error(cartResult.message || "Added to cart, but your cart could not be opened.");
-            const cartItemIds = (cartResult.data?.items || []).map((item) => item.id);
-            if (cartItemIds.length) navigate("/cart");
 
+            const cartResult = await cartResponse.json();
+
+            if (!cartResponse.ok) {
+                throw new Error(
+                    cartResult.message ||
+                    "Added to cart, but your cart could not be opened."
+                );
+            }
+
+            const cartItemIds = (
+                cartResult.data?.items || []
+            ).map((item) => item.id);
+
+            if (cartItemIds.length) {
+                navigate("/cart");
+            }
         } catch (error) {
             console.error("Add to cart error:", error);
 
@@ -165,17 +206,32 @@ function ProductDetails() {
         product.image_url ||
         product.image ||
         "/images/product-placeholder.png";
-    const relatedProducts = catalogProducts.filter((candidate) =>
-        String(candidate.id) !== String(product.id)
-        && product.category?.id != null
-        && String(candidate.category?.id) === String(product.category.id)
-        && candidate.seller?.id != null
-        && String(candidate.seller.id) !== String(product.seller?.id)
-    ).slice(0, 8);
+
+    const relatedProducts = catalogProducts
+        .filter(
+            (candidate) =>
+                String(candidate.id) !== String(product.id) &&
+                product.category?.id != null &&
+                String(candidate.category?.id) ===
+                String(product.category.id) &&
+                candidate.seller?.id != null &&
+                String(candidate.seller.id) !==
+                String(product.seller?.id)
+        )
+        .slice(0, 8);
+
+    // Calculate the average rating from approved reviews.
+    const averageRating =
+        reviews.length > 0
+            ? reviews.reduce(
+                (sum, review) =>
+                    sum + Number(review.rating || 0),
+                0
+            ) / reviews.length
+            : 0;
 
     return (
         <div className="product-details-page">
-
             <div className="product-details-container">
 
                 <button
@@ -187,6 +243,7 @@ function ProductDetails() {
                     Back
                 </button>
 
+                {/* PRODUCT DETAILS */}
                 <div className="product-details-card">
 
                     <div className="product-details-image-wrapper">
@@ -335,26 +392,195 @@ function ProductDetails() {
                             {addingToCart
                                 ? "Adding..."
                                 : stock > 0
-                                ? "Add to Cart"
-                                : "Out of Stock"}
+                                    ? "Add to Cart"
+                                    : "Out of Stock"}
                         </button>
 
                     </div>
-
                 </div>
 
-            </div>
+                {/* PRODUCT REVIEWS */}
+                <section className="product-reviews-section">
 
-            {relatedProducts.length > 0 && <section className="product-related-section">
-                <div className="product-related-heading"><span>MORE TO EXPLORE</span><h2>Similar products from other sellers</h2></div>
-                <div className="row g-4">{relatedProducts.map((related) => <div className="col-12 col-sm-6 col-lg-3" key={related.id}><ProductCard product={{
-                    id: related.id, name: related.name, description: related.description, price: Number(related.price || 0), stock_quantity: related.stock_quantity,
-                    category: related.category?.name || "Product", seller: related.seller?.store_name || related.seller?.name || "OrderMe seller",
-                    location: related.seller?.location || "Tanzania", image: related.image_url || related.image || null,
-                    rating: Number(related.rating || 0), reviews: Number(related.reviews || 0), discount: related.discount || null,
-                    oldPrice: related.old_price ? Number(related.old_price) : null,
-                }} /></div>)}</div>
-            </section>}
+                    <div className="product-reviews-heading">
+                        <span>PRODUCT REVIEWS</span>
+                        <h2>Customer Reviews</h2>
+                    </div>
+
+                    <div className="product-reviews-summary">
+
+                        <div className="product-average-rating">
+
+                            <strong>
+                                {averageRating.toFixed(1)}
+                            </strong>
+
+                            <div className="product-stars">
+                                {[1, 2, 3, 4, 5].map((star) => (
+                                    <Star
+                                        key={star}
+                                        size={18}
+                                        fill={
+                                            star <=
+                                                Math.round(averageRating)
+                                                ? "currentColor"
+                                                : "none"
+                                        }
+                                    />
+                                ))}
+                            </div>
+
+                            <span>
+                                {reviews.length}{" "}
+                                {reviews.length === 1
+                                    ? "review"
+                                    : "reviews"}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    {reviewsLoading ? (
+                        <div className="product-reviews-loading">
+                            Loading reviews...
+                        </div>
+                    ) : reviews.length === 0 ? (
+                        <div className="product-no-reviews">
+                            <p>
+                                No reviews yet for this product.
+                            </p>
+                        </div>
+                    ) : (
+                        <div className="product-reviews-list">
+
+                            {reviews.map((review) => (
+                                <article
+                                    className="product-review"
+                                    key={review.id}
+                                >
+
+                                    <div className="product-review-header">
+
+                                        <strong>
+                                            {review.user?.name ||
+                                                "Customer"}
+                                        </strong>
+
+                                        <div className="product-review-stars">
+
+                                            {[1, 2, 3, 4, 5].map(
+                                                (star) => (
+                                                    <Star
+                                                        key={star}
+                                                        size={15}
+                                                        fill={
+                                                            star <=
+                                                                Number(
+                                                                    review.rating ||
+                                                                    0
+                                                                )
+                                                                ? "currentColor"
+                                                                : "none"
+                                                        }
+                                                    />
+                                                )
+                                            )}
+
+                                        </div>
+
+                                    </div>
+
+                                    {review.comment && (
+                                        <p className="product-review-comment">
+                                            {review.comment}
+                                        </p>
+                                    )}
+
+                                    {review.created_at && (
+                                        <small className="product-review-date">
+                                            {new Date(
+                                                review.created_at
+                                            ).toLocaleDateString()}
+                                        </small>
+                                    )}
+
+                                </article>
+                            ))}
+
+                        </div>
+                    )}
+
+                </section>
+
+                {/* SIMILAR PRODUCTS */}
+                {relatedProducts.length > 0 && (
+                    <section className="product-related-section">
+
+                        <div className="product-related-heading">
+                            <span>MORE TO EXPLORE</span>
+                            <h2>
+                                Similar products from other sellers
+                            </h2>
+                        </div>
+
+                        <div className="row g-4">
+
+                            {relatedProducts.map((related) => (
+                                <div
+                                    className="col-12 col-sm-6 col-lg-3"
+                                    key={related.id}
+                                >
+                                    <ProductCard
+                                        product={{
+                                            id: related.id,
+                                            name: related.name,
+                                            description:
+                                                related.description,
+                                            price: Number(
+                                                related.price || 0
+                                            ),
+                                            stock_quantity:
+                                                related.stock_quantity,
+                                            category:
+                                                related.category?.name ||
+                                                "Product",
+                                            seller:
+                                                related.seller?.store_name ||
+                                                related.seller?.name ||
+                                                "OrderMe seller",
+                                            location:
+                                                related.seller?.location ||
+                                                "Tanzania",
+                                            image:
+                                                related.image_url ||
+                                                related.image ||
+                                                null,
+                                            rating: Number(
+                                                related.rating || 0
+                                            ),
+                                            reviews: Number(
+                                                related.reviews || 0
+                                            ),
+                                            discount:
+                                                related.discount || null,
+                                            oldPrice:
+                                                related.old_price
+                                                    ? Number(
+                                                        related.old_price
+                                                    )
+                                                    : null,
+                                        }}
+                                    />
+                                </div>
+                            ))}
+
+                        </div>
+
+                    </section>
+                )}
+
+            </div>
         </div>
     );
 }

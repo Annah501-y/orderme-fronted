@@ -821,7 +821,8 @@ function AdminDashboard() {
                                             </td>
 
                                             <td>
-                                                {order.user?.name || "Unknown"}
+                                                {/* Guest buyer names are saved on the order record. */}
+                                                {order.user?.name || order.guest_name || "Unknown"}
                                             </td>
 
                                             <td>

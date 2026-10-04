@@ -82,17 +82,6 @@ function Categories() {
 
 
     // ================================
-    // DUPLICATE CATEGORIES
-    // For continuous scrolling
-    // ================================
-
-    const sliderCategories = [
-        ...categories,
-        ...categories,
-    ];
-
-
-    // ================================
     // CATEGORY CLICK
     // ================================
 
@@ -160,11 +149,7 @@ function Categories() {
                 </div>
 
 
-                {/* ================================
-                    CATEGORY CAROUSEL
-                ================================= */}
-
-                <div className="categories-slider">
+                <div className="categories-grid-wrap">
 
                     {loading && (
                         <div className="categories-loading">
@@ -193,33 +178,22 @@ function Categories() {
                         !error &&
                         categories.length > 0 && (
 
-                            <div className="categories-track">
-
-                                {sliderCategories.map(
-                                    (category, index) => (
-
-                                        <div
+                            <div className="row g-4">
+                                {categories.map((category) => (
+                                    <div
+                                        className="col-12 col-sm-6 col-md-4 col-lg-3"
+                                        key={category.id}
+                                    >
+                                        <button
+                                            type="button"
                                             className="category-slide"
-                                            key={`${category.id}-${index}`}
-                                            onClick={() =>
-                                                handleCategoryClick(
-                                                    category.id
-                                                )
-                                            }
-                                            style={{
-                                                cursor: "pointer",
-                                            }}
+                                            onClick={() => handleCategoryClick(category.id)}
+                                            aria-label={`Browse ${category.name} products`}
                                         >
-
-                                            <CategoryCard
-                                                category={category}
-                                            />
-
-                                        </div>
-
-                                    )
-                                )}
-
+                                            <CategoryCard category={category} />
+                                        </button>
+                                    </div>
+                                ))}
                             </div>
 
                         )}

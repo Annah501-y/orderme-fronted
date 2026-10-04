@@ -5,6 +5,9 @@ import { fetchAllProducts, getProductImageUrl } from "../../api/marketplace";
 import "../../pages_styles/buyer_styles/buyer-wishlist.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
+// Use separate browser storage for guest favorites and cart entries.
+const GUEST_FAVORITES_KEY = "orderme_guest_favorites";
+const GUEST_CART_KEY = "orderme_guest_cart";
 const money = (price) => `TZS ${Number(price || 0).toLocaleString("en-TZ")}`;
 const categoryId = (product) => product?.category_id ?? product?.category?.id;
 const sellerId = (product) => product?.seller_id ?? product?.seller?.id;
@@ -22,6 +25,19 @@ function BuyerWishlist() {
     useEffect(() => {
         (async () => {
             try {
+                if (!token) {
+                    // Resolve locally saved favorite IDs against the current public product catalog.
+                    const savedIds = JSON.parse(localStorage.getItem(GUEST_FAVORITES_KEY) || "[]")
+                        .map(Number);
+                    const products = await fetchAllProducts();
+                    const saved = savedIds
+                        .map((id) => products.find((product) => Number(product.id) === id))
+                        .filter(Boolean)
+                        .map((product) => ({ id: product.id, product_id: product.id, product }));
+                    setWishlist(saved);
+                    return;
+                }
+
                 const [wishlistResponse, products] = await Promise.all([
                     fetch(`${API_URL}/wishlist`, { headers: { Accept: "application/json", Authorization: `Bearer ${token}` } }),
                     fetchAllProducts(),
@@ -66,6 +82,16 @@ function BuyerWishlist() {
     const removeFromWishlist = async (productId) => {
         try {
             setRemovingId(productId);
+            if (!token) {
+                // Guest wishlist changes are stored locally and never call authenticated endpoints.
+                const savedIds = JSON.parse(localStorage.getItem(GUEST_FAVORITES_KEY) || "[]")
+                    .map(Number)
+                    .filter((id) => id !== Number(productId));
+                localStorage.setItem(GUEST_FAVORITES_KEY, JSON.stringify(savedIds));
+                setWishlist((items) => items.filter((item) => Number(item.product_id) !== Number(productId)));
+                return;
+            }
+
             const response = await fetch(`${API_URL}/wishlist/${productId}`,
                 { method: "DELETE", headers: { Accept: "application/json", Authorization: `Bearer ${token}` } });
             const result = await response.json();
@@ -80,6 +106,18 @@ function BuyerWishlist() {
         try {
             setCheckoutId(product.id);
             setError("");
+            if (!token) {
+                // For guests, move the selected favorite to the browser cart before checkout.
+                const guestCart = JSON.parse(localStorage.getItem(GUEST_CART_KEY) || "[]");
+                const currentItem = guestCart.find((item) => Number(item.product_id) === Number(product.id));
+                const nextCart = currentItem
+                    ? guestCart
+                    : [...guestCart, { product_id: product.id, quantity: 1 }];
+                localStorage.setItem(GUEST_CART_KEY, JSON.stringify(nextCart));
+                navigate("/cart");
+                return;
+            }
+
             const addResponse = await fetch(`${API_URL}/cart/items`, {
                 method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json", Authorization: `Bearer ${token}` },
                 body: JSON.stringify({ product_id: product.id, quantity: 1 }),
@@ -104,6 +142,7 @@ function BuyerWishlist() {
             <div className="wishlist-count"><Heart size={18} /><span>{wishlist.length}</span></div>
         </div>
         {error && <div className="wishlist-error" role="alert">{error}</div>}
+        {!token && <p className="wishlist-guest-note">Guest favorites are saved only on this device.</p>}
         {!error && wishlist.length === 0 && <div className="wishlist-empty"><div className="wishlist-empty-icon"><Heart size={32} /></div><h2>Your wishlist is empty</h2><p>Save products from OrderMe sellers and they will appear here.</p><Link to="/products" className="wishlist-shop-button"><ShoppingCart size={17} /> Browse Products</Link></div>}
         {wishlist.map((item) => {
             const product = item.product;
@@ -118,7 +157,7 @@ function BuyerWishlist() {
                         <div className="wishlist-seller">Sold by {product.seller?.store_name || product.seller?.name || "OrderMe seller"}</div>
                         <div className="wishlist-card-bottom"><strong>{money(product.price)}</strong><div className="wishlist-card-actions">
                             <button type="button" className="wishlist-remove-button" onClick={() => removeFromWishlist(product.id)} disabled={removingId === product.id} title="Remove from wishlist" aria-label="Remove from wishlist">{removingId === product.id ? "…" : <Trash2 size={17} />}</button>
-                            <button type="button" className="wishlist-checkout-button" onClick={() => checkoutProduct(product)} disabled={checkoutId === product.id}>{checkoutId === product.id ? "Preparing…" : "Checkout"}<ArrowRight size={16} /></button>
+                            <button type="button" className="wishlist-checkout-button" onClick={() => checkoutProduct(product)} disabled={checkoutId === product.id}>{checkoutId === product.id ? "Preparing…" : token ? "Checkout" : "Add to Cart"}<ArrowRight size={16} /></button>
                         </div></div>
                     </div>
                 </div>

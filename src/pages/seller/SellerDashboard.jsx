@@ -299,6 +299,8 @@ function SellerDashboard() {
             order?.user?.name ||
             order?.customer?.name ||
             order?.buyer?.name ||
+            // Guest checkout captures the buyer name directly on the order.
+            order?.guest_name ||
             "Customer"
         );
     };

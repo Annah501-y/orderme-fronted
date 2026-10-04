@@ -35,6 +35,13 @@
     background: #f4f1e9;
     color: var(--om-gold);
     transition: all 0.35s ease;
+    overflow: hidden;
+}
+
+.seller-profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .seller-card:hover .seller-logo {
@@ -144,4 +151,35 @@
     .seller-card {
         padding: 20px;
     }
+}
+
+.seller-owner {
+    margin: 0 0 13px;
+    color: var(--om-muted, #68717c);
+    font-size: 13px;
+}
+
+.seller-owner strong {
+    color: var(--om-ink, #252a30);
+    font-weight: 600;
+}
+
+.seller-category-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 0 0 14px;
+}
+
+.seller-category-chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 26px;
+    padding: 4px 9px;
+    border: 1px solid #e8e2d4;
+    border-radius: 999px;
+    background: #faf8f3;
+    color: #715400;
+    font-size: 11px;
+    font-weight: 600;
 }

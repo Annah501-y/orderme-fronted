@@ -208,6 +208,10 @@
 .admin-rider-invite-button:hover:not(:disabled) { background: var(--om-gold, #d4a017); }
 .admin-rider-invite-button:disabled { opacity: .55; cursor: not-allowed; }
 .admin-rider-muted { margin: 0; color: var(--om-muted, #68727e); font-size: 14px; }
+.admin-rider-review-actions { display: flex; gap: 7px; }
+.admin-rider-review-reject { padding: 8px 12px; border: 1px solid #d8a0a0; border-radius: 6px; background: #fff; color: #923737; font-size: 12px; font-weight: 600; cursor: pointer; }
+.admin-rider-review-reject:hover:not(:disabled) { background: #fff2f2; }
+.admin-rider-review-reject:disabled { opacity: .55; cursor: not-allowed; }
 
 html[data-theme="dark"] .admin-rider-applications-card { background: var(--om-surface); border-color: var(--om-border); }
 html[data-theme="dark"] .admin-rider-applications-table th,

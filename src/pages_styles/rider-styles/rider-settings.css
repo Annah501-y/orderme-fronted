@@ -1,0 +1,53 @@
+@import "./rider-profile.css";
+
+.rider-settings-card > form {
+    display: grid;
+    gap: 17px;
+}
+
+.rider-settings-fields {
+    margin-top: 2px;
+}
+
+.rider-settings-primary,
+.rider-settings-secondary {
+    justify-self: start;
+}
+
+.rider-settings-secondary {
+    margin-top: 14px;
+    border: 1px solid #d4d9e0;
+    background: #fff;
+    color: #344154;
+}
+
+.rider-settings-verification {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #edf0f3;
+}
+
+.rider-settings-code-form {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.rider-settings-code-form .rider-settings-field {
+    width: min(100%, 300px);
+}
+
+@media (max-width: 640px) {
+    .rider-settings-code-form {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .rider-settings-code-form .rider-settings-field,
+    .rider-settings-code-form .rider-settings-primary,
+    .rider-settings-secondary,
+    .rider-settings-card > form > .rider-settings-primary {
+        width: 100%;
+    }
+}

@@ -189,8 +189,10 @@
 ========================================================= */
 
 .stock-value-btn {
-    border: none;
+    min-width: 42px;
+    border: 1px solid #d9dee4;
     background: #f5f5f5;
+    color: #273747;
     border-radius: 6px;
     padding: 6px 12px;
     font-weight: 600;
@@ -199,6 +201,7 @@
 
 .stock-value-btn:hover {
     background: #eee;
+    color: #172333;
 }
 
 .stock-editor {
@@ -218,9 +221,11 @@
 .stock-adjust-btn {
     width: 29px;
     height: 29px;
+    min-height: 29px;
     padding: 0;
     border: 1px solid #ddd;
     background: #fff;
+    color: #273747;
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -229,8 +234,9 @@
 
 .stock-save-btn {
     height: 29px;
+    min-height: 29px;
     border: none;
-    background: var(--om-gold);
+    background: #bd8c0a;
     color: #fff;
     border-radius: 5px;
     padding: 0 8px;
@@ -240,9 +246,11 @@
 .stock-cancel-btn {
     width: 29px;
     height: 29px;
+    min-height: 29px;
     padding: 0;
     border: 1px solid #ddd;
     background: #fff;
+    color: #273747;
     border-radius: 5px;
     display: flex;
     align-items: center;

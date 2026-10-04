@@ -109,6 +109,20 @@
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
 }
 
+.payment-method-option:disabled,
+.payment-method-option.unavailable {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.payment-method-option:disabled:hover,
+.payment-method-option.unavailable:hover {
+    border-color: #e5e7eb;
+    background: #ffffff;
+    box-shadow: none;
+    transform: none;
+}
+
 .payment-method-option:focus {
     outline: none;
     border-color: #d5aa00;

@@ -101,6 +101,15 @@ function Footer() {
                                         About Us
                                     </button>
                                 </li>
+                                <li>
+                                    <button
+                                        type="button"
+                                        className="footer-action-link"
+                                        onClick={() => openOverlay("faq")}
+                                    >
+                                        FAQ
+                                    </button>
+                                </li>
                             </ul>
                         </div>
 

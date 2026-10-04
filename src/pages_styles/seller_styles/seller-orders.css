@@ -216,16 +216,17 @@
    MANAGE BUTTON
 ======================================== */
 
-.seller-manage-order-btn {
+.seller-orders-page .seller-orders-table .seller-manage-order-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
 
-    background: var(--om-ink);
-    color: #fff;
+    min-height: 36px;
+    background-color: var(--om-ink, #273747) !important;
+    color: #fff !important;
 
-    border: 1px solid var(--om-ink);
+    border: 1px solid var(--om-ink, #273747) !important;
     border-radius: 6px;
 
     padding: 7px 12px;
@@ -235,13 +236,22 @@
 
     text-decoration: none;
 
-    transition: all 0.2s ease;
+    text-decoration: none !important;
+    opacity: 1;
+    visibility: visible;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
-.seller-manage-order-btn:hover {
-    background: var(--om-gold);
-    border-color: var(--om-gold);
-    color: #fff;
+.seller-orders-page .seller-orders-table .seller-manage-order-btn:hover,
+.seller-orders-page .seller-orders-table .seller-manage-order-btn:focus-visible {
+    background-color: var(--om-gold, #c49a00) !important;
+    border-color: var(--om-gold, #c49a00) !important;
+    color: #fff !important;
+}
+
+.seller-orders-page .seller-orders-table .seller-manage-order-btn:focus-visible {
+    outline: 3px solid var(--om-gold, #c49a00);
+    outline-offset: 2px;
 }
 
 

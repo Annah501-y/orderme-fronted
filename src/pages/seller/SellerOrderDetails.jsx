@@ -343,7 +343,8 @@ const SellerOrderDetails = () => {
 
                         <div className="seller-customer-details">
                             <strong>
-                                {order.customer?.name ||
+                                {/* Guest buyers are identified by the name entered during checkout. */}
+                                {order.customer?.name || order.user?.name || order.guest_name ||
                                     "Unknown Customer"}
                             </strong>
                         </div>

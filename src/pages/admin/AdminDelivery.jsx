@@ -398,12 +398,13 @@ const AdminDelivery= () => {
 
                                                     <div>
                                                         <strong>
-                                                            {customer?.name ||
+                                                            {/* Guest contact details are stored with the delivery order. */}
+                                                            {customer?.name || delivery.order?.guest_name ||
                                                                 "Unknown customer"}
                                                         </strong>
 
                                                         <small>
-                                                            {customer?.phone ||
+                                                            {customer?.phone || delivery.order?.guest_phone ||
                                                                 "No phone"}
                                                         </small>
                                                     </div>
@@ -1038,14 +1039,14 @@ const AdminDelivery= () => {
                                                 <div>
 
                                                     <h4>
-                                                        {customer?.name ||
+                                                        {customer?.name || selectedDelivery.order?.guest_name ||
                                                             "Unknown customer"}
                                                     </h4>
 
                                                     <span>
                                                         <Phone size={13} />
 
-                                                        {customer?.phone ||
+                                                        {customer?.phone || selectedDelivery.order?.guest_phone ||
                                                             "No phone number"}
                                                     </span>
 

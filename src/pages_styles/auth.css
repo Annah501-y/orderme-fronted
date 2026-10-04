@@ -148,16 +148,22 @@
 }
 
 .auth-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
+    min-height: 50px;
     padding: 14px;
     margin-top: 8px;
     border: none;
     border-radius: 8px;
-    background: var(--om-gold);
+    background: var(--om-gold, #c6a15b);
     color: #111317;
     font-size: 14px;
     font-weight: 700;
     cursor: pointer;
+    visibility: visible;
+    opacity: 1;
     transition: all 0.3s ease;
 }
 

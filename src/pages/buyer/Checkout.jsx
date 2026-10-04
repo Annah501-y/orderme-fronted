@@ -9,6 +9,9 @@ import {
 } from "lucide-react";
 
 import "../../pages_styles/buyer_styles/checkout.css";
+import GuestCheckout from "./GuestCheckout";
+import AddressLocationPicker from "../../components/AddressLocationPicker";
+import { toTanzaniaPhoneNumber } from "../../utils/tanzaniaPhone";
 
 const API_URL =
     import.meta.env.VITE_API_URL;
@@ -27,7 +30,9 @@ function Checkout() {
     const [addressError, setAddressError] = useState("");
     const [addressForm, setAddressForm] = useState({
         address_line: "", district: "", city: "", region: "", country: "Tanzania",
+        latitude: "", longitude: "", place_id: "",
     });
+    const [reachablePhone, setReachablePhone] = useState("");
 
     const [vehicleType, setVehicleType] = useState("bodaboda");
     const [deliveryFee, setDeliveryFee] = useState(0);
@@ -45,7 +50,6 @@ function Checkout() {
 
     useEffect(() => {
         if (!token) {
-            navigate("/login");
             return;
         }
 
@@ -120,12 +124,10 @@ function Checkout() {
                     (address) => address.is_default === true
                 );
 
-            if (defaultAddress) {
-                setSelectedAddressId(defaultAddress.id);
-            } else if (customerAddresses.length > 0) {
-                setSelectedAddressId(
-                    customerAddresses[0].id
-                );
+            const preferredAddress = defaultAddress || customerAddresses[0];
+            if (preferredAddress) {
+                setSelectedAddressId(preferredAddress.id);
+                setReachablePhone(preferredAddress.phone || "");
             } else {
                 setShowAddressForm(false);
             }
@@ -146,6 +148,10 @@ function Checkout() {
 
     const saveDeliveryAddress = async (event) => {
         event.preventDefault();
+        if (addressForm.latitude === "" || addressForm.longitude === "") {
+            setAddressError("Choose your delivery point on the map before saving this address.");
+            return;
+        }
         setSavingAddress(true);
         setAddressError("");
         try {
@@ -171,7 +177,7 @@ function Checkout() {
             const savedId = result.data?.address?.id || result.data?.id;
             setSelectedAddressId(savedId || savedAddresses[savedAddresses.length - 1]?.id || null);
             setShowAddressForm(false);
-            setAddressForm({ address_line: "", district: "", city: "", region: "", country: "Tanzania" });
+            setAddressForm({ address_line: "", district: "", city: "", region: "", country: "Tanzania", latitude: "", longitude: "", place_id: "" });
         } catch (saveError) {
             setAddressError(saveError.message || "Unable to save this address.");
         } finally {
@@ -282,6 +288,12 @@ function Checkout() {
             return;
         }
 
+        const normalizedReachablePhone = toTanzaniaPhoneNumber(reachablePhone);
+        if (normalizedReachablePhone.length !== 12) {
+            setError("Enter a valid, reachable Tanzania phone number for delivery.");
+            return;
+        }
+
         if (!vehicleType) {
             setError(
                 "Please select a delivery vehicle."
@@ -321,6 +333,7 @@ function Checkout() {
                     body: JSON.stringify({
                         cart_item_ids: cartItemIds,
                         address_id: selectedAddressId,
+                        reachable_phone: normalizedReachablePhone,
                         vehicle_type: vehicleType,
                     }),
                 }
@@ -364,6 +377,9 @@ function Checkout() {
             setPlacingOrder(false);
         }
     };
+
+    // Preserve the signed-in checkout below while routing visitors through guest address capture.
+    if (!token) return <GuestCheckout cartItemIds={cartItemIds} />;
 
     if (loading) {
         return (
@@ -488,9 +504,10 @@ function Checkout() {
                                                         address.id
                                                     }
                                                     onChange={() =>
-                                                        setSelectedAddressId(
-                                                            address.id
-                                                        )
+                                                        {
+                                                            setSelectedAddressId(address.id);
+                                                            setReachablePhone(address.phone || "");
+                                                        }
                                                     }
                                                 />
 
@@ -548,12 +565,31 @@ function Checkout() {
                                         <label>Region<input required name="region" autoComplete="address-level1" value={addressForm.region} onChange={(e) => setAddressForm({ ...addressForm, region: e.target.value })} /></label>
                                         <label>Country<input required name="country" autoComplete="country-name" value={addressForm.country} onChange={(e) => setAddressForm({ ...addressForm, country: e.target.value })} /></label>
                                     </div>
+                                    <AddressLocationPicker
+                                        latitude={addressForm.latitude}
+                                        longitude={addressForm.longitude}
+                                        onChange={({ latitude, longitude }) => setAddressForm((previous) => ({ ...previous, latitude, longitude, place_id: "" }))}
+                                    />
                                     <div className="checkout-address-form-actions">
                                         <button type="button" className="checkout-address-cancel" onClick={() => setShowAddressForm(false)}>Cancel</button>
                                         <button type="submit" disabled={savingAddress}>{savingAddress ? "Saving…" : "Save delivery address"}</button>
                                     </div>
                                 </form>
                             )}
+
+                            <label className="checkout-reachable-phone">
+                                Reachable phone number for delivery
+                                <input
+                                    required
+                                    type="tel"
+                                    name="reachable_phone"
+                                    autoComplete="tel"
+                                    placeholder="+255 7XX XXX XXX"
+                                    value={reachablePhone}
+                                    onChange={(event) => setReachablePhone(event.target.value)}
+                                />
+                                <small>The rider will use this number to contact you about delivery.</small>
+                            </label>
                         </section>
 
                         {/* Delivery Vehicle */}

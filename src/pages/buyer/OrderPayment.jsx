@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import {
     ArrowLeft,
     CheckCircle,
@@ -48,10 +48,11 @@ const paymentMethods = [
     },
     {
         value: "card",
-        label: "Card",
-        description: "Pay using your bank card.",
+        label: "Card (coming soon)",
+        description: "Card payments are not connected yet. Choose a mobile money method.",
         type: "card",
         requiresNumber: true,
+        unavailable: true,
         icon: CreditCard,
     },
  
@@ -63,12 +64,20 @@ const OrderPayment = () => {
     const navigate = useNavigate();
 
     const token = localStorage.getItem("token");
-
-    const orderFromState = location.state?.order;
+    // Restore a guest order and its scoped access token if the visitor returns to this page.
+    let savedGuestOrder = null;
+    try {
+        savedGuestOrder = JSON.parse(localStorage.getItem(`orderme_guest_order_${id}`) || "null");
+    } catch {
+        savedGuestOrder = null;
+    }
+    const guestAccessToken = location.state?.guestAccessToken || savedGuestOrder?.guestAccessToken;
+    const orderFromState = location.state?.order || savedGuestOrder?.order;
+    const guestTrackingNotice = location.state?.trackingNotice || savedGuestOrder?.trackingNotice;
 
     const [order, setOrder] = useState(orderFromState || null);
     const [paymentMethod, setPaymentMethod] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState(orderFromState?.guest_phone || orderFromState?.address?.phone || "");
     const [error, setError] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const [paying, setPaying] = useState(false);
@@ -149,18 +158,22 @@ const OrderPayment = () => {
                 method: paymentMethod,
             };
 
+            const guestOrder = !token && Boolean(guestAccessToken);
+            // Guest payment access is authorized by the per-order token, not a user session.
+            if (guestOrder) paymentData.guest_access_token = guestAccessToken;
+
             if (selectedMethod?.requiresPhone) {
                 paymentData.phone_number = toTanzaniaPhoneNumber(phoneNumber);
             }
 
             const response = await fetch(
-                `${API_URL}/orders/${id}/payment`,
+                `${API_URL}/${guestOrder ? "guest/orders" : "orders"}/${id}/payment`,
                 {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                         Accept: "application/json",
-                        Authorization: `Bearer ${token}`,
+                        ...(token ? { Authorization: `Bearer ${token}` } : {}),
                     },
                     body: JSON.stringify(paymentData),
                 }
@@ -178,12 +191,16 @@ const OrderPayment = () => {
                 result.message || "Payment initiated successfully."
             );
 
-            navigate(`/orders/${id}`, {
-                state: {
-                    paymentSuccess: true,
-                    payment: result.data,
-                },
-            });
+            if (guestOrder) {
+                setSuccessMessage("Payment started. Check your phone to approve the payment request.");
+            } else {
+                navigate(`/orders/${id}`, {
+                    state: {
+                        paymentSuccess: true,
+                        payment: result.data,
+                    },
+                });
+            }
         } catch (paymentError) {
             console.error("Payment error:", paymentError);
             setError(
@@ -237,6 +254,16 @@ const OrderPayment = () => {
                 Back
             </button>
 
+            {!token && guestTrackingNotice && (
+                <div className="alert alert-info d-flex flex-wrap align-items-center gap-2" role="status">
+                    <span>{guestTrackingNotice}.</span>
+                    <Link to="/login?redirect=%2Fbuyer%2Forders" className="alert-link">
+                        Log in now
+                    </Link>
+                    <span>and this guest order will be added to your account.</span>
+                </div>
+            )}
+
             <div className="row g-4">
                 <div className="col-lg-7">
                     <div className="card border-0 shadow-sm">
@@ -284,8 +311,10 @@ const OrderPayment = () => {
                                                     isSelected
                                                         ? "selected"
                                                         : ""
-                                                }`}
+                                                } ${method.unavailable ? "unavailable" : ""}`}
+                                                disabled={method.unavailable}
                                                 onClick={() => {
+                                                    if (method.unavailable) return;
                                                     setPaymentMethod(
                                                         method.value
                                                     );

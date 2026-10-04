@@ -1,0 +1,28 @@
+:where(button) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 8px 12px;
+    border-radius: 7px;
+    font: inherit;
+    font-weight: 600;
+    line-height: 1.25;
+    text-align: center;
+    cursor: pointer;
+}
+
+:where(button:not([class])) {
+    border: 1px solid #cbd2da;
+    background-color: #273747;
+    color: #ffffff;
+}
+
+:where(button):focus-visible {
+    outline: 3px solid #d5a62a;
+    outline-offset: 2px;
+}
+
+:where(button):disabled {
+    cursor: not-allowed;
+}

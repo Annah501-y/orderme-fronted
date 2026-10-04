@@ -372,6 +372,7 @@
 
 .checkout-place-order {
     width: 100%;
+    min-height: 54px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -379,20 +380,25 @@
     border: none;
     border-radius: 7px;
     padding: 13px 18px;
-    background: var(--om-gold);
+    background: #805d00;
     color: #fff;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.25;
+    visibility: visible;
+    opacity: 1;
     cursor: pointer;
     transition: 0.2s ease;
 }
 
 .checkout-place-order:hover:not(:disabled) {
-    background: #9d7308;
+    background: #604600;
 }
 
 .checkout-place-order:disabled {
-    opacity: 0.5;
+    background: #686868;
+    color: #fff;
+    opacity: 1;
     cursor: not-allowed;
 }
 
@@ -647,3 +653,70 @@
 .checkout-address-form-actions .checkout-address-cancel { background: #eceff2; color: #263344; }
 .checkout-address-error { margin: 0; color: #ad3333; font-size: 13px; }
 @media (max-width: 576px) { .checkout-address-fields { grid-template-columns: 1fr; } }
+
+/* Capture the order-specific number that the rider should call on delivery day. */
+.checkout-reachable-phone {
+    display: grid;
+    gap: 7px;
+    margin-top: 18px;
+    color: #343a40;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.checkout-reachable-phone input {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid #d8dce1;
+    border-radius: 7px;
+    background: #fff;
+    color: #263344;
+    font: inherit;
+    font-weight: 400;
+}
+
+.checkout-reachable-phone input:focus {
+    border-color: var(--om-gold, #805d00);
+    outline: 0;
+    box-shadow: 0 0 0 3px rgba(128, 93, 0, 0.12);
+}
+
+.checkout-reachable-phone small {
+    color: var(--om-muted, #6b7280);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+/* Match guest contact inputs to the existing checkout address form. */
+.guest-checkout-fields {
+    display: grid;
+    gap: 14px;
+}
+
+.guest-checkout-fields > label,
+.guest-checkout-fields .checkout-address-fields > label {
+    display: grid;
+    gap: 7px;
+    color: #343a40;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.guest-checkout-fields input {
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid #d8dce1;
+    border-radius: 7px;
+    background: #fff;
+    color: #263344;
+    font: inherit;
+    font-weight: 400;
+}
+
+.guest-checkout-fields input:focus {
+    border-color: var(--om-gold, #805d00);
+    outline: 0;
+    box-shadow: 0 0 0 3px rgba(128, 93, 0, 0.12);
+}

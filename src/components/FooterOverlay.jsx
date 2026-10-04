@@ -4,6 +4,7 @@ import { ArrowLeft, X } from "lucide-react";
 import Terms from "../pages/Terms";
 import Privacy from "../pages/Privacy";
 import HelpCenter from "../pages/HelpCenter";
+import FAQ from "../pages/FAQ";
 import AboutUs from "../pages/AboutUs";
 import "../components_styles/footer-overlay.css";
 
@@ -29,6 +30,8 @@ function FooterOverlay({ type, onClose, onNavigate }) {
         switch (type) {
             case "help":
                 return <HelpCenter />;
+            case "faq":
+                return <FAQ onOpenHelpCenter={() => onNavigate("help")} />;
             case "about":
                 return <AboutUs />;
 
@@ -45,6 +48,7 @@ function FooterOverlay({ type, onClose, onNavigate }) {
 
     const titles = {
         help: "Help Center",
+        faq: "Frequently Asked Questions",
         about: "About Us",
         privacy: "Privacy Policy",
         terms: "Terms & Conditions",

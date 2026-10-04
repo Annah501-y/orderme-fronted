@@ -227,6 +227,90 @@
     border-bottom: 1px solid #f0f0f0;
 }
 
+/* Delivery controls keep each required rider action beside its related stop. */
+.rider-delivery-actions,
+.rider-stop-actions,
+.rider-customer-delivery-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.rider-delivery-actions {
+    padding: 0 24px 18px;
+}
+
+.rider-action-primary,
+.rider-action-secondary {
+    min-height: 40px;
+    padding: 9px 14px;
+    border: 1px solid var(--om-gold, #d4a017);
+    border-radius: 8px;
+    background: var(--om-gold, #d4a017);
+    color: #fff;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 650;
+    cursor: pointer;
+}
+
+.rider-action-secondary {
+    border-color: #dce1e6;
+    background: #fff;
+    color: #343b43;
+}
+
+.rider-action-primary:hover:not(:disabled) { filter: brightness(.96); }
+.rider-action-secondary:hover:not(:disabled) { border-color: var(--om-gold, #d4a017); }
+.rider-action-primary:disabled,
+.rider-action-secondary:disabled { cursor: not-allowed; opacity: .55; }
+
+.rider-otp-form {
+    display: grid;
+    width: min(100%, 390px);
+    gap: 9px;
+    margin-top: 4px;
+    padding: 14px;
+    border: 1px solid #e7e9ec;
+    border-radius: 10px;
+    background: #fff;
+}
+
+.rider-otp-panel {
+    display: grid;
+    width: min(100%, 420px);
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.rider-otp-panel > p {
+    margin: 0;
+    color: #69737d;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.rider-otp-form p,
+.rider-otp-hint {
+    margin: 0;
+    color: #69737d;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.rider-otp-form label { color: #434c55; font-size: 12px; font-weight: 650; }
+.rider-otp-form input { width: 100%; box-sizing: border-box; min-height: 42px; padding: 9px 11px; border: 1px solid #dce1e6; border-radius: 7px; font: inherit; font-size: 16px; letter-spacing: .12em; }
+.rider-otp-form input:focus { outline: 2px solid rgb(212 160 23 / 26%); border-color: var(--om-gold, #d4a017); }
+.rider-otp-hint { align-self: center; }
+
+@media (max-width: 600px) {
+    .rider-delivery-actions { padding: 0 16px 16px; }
+    .rider-otp-form { width: auto; }
+    .rider-action-primary,
+    .rider-action-secondary { width: 100%; }
+}
+
 .section-heading {
     display: flex;
     justify-content: space-between;
@@ -311,10 +395,36 @@
 .customer-phone {
     display: inline-flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 6px;
     margin-top: 10px;
-    color: #374151;
+    color: #604600;
     text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.phone-link:hover,
+.customer-phone:hover {
+    color: #3f2f00;
+    text-decoration: underline;
+}
+
+.phone-link svg,
+.customer-phone svg {
+    flex: 0 0 auto;
+}
+
+.contact-label {
+    color: #6b7280;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.contact-unavailable {
+    margin: 10px 0 0;
+    color: #6b7280;
     font-size: 12px;
 }
 
@@ -489,10 +599,13 @@
     font-size: 13px;
 }
 
-.delivery-details .delivery-total {
+.rider-otp-details {
     grid-column: 1 / -1;
-    border-top: 1px solid #e5e7eb;
+    width: 100%;
+    max-width: none;
+    margin-top: 0;
     padding-top: 16px;
+    border-top: 1px solid #e5e7eb;
 }
 
 .empty-deliveries {
@@ -552,6 +665,42 @@
     border-radius: 7px;
     padding: 7px 12px;
     cursor: pointer;
+}
+.phone-link,
+.customer-phone {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+    color: #604600;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.phone-link:hover,
+.customer-phone:hover {
+    color: #3f2f00;
+    text-decoration: underline;
+}
+
+.phone-link svg,
+.customer-phone svg {
+    flex: 0 0 auto;
+}
+
+.contact-label {
+    color: #6b7280;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.contact-unavailable {
+    margin: 10px 0 0;
+    color: #6b7280;
+    font-size: 12px;
 }
 
 @keyframes riderSpin {
@@ -616,7 +765,4 @@
         grid-template-columns: 1fr;
     }
 
-    .delivery-details .delivery-total {
-        grid-column: auto;
-    }
 }

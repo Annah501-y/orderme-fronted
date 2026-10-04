@@ -49,6 +49,7 @@ import RiderActivate from "../pages/rider/RiderActivate";
 import AdminRiders from "../pages/admin/AdminRiders";
 import AdminDelivery from "../pages/admin/AdminDelivery";
 import AdminSettings from "../pages/admin/AdminSettings";
+import AdminPayments from "../pages/admin/AdminPayments";
 import RiderLayout from "../layouts/RiderLayout";
 import RiderDashboard from "../pages/rider/RiderDashboard";
 import RiderOrder from "../pages/rider/RiderOrders";
@@ -63,6 +64,9 @@ import Privacy from "../pages/Privacy";
 import SellerApprovalGate from "../components/SellerApprovalGate";
 import Deals from "../components/Deals";
 import BeRider from "../pages/rider/BeRider";
+import RiderProfile from "../pages/rider/RiderProfile";
+import RiderSettings from "../pages/rider/RiderSettings";
+import RiderEarnings from "../pages/rider/RiderEarnings";
 
 
 function AppRoutes() {
@@ -77,6 +81,10 @@ function AppRoutes() {
             <Route element={<MainLayout />}>
 
                 <Route path="/" element={<Home />} />
+
+                {/* Guest shoppers can save favorites and use the cart without signing in. */}
+                <Route path="/buyer/wishlist" element={<BuyerWishlist />} />
+                <Route path="/cart" element={<Cart />} />
 
                 <Route path="/login" element={<Login />} />
 
@@ -127,14 +135,7 @@ function AppRoutes() {
                     element={<BuyerOrders />}
                 />
 
-                <Route
-                    path="/buyer/wishlist"
-                    element={<BuyerWishlist />}
-                />
-
                
-                <Route path="/cart" 
-                element={<Cart />} />
             </Route>
             {/* =========================
                 SELLER ROUTES
@@ -249,7 +250,7 @@ function AppRoutes() {
 
     <Route
         path="/admin/payments"
-        element={<div>Payments</div>}
+        element={<AdminPayments/>}
     />
 
     <Route
@@ -282,17 +283,17 @@ function AppRoutes() {
 
     <Route
         path="earnings"
-        element={<div>RiderEarnings</div>}
+        element={<RiderEarnings />}
     />
 
     <Route
         path="profile"
-        element={<div>RiderProfile </div>}
+        element={<RiderProfile />}
     />
 
     <Route
         path="settings"
-        element={<div>RiderSettings </div>}
+        element={<RiderSettings />}
     />
 </Route>
 

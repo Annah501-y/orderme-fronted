@@ -1,0 +1,270 @@
+.rider-profile-page,
+.rider-settings-page {
+    width: min(100%, 1120px);
+    margin: 0 auto;
+    padding: 30px 24px 48px;
+    color: #243142;
+}
+
+.rider-profile-header,
+.rider-settings-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 24px;
+}
+
+.rider-profile-header-icon,
+.rider-settings-header-icon {
+    display: grid;
+    width: 50px;
+    height: 50px;
+    place-items: center;
+    border-radius: 13px;
+    background: #f6f0df;
+    color: #805d00;
+}
+
+.rider-profile-header h1,
+.rider-settings-header h1 {
+    margin: 0;
+    font-size: 27px;
+}
+
+.rider-profile-header p,
+.rider-settings-header p {
+    margin: 5px 0 0;
+    color: #697586;
+    font-size: 14px;
+}
+
+.rider-profile-card,
+.rider-settings-card {
+    overflow: hidden;
+    border: 1px solid #e3e6eb;
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(24, 35, 48, 0.05);
+}
+
+.rider-profile-section,
+.rider-settings-card {
+    padding: 23px;
+}
+
+.rider-profile-section + .rider-profile-section {
+    border-top: 1px solid #edf0f3;
+}
+
+.rider-profile-section-title,
+.rider-settings-card-title {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    margin-bottom: 20px;
+    color: #805d00;
+}
+
+.rider-profile-section-title h2,
+.rider-settings-card-title h2 {
+    margin: 0;
+    color: #243142;
+    font-size: 17px;
+}
+
+.rider-profile-section-title p,
+.rider-settings-card-title p {
+    margin: 5px 0 0;
+    color: #697586;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.rider-profile-fields,
+.rider-settings-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.rider-profile-fields label,
+.rider-settings-field {
+    display: grid;
+    gap: 7px;
+    color: #344154;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.rider-profile-fields input,
+.rider-profile-fields select,
+.rider-settings-field input,
+.rider-settings-field select {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid #d8dde5;
+    border-radius: 8px;
+    background: #fff;
+    color: #243142;
+    font: inherit;
+    font-weight: 400;
+}
+
+.rider-profile-fields input:focus,
+.rider-profile-fields select:focus,
+.rider-settings-field input:focus,
+.rider-settings-field select:focus {
+    border-color: #a17a1a;
+    outline: 3px solid rgba(161, 122, 26, 0.13);
+}
+
+.rider-profile-file-field {
+    grid-column: 1 / -1;
+}
+
+.rider-profile-file-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    padding: 6px 10px;
+    border: 1px dashed #c9cfd8;
+    border-radius: 8px;
+    color: #805d00;
+}
+
+.rider-profile-file-control input {
+    padding: 4px;
+    border: 0;
+}
+
+.rider-profile-file-field small {
+    color: #697586;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.rider-license-status,
+.rider-settings-verification-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 18px;
+    padding: 12px 14px;
+    border: 1px solid #e3e6eb;
+    border-radius: 9px;
+    background: #f8f9fb;
+    color: #4b5563;
+    font-size: 13px;
+    text-transform: capitalize;
+}
+
+.rider-license-status.approved,
+.rider-settings-verification-status.verified {
+    border-color: #b9dec8;
+    background: #effaf3;
+    color: #24633a;
+}
+
+.rider-license-status.pending,
+.rider-license-status.rejected {
+    border-color: #ead9a9;
+    background: #fff9e9;
+    color: #805d00;
+}
+
+.rider-license-review-note {
+    margin: 10px 0 0;
+    color: #9b3434;
+    font-size: 13px;
+}
+
+.rider-profile-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 18px 23px;
+    border-top: 1px solid #edf0f3;
+    background: #fbfcfd;
+}
+
+.rider-profile-actions button,
+.rider-settings-primary,
+.rider-settings-secondary {
+    min-height: 43px;
+    padding: 10px 16px;
+    border: 0;
+    border-radius: 8px;
+    background: #805d00;
+    color: #fff;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.rider-profile-actions button:disabled,
+.rider-settings-primary:disabled,
+.rider-settings-secondary:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+.rider-profile-alert,
+.rider-settings-alert {
+    margin-bottom: 16px;
+    padding: 12px 14px;
+    border: 1px solid;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.rider-profile-alert.error,
+.rider-settings-alert.error {
+    border-color: #f1c3c3;
+    background: #fff3f3;
+    color: #922f2f;
+}
+
+.rider-profile-alert.success,
+.rider-settings-alert.success {
+    border-color: #b9dec8;
+    background: #effaf3;
+    color: #24633a;
+}
+
+.rider-profile-loading,
+.rider-settings-loading {
+    padding: 60px 0;
+    color: #697586;
+    text-align: center;
+}
+
+@media (max-width: 640px) {
+    .rider-profile-page,
+    .rider-settings-page {
+        padding: 22px 14px 36px;
+    }
+
+    .rider-profile-fields,
+    .rider-settings-fields {
+        grid-template-columns: 1fr;
+    }
+
+    .rider-profile-section,
+    .rider-settings-card {
+        padding: 18px;
+    }
+
+    .rider-profile-file-field {
+        grid-column: auto;
+    }
+
+    .rider-profile-actions {
+        padding: 16px 18px;
+    }
+
+    .rider-profile-actions button {
+        width: 100%;
+    }
+}

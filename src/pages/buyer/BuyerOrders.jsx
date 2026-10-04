@@ -4,19 +4,69 @@ import {
     Package,
     ChevronDown,
     ChevronUp,
+    Star,
+    RefreshCw,
 } from "lucide-react";
 import { fetchAllProducts, getProductImageUrl } from "../../api/marketplace";
 import { submitProductReview } from "../../api/customerFeedback";
+import GeneralFeedbackForm from "../../components/feedback/GeneralFeedbackForm";
 
 import "../../pages_styles/buyer_styles/buyer-order.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
+function getSellerOrderStatusLabel(status) {
+    const labels = {
+        ready_for_delivery: "Ready for delivery",
+        picked_up: "Picked up",
+        out_for_delivery: "Out for delivery",
+        delivered: "Delivered",
+    };
+
+    return labels[status] || status?.replaceAll("_", " ").replace(/\b\w/g, (letter) => letter.toUpperCase()) || "Pending";
+}
+
+function getSellerOrderStatusClass(status) {
+    if (["ready_for_delivery", "assigned", "picked_up", "out_for_delivery"].includes(status)) {
+        return "in-progress";
+    }
+    if (status === "delivered") return "complete";
+    if (status === "cancelled") return "cancelled";
+    return "waiting";
+}
+
+function SellerOrderProgress({ sellerOrders = [] }) {
+    if (!sellerOrders.length) return null;
+
+    return (
+        <section className="buyer-store-progress" aria-label="Store order progress">
+            <h3>Store order progress</h3>
+            {sellerOrders.map((sellerOrder) => {
+                const seller = sellerOrder.seller;
+                const storeName = seller?.seller_profile?.store_name
+                    || seller?.sellerProfile?.store_name
+                    || seller?.name
+                    || `Store ${sellerOrder.seller_id}`;
+
+                return (
+                    <div className="buyer-store-progress-row" key={sellerOrder.id}>
+                        <span>{storeName}</span>
+                        <span className={`buyer-store-status ${getSellerOrderStatusClass(sellerOrder.status)}`}>
+                            {getSellerOrderStatusLabel(sellerOrder.status)}
+                        </span>
+                    </div>
+                );
+            })}
+        </section>
+    );
+}
+
 /** Submit a review for a product the buyer purchased in this order. */
 function ProductReviewForm({ orderId, productId }) {
-    const [rating, setRating] = useState("5");
+    const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
     const [submitting, setSubmitting] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
 
@@ -24,6 +74,10 @@ function ProductReviewForm({ orderId, productId }) {
         event.preventDefault();
         setMessage("");
         setError("");
+        if (!rating) {
+            setError("Choose a star rating before submitting.");
+            return;
+        }
         setSubmitting(true);
 
         try {
@@ -35,6 +89,7 @@ function ProductReviewForm({ orderId, productId }) {
             });
 
             setMessage(result?.message || "Your review was submitted for approval.");
+            setSubmitted(true);
             setComment("");
         } catch (requestError) {
             const fieldErrors = requestError.response?.data?.errors;
@@ -54,37 +109,51 @@ function ProductReviewForm({ orderId, productId }) {
 
     return (
         <form className="buyer-product-review-form" onSubmit={handleSubmit}>
-            <label htmlFor={`review-rating-${orderId}-${productId}`}>
-                Your rating
-            </label>
-            <select
-                id={`review-rating-${orderId}-${productId}`}
-                value={rating}
-                onChange={(event) => setRating(event.target.value)}
-                required
-            >
-                <option value="5">5 — Excellent</option>
-                <option value="4">4 — Very good</option>
-                <option value="3">3 — Good</option>
-                <option value="2">2 — Fair</option>
-                <option value="1">1 — Poor</option>
-            </select>
+            {!submitted && (
+                <>
+                    <fieldset className="buyer-review-rating">
+                        <legend>Your rating</legend>
+                        <div className="buyer-review-stars" role="group" aria-label="Choose a rating from 1 to 5 stars">
+                            {[1, 2, 3, 4, 5].map((value) => (
+                                <button
+                                    key={value}
+                                    type="button"
+                                    className="buyer-review-star"
+                                    aria-label={`${value} star${value === 1 ? "" : "s"}${value === 5 ? ", Excellent" : ""}`}
+                                    aria-pressed={rating === value}
+                                    title={value === 5 ? "Excellent" : `${value} star${value === 1 ? "" : "s"}`}
+                                    onClick={() => setRating(value)}
+                                >
+                                    <Star
+                                        size={28}
+                                        fill={rating >= value ? "currentColor" : "none"}
+                                        aria-hidden="true"
+                                    />
+                                </button>
+                            ))}
+                        </div>
+                        <span className="buyer-review-rating-label">
+                            {rating === 0 ? "Select a star rating" : ["", "Poor", "Fair", "Good", "Very good", "Excellent"][rating]}
+                        </span>
+                    </fieldset>
 
-            <label htmlFor={`review-comment-${orderId}-${productId}`}>
-                Comment <span>(optional)</span>
-            </label>
-            <textarea
-                id={`review-comment-${orderId}-${productId}`}
-                value={comment}
-                onChange={(event) => setComment(event.target.value)}
-                maxLength={5000}
-                rows={3}
-                placeholder="Share your experience with this product"
-            />
+                    <label htmlFor={`review-comment-${orderId}-${productId}`}>
+                        Comment <span>(optional)</span>
+                    </label>
+                    <textarea
+                        id={`review-comment-${orderId}-${productId}`}
+                        value={comment}
+                        onChange={(event) => setComment(event.target.value)}
+                        maxLength={5000}
+                        rows={3}
+                        placeholder="Share your experience with this product"
+                    />
 
-            <button type="submit" disabled={submitting}>
-                {submitting ? "Submitting…" : "Submit review"}
-            </button>
+                    <button type="submit" disabled={submitting || rating === 0}>
+                        {submitting ? "Submitting…" : "Submit review"}
+                    </button>
+                </>
+            )}
 
             {message && <p className="review-success" role="status">{message}</p>}
             {error && <p className="review-error" role="alert">{error}</p>}
@@ -97,8 +166,9 @@ function BuyerOrders() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const [expandedOrder, setExpandedOrder] = useState(null);
+    const [refreshing, setRefreshing] = useState(false);
 
-    const fetchOrders = async () => {
+    const fetchOrders = async (quietRefresh = false) => {
         const token = localStorage.getItem("token");
 
         if (!token) {
@@ -107,8 +177,30 @@ function BuyerOrders() {
         }
 
         try {
-            setLoading(true);
+            if (quietRefresh) setRefreshing(true);
+            else setLoading(true);
             setError("");
+
+            // Link valid guest checkouts to the buyer account so they can be tracked here.
+            const guestOrderKeys = Object.keys(localStorage).filter((key) => key.startsWith("orderme_guest_order_"));
+            for (const key of guestOrderKeys) {
+                try {
+                    const guestOrder = JSON.parse(localStorage.getItem(key) || "null");
+                    if (!guestOrder?.order?.id || !guestOrder?.guestAccessToken) continue;
+                    const claimResponse = await fetch(`${API_URL}/guest/orders/${guestOrder.order.id}/claim`, {
+                        method: "POST",
+                        headers: {
+                            Accept: "application/json",
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${token}`,
+                        },
+                        body: JSON.stringify({ guest_access_token: guestOrder.guestAccessToken }),
+                    });
+                    if (claimResponse.ok) localStorage.removeItem(key);
+                } catch (claimError) {
+                    console.warn("Unable to link a recent guest order:", claimError);
+                }
+            }
 
             const response = await fetch(`${API_URL}/orders`, {
                 method: "GET",
@@ -153,7 +245,8 @@ function BuyerOrders() {
                 error.message || "Unable to load your orders."
             );
         } finally {
-            setLoading(false);
+            if (quietRefresh) setRefreshing(false);
+            else setLoading(false);
         }
     };
 
@@ -204,6 +297,9 @@ function BuyerOrders() {
         }
     };
 
+    const isOrderCompleted = (status) =>
+        ["delivered", "completed", "complete"].includes(status?.toLowerCase());
+
     if (loading) {
         return (
             <div className="buyer-orders-page">
@@ -242,6 +338,16 @@ function BuyerOrders() {
                                 : "Orders"}
                         </span>
                     </div>
+
+                    <button
+                        type="button"
+                        className="buyer-orders-refresh"
+                        onClick={() => fetchOrders(true)}
+                        disabled={refreshing}
+                    >
+                        <RefreshCw size={16} className={refreshing ? "spinning" : ""} />
+                        {refreshing ? "Updating..." : "Refresh status"}
+                    </button>
                 </div>
 
                 {error && (
@@ -361,6 +467,8 @@ function BuyerOrders() {
                                     order.id && (
                                     <div className="order-details">
 
+                                        <SellerOrderProgress sellerOrders={order.seller_orders || order.sellerOrders || []} />
+
                                         <h3>
                                             Order Items
                                         </h3>
@@ -422,7 +530,7 @@ function BuyerOrders() {
                                                     </strong>
 
                                                     </div>
-                                                    {productId != null && (
+                                                    {productId != null && isOrderCompleted(order.status) && (
                                                         <ProductReviewForm
                                                             orderId={order.id}
                                                             productId={productId}
@@ -431,6 +539,10 @@ function BuyerOrders() {
                                                 </React.Fragment>
                                             );
                                         })}
+
+                                        {isOrderCompleted(order.status) && (
+                                            <GeneralFeedbackForm orderId={order.id} />
+                                        )}
 
                                     </div>
                                 )}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
     Search,
     Eye,
@@ -61,6 +61,7 @@ const getStatusClass = (status) => {
             return "status-ready";
 
         case "assigned":
+        case "assigned_to_rider":
         case "picked_up":
         case "out_for_delivery":
             return "status-delivery";
@@ -85,6 +86,7 @@ const getStatusIcon = (status) => {
             return <XCircle size={15} />;
 
         case "assigned":
+        case "assigned_to_rider":
         case "picked_up":
         case "out_for_delivery":
             return <Truck size={15} />;
@@ -105,18 +107,23 @@ const AdminOrders = () => {
 
     const [selectedOrder, setSelectedOrder] = useState(null);
     const [showDetails, setShowDetails] = useState(false);
+    const [assigningRider, setAssigningRider] = useState(false);
+    const [assignmentMessage, setAssignmentMessage] = useState("");
+    const [assignmentError, setAssignmentError] = useState("");
+    const searchRef = useRef(search);
+    searchRef.current = search;
 
     const token = localStorage.getItem("token");
 
-    const fetchOrders = async () => {
+    const fetchOrders = useCallback(async (showLoader = true) => {
         try {
-            setLoading(true);
-            setError("");
+            if (showLoader) setLoading(true);
+            if (showLoader) setError("");
 
             const params = new URLSearchParams();
 
-            if (search.trim()) {
-                params.append("search", search.trim());
+            if (searchRef.current.trim()) {
+                params.append("search", searchRef.current.trim());
             }
 
             if (status) {
@@ -155,13 +162,38 @@ const AdminOrders = () => {
         } catch (err) {
             setError(err.message || "Failed to load orders.");
         } finally {
-            setLoading(false);
+            if (showLoader) setLoading(false);
         }
-    };
+    }, [status, token]);
 
     useEffect(() => {
         fetchOrders();
-    }, [status]);
+        // Keep seller readiness current while the admin dashboard remains open.
+        const refreshTimer = window.setInterval(() => fetchOrders(false), 30000);
+        return () => window.clearInterval(refreshTimer);
+    }, [fetchOrders]);
+
+    useEffect(() => {
+        if (!showDetails || !selectedOrder?.id) return undefined;
+
+        const selectedOrderId = selectedOrder.id;
+        const detailsTimer = window.setInterval(async () => {
+            try {
+                const response = await fetch(`${API_URL}/admin/orders/${selectedOrderId}`, {
+                    headers: {
+                        Accept: "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                const result = await response.json();
+                if (response.ok) setSelectedOrder(result.data);
+            } catch {
+                // Leave the last loaded details visible if a background refresh fails.
+            }
+        }, 30000);
+
+        return () => window.clearInterval(detailsTimer);
+    }, [showDetails, selectedOrder?.id, token]);
 
     const handleSearch = (event) => {
         event.preventDefault();
@@ -171,6 +203,8 @@ const AdminOrders = () => {
     const handleViewOrder = async (orderId) => {
         try {
             setError("");
+            setAssignmentMessage("");
+            setAssignmentError("");
 
             const response = await fetch(
                 `${API_URL}/admin/orders/${orderId}`,
@@ -195,6 +229,51 @@ const AdminOrders = () => {
             setShowDetails(true);
         } catch (err) {
             setError(err.message || "Failed to load order details.");
+        }
+    };
+
+    const handleAssignReadySellers = async () => {
+        if (!selectedOrder?.id || assigningRider) return;
+
+        try {
+            setAssigningRider(true);
+            setAssignmentMessage("");
+            setAssignmentError("");
+            setError("");
+
+            const response = await fetch(
+                `${API_URL}/orders/${selectedOrder.id}/assign-delivery`,
+                {
+                    method: "POST",
+                    headers: {
+                        Accept: "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            const result = await response.json();
+            if (!response.ok) {
+                throw new Error(result.message || "Could not assign a rider.");
+            }
+
+            setAssignmentMessage(result.message || "Rider assignment completed.");
+            await fetchOrders(false);
+
+            const detailsResponse = await fetch(
+                `${API_URL}/admin/orders/${selectedOrder.id}`,
+                {
+                    headers: {
+                        Accept: "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            const detailsResult = await detailsResponse.json();
+            if (detailsResponse.ok) setSelectedOrder(detailsResult.data);
+        } catch (err) {
+            setAssignmentError(err.message || "Could not assign a rider.");
+        } finally {
+            setAssigningRider(false);
         }
     };
 
@@ -308,6 +387,7 @@ const AdminOrders = () => {
                                     <th>Items</th>
                                     <th>Total</th>
                                     <th>Status</th>
+                                    <th>Seller fulfillment</th>
                                     <th>Date</th>
                                     <th>Action</th>
                                 </tr>
@@ -337,13 +417,13 @@ const AdminOrders = () => {
                                                 <div>
 
                                                     <strong>
-                                                        {order.user?.name ||
+                                                        {order.user?.name || order.guest_name ||
                                                             "Unknown Customer"}
                                                     </strong>
 
                                                     <span>
-                                                        {order.user?.email ||
-                                                            "No email"}
+                                                        {/* Guests have no account email, so show their reachable checkout phone. */}
+                                                        {order.user?.email || (order.guest_phone ? `Guest phone: ${order.guest_phone}` : "No email")}
                                                     </span>
 
                                                 </div>
@@ -394,6 +474,21 @@ const AdminOrders = () => {
 
                                             </span>
 
+                                        </td>
+
+                                        {/* Surface seller status changes, even when the parent order status is unchanged. */}
+                                        <td>
+                                            {(() => {
+                                                const sellerOrders = order.seller_orders || order.sellerOrders || [];
+                                                const readyCount = sellerOrders.filter((item) => item.status === "ready_for_delivery").length;
+                                                return (
+                                                    <span className={`admin-order-readiness ${readyCount > 0 ? "is-ready" : ""}`}>
+                                                        {readyCount > 0
+                                                            ? `${readyCount} ready for delivery`
+                                                            : `${sellerOrders.length} seller${sellerOrders.length === 1 ? "" : "s"} - none ready`}
+                                                    </span>
+                                                );
+                                            })()}
                                         </td>
 
                                         {/* DATE */}
@@ -680,6 +775,37 @@ const AdminOrders = () => {
                                 </h3>
 
                             </div>
+
+                            {(selectedOrder.seller_orders || selectedOrder.sellerOrders || []).some(
+                                (sellerOrder) => sellerOrder.status === "ready_for_delivery"
+                            ) && (
+                                <div className="admin-order-assignment-box">
+                                    <div>
+                                        <strong>Seller items are ready</strong>
+                                        <span>Assigns available riders to all ready seller orders in this customer order.</span>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        className="admin-order-assign-btn"
+                                        onClick={handleAssignReadySellers}
+                                        disabled={assigningRider}
+                                    >
+                                        <Truck size={16} />
+                                        {assigningRider ? "Assigning..." : "Assign rider"}
+                                    </button>
+                                </div>
+                            )}
+
+                            {assignmentMessage && (
+                                <div className="admin-order-assignment-success" role="status">
+                                    {assignmentMessage}
+                                </div>
+                            )}
+                            {assignmentError && (
+                                <div className="admin-order-assignment-error" role="alert">
+                                    {assignmentError}
+                                </div>
+                            )}
 
                             <div className="admin-order-sellers">
 

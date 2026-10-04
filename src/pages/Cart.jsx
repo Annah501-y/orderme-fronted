@@ -10,8 +10,11 @@ import {
 } from "lucide-react";
 
 import "../pages_styles/cart.css";
+import { fetchAllProducts } from "../api/marketplace";
 
 const API_URL = import.meta.env.VITE_API_URL;
+// A browser-only cart lets visitors shop before creating or signing into an account.
+const GUEST_CART_KEY = "orderme_guest_cart";
 
 function Cart() {
     const navigate = useNavigate();
@@ -31,6 +34,28 @@ function Cart() {
         try {
             setLoading(true);
             setError("");
+
+            if (!token) {
+                // Join stored product IDs with public catalog data for the existing cart UI.
+                const savedCart = JSON.parse(localStorage.getItem(GUEST_CART_KEY) || "[]");
+                const products = await fetchAllProducts();
+                const productById = new Map(products.map((product) => [Number(product.id), product]));
+                const items = savedCart
+                    .map((entry) => {
+                        const product = productById.get(Number(entry.product_id));
+                        if (!product) return null;
+                        return {
+                            id: `guest-${product.id}`,
+                            product_id: product.id,
+                            quantity: Number(entry.quantity || 1),
+                            product,
+                        };
+                    })
+                    .filter(Boolean);
+                setCartItems(items);
+                setSelectedItems(items.map((item) => item.id));
+                return;
+            }
 
             const response = await fetch(`${API_URL}/cart`, {
                 headers: {
@@ -67,6 +92,17 @@ function Cart() {
     const updateQuantity = async (itemId, quantity) => {
         if (quantity < 1) return;
 
+        if (!token) {
+            // Persist quantity changes locally; the server will validate stock at order placement.
+            const updated = JSON.parse(localStorage.getItem(GUEST_CART_KEY) || "[]")
+                .map((item) => Number(item.product_id) === Number(String(itemId).replace("guest-", ""))
+                    ? { ...item, quantity }
+                    : item);
+            localStorage.setItem(GUEST_CART_KEY, JSON.stringify(updated));
+            fetchCart();
+            return;
+        }
+
         try {
             const response = await fetch(
                 `${API_URL}/cart/items/${itemId}`,
@@ -100,6 +136,17 @@ function Cart() {
     };
 
     const removeItem = async (itemId) => {
+        if (!token) {
+            // Remove the matching product from the guest cart and selection state.
+            const productId = Number(String(itemId).replace("guest-", ""));
+            const updated = JSON.parse(localStorage.getItem(GUEST_CART_KEY) || "[]")
+                .filter((item) => Number(item.product_id) !== productId);
+            localStorage.setItem(GUEST_CART_KEY, JSON.stringify(updated));
+            setCartItems((items) => items.filter((item) => item.id !== itemId));
+            setSelectedItems((items) => items.filter((id) => id !== itemId));
+            return;
+        }
+
         try {
             const response = await fetch(
                 `${API_URL}/cart/items/${itemId}`,
@@ -133,6 +180,14 @@ function Cart() {
     };
 
     const clearCart = async () => {
+        if (!token) {
+            // Clearing a guest cart only updates this browser's saved cart.
+            localStorage.removeItem(GUEST_CART_KEY);
+            setCartItems([]);
+            setSelectedItems([]);
+            return;
+        }
+
         try {
             const response = await fetch(`${API_URL}/cart`, {
                 method: "DELETE",
@@ -299,7 +354,9 @@ function Cart() {
 
                 </div>
 
-                {error && (
+        {!token && <p className="guest-cart-note">Guest cart items are saved on this device. You can enter your delivery address and phone number at checkout.</p>}
+
+        {error && (
                     <div className="cart-error">
                         {error}
                     </div>

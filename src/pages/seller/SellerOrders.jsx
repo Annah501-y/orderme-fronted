@@ -181,7 +181,8 @@ const SellerOrders = () => {
                                             {/* CUSTOMER */}
                                             <td>
                                                 <span className="seller-customer-name">
-                                                    {sellerOrder.order?.user?.name ||
+                                                    {/* Guest buyer details live on the order rather than a user profile. */}
+                                                    {sellerOrder.order?.user?.name || sellerOrder.order?.guest_name ||
                                                         "Unknown Customer"}
                                                 </span>
                                             </td>

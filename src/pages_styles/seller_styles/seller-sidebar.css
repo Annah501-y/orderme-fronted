@@ -7,13 +7,13 @@
     min-width: 240px;
     flex-shrink: 0;
 
-    background: #111111;
-    color: #ffffff;
+    background: #ffffff;
+    color: #293544;
 
     display: flex;
     flex-direction: column;
 
-    border-right: 1px solid #2a2a2a;
+    border-right: 1px solid #e5e8ec;
 
     transition: width 0.3s ease, min-width 0.3s ease;
 
@@ -42,7 +42,7 @@
 
     padding: 20px 16px;
 
-    border-bottom: 1px solid #2a2a2a;
+    border-bottom: 1px solid #e8ebef;
 }
 
 
@@ -139,7 +139,7 @@
     background: var(--om-gold);
     color: #111111;
 
-    border: 2px solid #111111;
+    border: 2px solid #ffffff;
 
     cursor: pointer;
 
@@ -168,7 +168,7 @@
     font-size: 14px;
     font-weight: 600;
 
-    color: #ffffff;
+    color: #293544;
 
     white-space: nowrap;
     overflow: hidden;
@@ -211,7 +211,7 @@
 
     background: transparent;
 
-    color: #bdbdbd;
+    color: #525e6b;
 
     text-decoration: none;
 
@@ -232,8 +232,8 @@
 ======================================== */
 
 .sidebar-link:hover {
-    background: #1d1d1d;
-    color: #ffffff;
+    background: #f3f5f7;
+    color: #253247;
 }
 
 
@@ -242,8 +242,8 @@
 ======================================== */
 
 .sidebar-link.active {
-    background: rgba(198, 161, 91, 0.15);
-    color: var(--om-gold);
+    background: #fff5dd;
+    color: #72550a;
 }
 
 
@@ -252,7 +252,7 @@
 ======================================== */
 
 .sidebar-link.active svg {
-    color: var(--om-gold);
+    color: #72550a;
 }
 
 
@@ -263,16 +263,16 @@
 .sidebar-bottom {
     padding: 12px;
 
-    border-top: 1px solid #2a2a2a;
+    border-top: 1px solid #e8ebef;
 }
 
 .logout-link {
-    color: #bdbdbd;
+    color: #525e6b;
 }
 
 .logout-link:hover {
-    color: #ffffff;
-    background: #1d1d1d;
+    background: #f3f5f7;
+    color: #253247;
 }
 
 
@@ -283,7 +283,7 @@
 .sidebar-collapse {
     padding: 12px;
 
-    border-top: 1px solid #2a2a2a;
+    border-top: 1px solid #e8ebef;
 }
 
 
@@ -307,7 +307,7 @@
 
     background: transparent;
 
-    color: #bdbdbd;
+    color: #525e6b;
 
     font-size: 13px;
 
@@ -319,8 +319,8 @@
 }
 
 .collapse-button:hover {
-    background: #1d1d1d;
-    color: #ffffff;
+    background: #f3f5f7;
+    color: #253247;
 }
 
 

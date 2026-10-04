@@ -369,31 +369,54 @@
 /* Status action button */
 
 .seller-status-action-btn {
-    background-color: var(--om-gold);
-
-    color: #ffffff;
-
-    border: none;
-
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 44px;
+    background-color: #bd8c0a !important;
+    color: #ffffff !important;
+    border: 1px solid #bd8c0a !important;
     padding: 11px 15px;
 
     font-size: 14px;
     font-weight: 600;
 
     border-radius: 7px;
-
+    cursor: pointer;
     transition: background-color 0.2s ease;
 }
 
 .seller-status-action-btn:hover {
-    background-color: #9f7409;
-    color: #ffffff;
+    background-color: #946e08 !important;
+    border-color: #946e08 !important;
+    color: #ffffff !important;
 }
 
 .seller-status-action-btn:disabled {
-    background-color: #b8b8b8;
-    color: #ffffff;
+    background-color: #777777 !important;
+    border-color: #777777 !important;
+    color: #ffffff !important;
     cursor: not-allowed;
+}
+
+.seller-order-action {
+    display: grid;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+.seller-action-label {
+    margin: 0;
+    color: #273747;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.seller-status-action-btn:focus-visible {
+    outline: 3px solid #bd8c0a;
+    outline-offset: 3px;
 }
 
 

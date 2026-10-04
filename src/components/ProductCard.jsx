@@ -3,11 +3,25 @@ import { Link, useNavigate } from "react-router-dom";
 import { Heart, MapPin, Star, ShoppingCart } from "lucide-react";
 
 const API_URL = import.meta.env.VITE_API_URL;
+// Guest favorites stay on this device until the customer signs in.
+const GUEST_FAVORITES_KEY = "orderme_guest_favorites";
+
+// Ignore malformed browser storage so a damaged value cannot break the product grid.
+function readGuestFavorites() {
+    try {
+        const saved = JSON.parse(localStorage.getItem(GUEST_FAVORITES_KEY) || "[]");
+        return Array.isArray(saved) ? saved.map(Number) : [];
+    } catch {
+        return [];
+    }
+}
 
 function ProductCard({ product, onAddToCart }) {
     const navigate = useNavigate();
     const [adding, setAdding] = useState(false);
-    const [favorited, setFavorited] = useState(false);
+    const [favorited, setFavorited] = useState(() =>
+        !localStorage.getItem("token") && readGuestFavorites().includes(Number(product.id))
+    );
     const [favoriteError, setFavoriteError] = useState("");
     const [cartError, setCartError] = useState("");
 
@@ -15,7 +29,16 @@ function ProductCard({ product, onAddToCart }) {
         const token = localStorage.getItem("token");
 
         if (!token) {
-            navigate("/login");
+            // Keep guest favorites available without creating an account, then open the wishlist.
+            const favorites = readGuestFavorites();
+            const nextFavorites = favorites.includes(Number(product.id))
+                ? favorites.filter((id) => id !== Number(product.id))
+                : [...favorites, Number(product.id)];
+
+            localStorage.setItem(GUEST_FAVORITES_KEY, JSON.stringify(nextFavorites));
+            setFavorited(nextFavorites.includes(Number(product.id)));
+            setFavoriteError("");
+            navigate("/buyer/wishlist");
             return;
         }
 
@@ -129,19 +152,7 @@ function ProductCard({ product, onAddToCart }) {
 
             <div className="product-content">
 
-                <span className="product-category">
-                    {product.category}
-                </span>
-
                 <h3 className="product-name"><Link to={`/products/${product.id}`}>{product.name}</Link></h3>
-
-                <div className="product-rating">
-                    <Star size={15} fill="currentColor" />
-                    <span>{product.rating}</span>
-                    <span className="product-reviews">
-                        ({product.reviews})
-                    </span>
-                </div>
 
                 <div className="product-price">
                     <strong>
@@ -154,26 +165,6 @@ function ProductCard({ product, onAddToCart }) {
                         </span>
                     )}
                 </div>
-
-                <div className="product-seller">
-                    <span>{product.seller}</span>
-
-                    <div className="product-location">
-                        <MapPin size={14} />
-                        {product.location}
-                    </div>
-                </div>
-
-                <button
-                    type="button"
-                    className="product-cart-button"
-                    onClick={addToCart}
-                    disabled={adding}
-                >
-                    <ShoppingCart size={17} />
-                    {adding ? "Adding…" : "Add to Cart"}
-                </button>
-                {cartError && <p className="product-card-feedback" role="alert">{cartError}</p>}
 
             </div>
 

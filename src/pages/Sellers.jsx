@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { ArrowRight, Store } from "lucide-react";
 import { fetchAllProducts, groupProductsBySeller } from "../api/marketplace";
+import SellerCard from "../components/SellerCard";
 import "../pages_styles/seller_styles/seller-card.css";
 
 function Sellers() {
@@ -57,33 +56,7 @@ function Sellers() {
                 <div className="row g-4">
                     {sellers.map((seller) => (
                         <section className="col-12 col-md-6 col-xl-4" key={seller.id}>
-                            <div className="seller-card h-100">
-                                <div className="seller-top">
-                                    <div className="seller-logo"><Store size={28} /></div>
-                                </div>
-                                <div className="seller-info">
-                                    <h2>{seller.storeName}</h2>
-                                    <p>{seller.name}</p>
-                                    {seller.description && <p>{seller.description}</p>}
-                                    <p className="seller-category">{seller.category}</p>
-                                    <h3 className="h6 mt-3">Products from this store</h3>
-                                    <ul className="list-unstyled">
-                                        {seller.products.slice(0, 6).map((product) => (
-                                            <li key={product.id}>
-                                                <Link to={`/products/${product.id}`}>
-                                                    {product.name}
-                                                </Link>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                                <Link
-                                    className="seller-button text-decoration-none"
-                                    to={`/products?seller=${seller.id}`}
-                                >
-                                    View all store products <ArrowRight size={16} />
-                                </Link>
-                            </div>
+                            <SellerCard seller={seller} />
                         </section>
                     ))}
                 </div>

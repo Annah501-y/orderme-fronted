@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
-    Sun,
-    Moon,
     Camera,
     LogOut,
     Settings,
@@ -20,9 +18,6 @@ const API_URL = import.meta.env.VITE_API_URL;
 const AdminNavbar = () => {
     const [admin, setAdmin] = useState(null);
     const [loading, setLoading] = useState(true);
-
-    const [theme, toggleTheme] = useTheme();
-    const darkMode = theme === "dark";
 
     const [showProfileMenu, setShowProfileMenu] = useState(false);
     const [showPhotoModal, setShowPhotoModal] = useState(false);
@@ -278,24 +273,6 @@ const AdminNavbar = () => {
                 </div>
 
                 <div className="admin-navbar-right">
-                    {/* Theme Toggle */}
-                    <button
-                        type="button"
-                        className="admin-theme-toggle"
-                        onClick={toggleTheme}
-                        title={
-                            darkMode
-                                ? "Switch to light mode"
-                                : "Switch to dark mode"
-                        }
-                    >
-                        {darkMode ? (
-                            <Sun size={19} />
-                        ) : (
-                            <Moon size={19} />
-                        )}
-                    </button>
-
                     {/* Profile */}
                     <div
                         className="admin-navbar-profile"
