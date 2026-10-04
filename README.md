@@ -442,7 +442,7 @@ Delivered
 
 If sellers are geographically separated, one customer order may be divided into multiple deliveries.
 
----
+
 
 Responsive Design
 
