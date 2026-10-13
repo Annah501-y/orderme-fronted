@@ -442,7 +442,7 @@ Delivered
 
 If sellers are geographically separated, one customer order may be divided into multiple deliveries.
 
----
+
 
 Responsive Design
 
@@ -485,37 +485,18 @@ OrderMe Laravel API
 Database
 
 Make sure the Laravel backend is running before testing features that require API communication.
-
----
-
 Testing
-
 API endpoints are tested using Postman.
-
 Frontend functionality is tested through:
-
 - Browser testing
 - API integration testing
 - Role-based access testing
 - Responsive testing
 - End-to-end testing
 
----
-
-Project Goal
-
-The goal of OrderMe is to provide a scalable multi-vendor commerce platform where customers can purchase products from different sellers through a single marketplace while sellers, administrators, and delivery riders each have dedicated interfaces.
-
 The system combines:
-
 E-commerce + Multi-vendor Marketplace + Payments + Delivery Management + Rider Tracking
-
 into one platform.
-
----
-
 Development
-
 OrderMe is currently under active development.
-
 The frontend and backend are being developed independently while communicating through REST APIs.
