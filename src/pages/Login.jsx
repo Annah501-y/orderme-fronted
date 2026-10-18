@@ -87,7 +87,12 @@ function Login() {
             );
             window.dispatchEvent(new Event("orderme:auth-changed"));
 
-            const role = user.roles?.[0]?.name;
+            const userRoles = (user.roles || [])
+                .map((item) => item?.name)
+                .filter(Boolean);
+
+            const role =
+                userRoles.includes("seller") ? "seller" : userRoles[0];
 
             if (role === "buyer") {
                 navigate(buyerRedirect);
@@ -95,7 +100,7 @@ function Login() {
                 navigate("/seller-dashboard");
             } else if (role === "admin") {
                 navigate("/admin-dashboard");
-            }else if (role === "rider"){
+            } else if (role === "rider") {
                 navigate("/rider/dashboard");
             } else {
                 navigate("/");

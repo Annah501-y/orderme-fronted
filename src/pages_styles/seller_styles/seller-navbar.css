@@ -1,0 +1,194 @@
+.seller-navbar {
+    position: relative;
+    z-index: 1000;
+    width: 100%;
+    min-height: 68px;
+    border-bottom: 1px solid #e7e7e7;
+    background: #fff;
+}
+
+.seller-navbar-inner {
+    width: 100%;
+    min-height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 0 28px;
+}
+
+.seller-navbar .seller-navbar-brand {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+    color: var(--om-ink, #263344);
+    text-decoration: none;
+}
+
+.seller-navbar .seller-navbar-logo {
+    width: 42px;
+    height: 42px;
+    border-radius: 6px;
+    object-fit: contain;
+}
+
+.seller-navbar .seller-navbar-wordmark {
+    margin-left: 8px;
+    color: var(--om-ink, #263344);
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.seller-navbar .seller-navbar-wordmark > span {
+    color: var(--om-gold, #b58a32);
+}
+
+.seller-account-menu-wrap {
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.seller-navbar .seller-account-trigger {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #263344;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 160ms ease, background-color 160ms ease;
+}
+
+.seller-navbar .seller-account-trigger:hover,
+.seller-navbar .seller-account-trigger[aria-expanded="true"] {
+    background: #f8f7f4;
+    color: var(--om-gold, #8a6500);
+}
+
+.seller-account-trigger > svg:last-child {
+    transition: transform 160ms ease;
+}
+
+.seller-account-trigger > svg:last-child.is-open {
+    transform: rotate(180deg);
+}
+
+.seller-navbar .seller-account-name {
+    max-width: min(32vw, 220px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.seller-account-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    z-index: 1100;
+    width: 245px;
+    padding: 9px;
+    border: 1px solid #e7e7e7;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 14px 36px rgba(11, 23, 38, 0.16);
+}
+
+.seller-account-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 10px 12px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #eee;
+    color: var(--om-ink, #263344);
+    overflow-wrap: anywhere;
+}
+
+.seller-account-heading strong {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.seller-account-heading small {
+    color: var(--om-muted, #697586);
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.seller-navbar .seller-account-dropdown a,
+.seller-navbar .seller-account-dropdown > button {
+    width: 100%;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 10px 12px;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: #263344;
+    font: inherit;
+    font-size: 14px;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.seller-navbar .seller-account-dropdown a:hover {
+    background: #f6f4ef;
+    color: var(--om-gold, #8a6500);
+}
+
+.seller-navbar .seller-account-dropdown > .seller-signout-button {
+    color: #b42318;
+}
+
+.seller-navbar .seller-account-dropdown > .seller-signout-button:hover {
+    background: #fef3f2;
+    color: #912018;
+}
+
+.seller-navbar .seller-account-trigger:focus-visible,
+.seller-navbar .seller-account-dropdown a:focus-visible,
+.seller-navbar .seller-account-dropdown button:focus-visible,
+.seller-navbar .seller-navbar-brand:focus-visible {
+    outline: 2px solid var(--om-gold, #b58a32);
+    outline-offset: 2px;
+}
+
+@media (max-width: 576px) {
+    .seller-navbar-inner {
+        min-height: 60px;
+        padding: 0 14px;
+    }
+
+    .seller-navbar .seller-navbar-logo {
+        width: 36px;
+        height: 36px;
+    }
+
+    .seller-navbar .seller-navbar-wordmark {
+        font-size: 20px;
+    }
+
+    .seller-navbar .seller-account-trigger {
+        gap: 6px;
+        padding: 8px 4px 8px 8px;
+        font-size: 13px;
+    }
+
+    .seller-navbar .seller-account-name {
+        max-width: 38vw;
+    }
+
+    .seller-account-dropdown {
+        width: min(245px, calc(100vw - 28px));
+    }
+}
